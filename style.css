@@ -1,0 +1,9 @@
+body{
+    display: flex;
+   flex-direction: column;
+    align-items: center;
+}
+
+canvas{
+    background-image: url(img/4.Maps/forest/Background/Bright/sky.png);
+}
