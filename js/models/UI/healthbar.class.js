@@ -10,8 +10,8 @@ class Healthbar extends DrawableObjects {
 
   constructor(){
     super();
-    this.x = 100;
-    this.y = 100;
+    this.x = 130;
+    this.y = 40;
 
   
   }

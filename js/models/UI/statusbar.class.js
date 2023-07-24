@@ -1,5 +1,4 @@
-class Statusbar extends MovableObjects {
-
+class Statusbar {
 
   IMAGES = [
     'img/8.UI/hp_full.png',

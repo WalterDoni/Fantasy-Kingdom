@@ -2,8 +2,8 @@ class Manabar extends DrawableObjects {
 
     constructor(){
       super();
-      this.x = 100;
-      this.y = 150;
+      this.x = 130;
+      this.y = 80;
       this.width = 200;
       this.height = 25;
       this.maxHealth = 100;

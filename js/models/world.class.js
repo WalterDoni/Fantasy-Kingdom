@@ -3,7 +3,11 @@ class World {
     level = level1;
     character = new Character();
     healthbar = new Healthbar();
+    statusbarFrameHP = new StatusbarFrameHP();
+    statusbarFrameMana = new StatusbarFrameMana();
     manabar = new Manabar();
+    avatarFrame = new AvatarFrame();
+    avatarIcon = new AvatarIcon();
     canvas;
     ctx;
     keyboard;
@@ -64,6 +68,11 @@ class World {
         //-- Hier fixierte Elemente auf der Karte einfügen - Start -- //
         this.healthbar.renderStatusbars(this.ctx);
         this.manabar.renderStatusbars(this.ctx);
+        this.addToWorld(this.statusbarFrameHP);
+        this.addToWorld(this.statusbarFrameMana);
+        this.addToWorld(this.avatarFrame);
+        this.addToWorld(this.avatarIcon);
+        
 
         //-- Hier fixierte Elemente auf der Karte einfügen - Ende -- //
 
