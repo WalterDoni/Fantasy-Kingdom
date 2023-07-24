@@ -1,5 +1,5 @@
-class Coin extends MovableObjects{
-     
+class Coin extends MovableObjects {
+
     width = 35;
     height = 35;
     speed = 0;
@@ -19,26 +19,22 @@ class Coin extends MovableObjects{
         'img/5.CollectableItems/coin10.png',
     ]
 
-    constructor(x, y){
-    super().loadImage('img/5.CollectableItems/coin1.png');
-    this.x = x;
-    this.y = y;
-    this.loadImages(this.IMAGES);
-    this.animate();
+    constructor(x, y) {
+        super().loadImage('img/5.CollectableItems/coin1.png');
+        this.x = x;
+        this.y = y;
+        this.loadImages(this.IMAGES);
+        this.animate();
     }
 
- animate(){
-    this.moveLeft();
+    animate() {
+        this.moveLeft();
 
-    setInterval(() =>{
+        setInterval(() => {
+            this.playAnimation(this.IMAGES)
+        }, 150)
 
-    let i = this.currentImage % this.IMAGES.length;
-    let path = this.IMAGES[i];
-    this.img = this.imageCache[path];
-    this.currentImage++;
-    }, 150 )
-
- }
+    }
 
 
 }

@@ -1,5 +1,5 @@
-class ManaCrystal extends MovableObjects{
-     
+class ManaCrystal extends MovableObjects {
+
     width = 35;
     height = 35;
     speed = 0;
@@ -17,30 +17,26 @@ class ManaCrystal extends MovableObjects{
         'img/5.CollectableItems/crystal8.png',
         'img/5.CollectableItems/crystal9.png',
         'img/5.CollectableItems/crystal10.png',
-       
-       
+
+
     ]
 
-    constructor(x, y){
-    super().loadImage('img/5.CollectableItems/crystal.png');
-    this.x = x;
-    this.y = y;
-    this.loadImages(this.IMAGES);
-    this.animate();
+    constructor(x, y) {
+        super().loadImage('img/5.CollectableItems/crystal.png');
+        this.x = x;
+        this.y = y;
+        this.loadImages(this.IMAGES);
+        this.animate();
     }
 
- animate(){
-    this.moveLeft();
+    animate() {
+        this.moveLeft();
 
-    setInterval(() =>{
+        setInterval(() => {
+            this.playAnimation(this.IMAGES)
+        }, 150)
 
-    let i = this.currentImage % this.IMAGES.length;
-    let path = this.IMAGES[i];
-    this.img = this.imageCache[path];
-    this.currentImage++;
-    }, 150 )
-
- }
+    }
 
 
 }

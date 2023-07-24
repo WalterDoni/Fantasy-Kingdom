@@ -11,6 +11,7 @@ async function init() {
 };
 
 
+
 //Keydown MUSS verwendet werden, damit die Pfeiltasten erkannt werden.
 
 window.addEventListener("keydown", (event) => {

@@ -2,11 +2,14 @@ class World {
 
     level = level1;
     character = new Character();
+    healthbar = new Healthbar();
+    manabar = new Manabar();
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
     turnArround = false;
+    hit = 10;
 
 
 
@@ -33,15 +36,14 @@ class World {
              
                 if (this.character.isColliding(enemy)) {
                   this.character.hit();
-                  console.log(this.character.healthpoints);
-                 
-                
+                  this.healthbar.updateHealthpoints();
                 }
             });
         }, 150);
     }
-
+         
     
+  
 
 
     draw() {
@@ -57,9 +59,13 @@ class World {
             this.addToWorld(enemy) // addObjectsToMap macht den Code lesbarer, führt jedoch genau das aus
         });*/
         this.addObjectsToMap(this.level.grounds);
+        this.ctx.translate(-this.camera_x, 0)// Nach dem Zeichnen ctx wieder zurücksetzen, sonst verschwindet die Map
 
+        //-- Hier fixierte Elemente auf der Karte einfügen - Start -- //
+        this.healthbar.renderStatusbars(this.ctx);
+        this.manabar.renderStatusbars(this.ctx);
 
-        this.ctx.translate(-this.camera_x, 0) // Nach dem Zeichnen ctx wieder zurücksetzen, sonst verschwindet die Map
+        //-- Hier fixierte Elemente auf der Karte einfügen - Ende -- //
 
 
         let self = this;
@@ -96,4 +102,5 @@ class World {
         }
     }
 
+    
 }

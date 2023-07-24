@@ -28,7 +28,7 @@ class Goblin extends MovableObjects {
             this.moveLeft();
         }, 1000 / 60); // 60 FPS
         setInterval(() => {
-            this.playWalkAnimation()
+            this.playAnimation(this.WALKING_IMAGES)
         }, 180);
     }
 

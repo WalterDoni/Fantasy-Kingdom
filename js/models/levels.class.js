@@ -5,6 +5,8 @@ class Levels {
     birds;
     enemies;
     collectables;
+    
+    
 
 
     constructor(backgrounds, grounds, clouds, birds, enemies, collectables) {
@@ -14,6 +16,7 @@ class Levels {
         this.birds = birds;
         this.enemies = enemies;
         this.collectables = collectables;
+
 
         this.createFloorLevel1Part1();
         this.createFloorLevel1Part2();
@@ -116,7 +119,7 @@ class Levels {
 
         for (let i = 0; i < Blocks; i++) {
             let y = startY - i * 50;
-         
+
             let block = new LeftSideBuildUpGround(5180, y);
             let block1 = new MiddleObjectBuildUp(5230, y);
             let block2 = new MiddleObjectBuildUp(5280, y);
@@ -133,9 +136,9 @@ class Levels {
             let block13 = new MiddleObjectBuildUp(5830, y);
             let block14 = new MiddleObjectBuildUp(5880, y);
             let block15 = new MiddleObjectBuildUp(5930, y);
-        
 
-            this.grounds.push(block, block1, block2, block3, block4, block5, block6,block7,block8,block9,block10,block11,block12,block13,block14,block15);
+
+            this.grounds.push(block, block1, block2, block3, block4, block5, block6, block7, block8, block9, block10, block11, block12, block13, block14, block15);
         }
     }
 }

@@ -5,7 +5,7 @@ class Bird extends MovableObjects {
     width = 100;
     speed = 0.18;
 
-    WALKING_IMAGES = [
+    IMAGES = [
         'img/4.Maps/forest/Background/Bright/Bird/frame1.png',
         'img/4.Maps/forest/Background/Bright/Bird/frame2.png',
         'img/4.Maps/forest/Background/Bright/Bird/frame3.png',
@@ -23,7 +23,7 @@ class Bird extends MovableObjects {
         this.x = x;
         this.y = y;
 
-        this.loadImages(this.WALKING_IMAGES);
+        this.loadImages(this.IMAGES);
 
         this.animate();
     };
@@ -34,7 +34,7 @@ class Bird extends MovableObjects {
             this.x -= this.speed;
         }, 1000 / 60); // 60 FPS
         setInterval(() => {
-            this.playWalkAnimation()
+            this.playAnimation(this.IMAGES)
         }, 180);
     }
 }
