@@ -31,7 +31,7 @@ class Levels {
     }
 
 
-
+   //Funktionen für Bodenelemente 
 
     createFloorLevel1Part1() {
         let startX = -50; // Startwert für die x-Koordinate
@@ -46,11 +46,11 @@ class Levels {
     }
 
     createFloorLevel1Part2() {
-        let startX = 1280; // Startwert für die x-Koordinate
-        let numberOfMiddleGrounds = 30; // Anzahl der neuen MiddleGround-Instanzen
+        let startX = 1280; 
+        let numberOfMiddleGrounds = 30;
 
         for (let i = 0; i < numberOfMiddleGrounds; i++) {
-            let x = startX + i * 50; // Berechne die x-Koordinate basierend auf dem Index i
+            let x = startX + i * 50;
             let ground = new MiddleGround(x, 530);
             this.grounds.push(ground);
         }
@@ -59,11 +59,11 @@ class Levels {
 
 
     createFloorLevel1Part3() {
-        let startX = 3990; // Startwert für die x-Koordinate
-        let numberOfMiddleGrounds = 23; // Anzahl der neuen MiddleGround-Instanzen
+        let startX = 3990; 
+        let numberOfMiddleGrounds = 23; 
 
         for (let i = 0; i < numberOfMiddleGrounds; i++) {
-            let x = startX + i * 50; // Berechne die x-Koordinate basierend auf dem Index i
+            let x = startX + i * 50; 
             let ground = new MiddleGround(x, 530);
             this.grounds.push(ground);
         }

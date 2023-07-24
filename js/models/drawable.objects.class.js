@@ -12,12 +12,16 @@ class DrawableObjects {
         this.img.src = path;
     }
 
+    /**
+        * draw the object in the canvas
+        * @param {object} ctx context of the canvas
+        */
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 
     }
 
-   
+
     /**
      * 
      * @param {Array} array -   //['img/image1.png', 'img/image2.png',........]
@@ -30,7 +34,8 @@ class DrawableObjects {
         });
     }
 
-    drawFrame(ctx) { // Zeichne den Rahem um instanceof Klassen
+    
+    drawFrame(ctx) { // Zeichne den Rahmen um instanceof Klassen
         if (this instanceof Character || this instanceof Goblin || this instanceof Dwarf || this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = '3';

@@ -11,8 +11,11 @@ async function init() {
 };
 
 
-
-//Keydown MUSS verwendet werden, damit die Pfeiltasten erkannt werden.
+/**
+ * Set the variable from keyboard.class.js to true, when button is clicked 
+ * 
+ * @param {click} event - Keydown MUST be used, to recognize the arrowbuttons 
+ */
 
 window.addEventListener("keydown", (event) => {
     const key = event.key;
