@@ -6,5 +6,6 @@ class Keyboard {
     DOWN = false;
     SPACE = false;
     LEFTMOUSE = false;
+    T_KEYBOARD = false;
 
 }

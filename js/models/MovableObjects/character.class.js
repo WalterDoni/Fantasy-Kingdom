@@ -37,18 +37,36 @@ class Character extends MovableObjects {
     ]
 
     DEAD_IMAGES = [
-         'img/1.PlayableChars/Knight/Death/death1.png',
-         'img/1.PlayableChars/Knight/Death/death2.png',
-         'img/1.PlayableChars/Knight/Death/death3.png',
-         'img/1.PlayableChars/Knight/Death/death4.png',
-         'img/1.PlayableChars/Knight/Death/death5.png',
-         'img/1.PlayableChars/Knight/Death/death6.png',
-         'img/1.PlayableChars/Knight/Death/death7.png',
-         'img/1.PlayableChars/Knight/Death/death8.png',
-         'img/1.PlayableChars/Knight/Death/death9.png',
-         'img/1.PlayableChars/Knight/Death/death10.png'
-        
+        'img/1.PlayableChars/Knight/Death/death1.png',
+        'img/1.PlayableChars/Knight/Death/death2.png',
+        'img/1.PlayableChars/Knight/Death/death3.png',
+        'img/1.PlayableChars/Knight/Death/death4.png',
+        'img/1.PlayableChars/Knight/Death/death5.png',
+        'img/1.PlayableChars/Knight/Death/death6.png',
+        'img/1.PlayableChars/Knight/Death/death7.png',
+        'img/1.PlayableChars/Knight/Death/death8.png',
+        'img/1.PlayableChars/Knight/Death/death9.png',
+        'img/1.PlayableChars/Knight/Death/death10.png'
 
+
+    ]
+
+    EXTRA_ATTACK = [
+        'img/1.PlayableChars/Knight/Attack/attack1.png',
+        'img/1.PlayableChars/Knight/Attack/attack2.png',
+        'img/1.PlayableChars/Knight/Attack/attack3.png',
+        'img/1.PlayableChars/Knight/Attack/attack4.png',
+    ]
+
+    IMAGE_ATTACK = [
+        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra1.png',
+        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra2.png',
+        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra3.png',
+        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra4.png',
+        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra5.png',
+        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra6.png',
+        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra7.png',
+        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra8.png',
     ]
 
 
@@ -58,17 +76,19 @@ class Character extends MovableObjects {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.DEAD_IMAGES);
         this.loadImages(this.HURT_IMAGES);
-        this.applyGravity()
+        this.loadImages(this.EXTRA_ATTACK);
+        this.loadImages(this.IMAGE_ATTACK);
+        this.applyGravity();
         this.animate();
+
     }
 
-  
+
 
     animate() {
 
         setInterval(() => {
             //this.walking_sound.pause()
-
             
             // Charakter bewegt sich nach rechts oder links
             if (this.world.keyboard.RIGHT && this.x < 5000) {
@@ -91,19 +111,34 @@ class Character extends MovableObjects {
         }, 1000 / 60);
 
         setInterval(() => {
-            if(this.isDead()){
+            if (this.isDead()) {
                 this.playAnimation(this.DEAD_IMAGES);
-            }else if (this.isHurt()){
+            } else if (this.isHurt()) {
                 this.playAnimation(this.HURT_IMAGES);
             }
             else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else
-                // Charakter Animation  nach rechts oder links
+
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.WALKING_IMAGES)
                 }
         }, 120);
+        
     }
+
+    fireAttack() {
+
+        setInterval(() => {
+            this.playAnimation(this.EXTRA_ATTACK);
+        }, 100);
+    }
+
+    swordattack() {
+        setInterval(() => {
+            this.playAnimation(this.IMAGE_ATTACK);
+        }, 100);
+    }
+
 
 }

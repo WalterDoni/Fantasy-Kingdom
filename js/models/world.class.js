@@ -34,22 +34,25 @@ class World {
      */
     setWorld() {
         this.character.world = this;
+        this.throwableObjects.world = this;
     }
 
-  
+
     run() {
 
         setInterval(() => {
             this.checkCollisions();
-            this.checkThrowObjects();
+            this.useAttacksFromCharacter();
+
         }, 150);
+
     }
 
-      /**
-     * Check if something (e.g. enemy) collides with the character. 
-     * hit -> this function is described in movable.objects.class.js
-     * updateHealthpoints -> this function is described in manabar- or heathbar.class.ja
-     */
+    /**
+   * Check if something (e.g. enemy) collides with the character. 
+   * hit -> this function is described in movable.objects.class.js
+   * updateHealthpoints -> this function is described in manabar- or heathbar.class.ja
+   */
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
 
@@ -60,12 +63,17 @@ class World {
         });
     }
 
-    checkThrowObjects(){
-        if(this.keyboard.LEFTMOUSE){
-            let fireball = new ThrowableObjects(this.character.x+50, this.character.y+20);
-            this.throwableObjects.push(fireball)
+    useAttacksFromCharacter() {
+        if (this.keyboard.T_KEYBOARD) {
+            let fireball = new ThrowableObjects(this.character.x + 50, this.character.y + 20);
+            this.throwableObjects.push(fireball);
+            this.character.fireAttack();
+        }
+        if (this.keyboard.LEFTMOUSE) {
+            this.character.swordattack();
         }
     }
+
 
 
     /**

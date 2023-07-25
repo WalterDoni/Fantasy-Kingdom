@@ -39,7 +39,12 @@ window.addEventListener("keydown", (event) => {
     if (key === " ") {
         keyboard.SPACE = true;
     }
-    
+   
+    if ( key === "t"){
+        keyboard.T_KEYBOARD = true;
+    }
+
+
 });
 
 window.addEventListener("mousedown", (event) => {
@@ -47,6 +52,14 @@ window.addEventListener("mousedown", (event) => {
 
     if (key === 0) {
         keyboard.LEFTMOUSE = true;
+    }
+});
+
+window.addEventListener("mouseup", (event) => {
+    const key = event.button;
+
+    if (key === 0) {
+        keyboard.LEFTMOUSE = false;
     }
 });
 
@@ -72,4 +85,8 @@ window.addEventListener("keyup", (event) => {
     if (key === " ") {
         keyboard.SPACE = false;
     }
+    if ( key === "t"){
+        keyboard.T_KEYBOARD = false;
+    }
+
 });

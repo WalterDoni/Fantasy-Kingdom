@@ -1,4 +1,5 @@
 class ThrowableObjects extends MovableObjects {
+    world;
 
     IMAGES_FIRE = [
         'img/7.Effects/Fire/fire1.png',
@@ -13,23 +14,25 @@ class ThrowableObjects extends MovableObjects {
         'img/7.Effects/Fire/fire10.png',
     ]
 
-    constructor(x, y){
+    constructor(x, y) {
         super().loadImage('img/7.Effects/Fire/fire1.png');
         this.x = x;
         this.y = y;
         this.height = 150;
         this.width = 150;
-        this.loadImages(this.IMAGES_FIRE)
+        this.loadImages(this.IMAGES_FIRE);
         this.throw();
-
     }
 
-    throw(){
+    
+    throw() {
+        
         setInterval(() => {
-            this.x += 5;
-            this.playAnimation(this.IMAGES_FIRE)
+            this.x += 30;
+            this.playAnimation(this.IMAGES_FIRE);
         }, 100);
     }
+
 
 
 
