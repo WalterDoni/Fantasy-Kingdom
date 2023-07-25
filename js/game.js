@@ -39,6 +39,15 @@ window.addEventListener("keydown", (event) => {
     if (key === " ") {
         keyboard.SPACE = true;
     }
+    
+});
+
+window.addEventListener("mousedown", (event) => {
+    const key = event.button;
+
+    if (key === 0) {
+        keyboard.LEFTMOUSE = true;
+    }
 });
 
 window.addEventListener("keyup", (event) => {

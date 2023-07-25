@@ -8,6 +8,7 @@ class World {
     manabar = new Manabar();
     avatarFrame = new AvatarFrame();
     avatarIcon = new AvatarIcon();
+    throwableObjects = [];
     canvas;
     ctx;
     keyboard;
@@ -26,50 +27,64 @@ class World {
         this.ctx = canvas.getContext('2d'); /*Context=Lässt zu auf den Koordinaten etwas einzugeben*/
         this.setWorld();
         this.draw();
-        this.checkCollisions();
+        this.run();
     }
-     /**
-      * Bind the character to the world, it's necessary e.g. for the camera_x 
-      */
+    /**
+     * Bind the character to the world, it's necessary e.g. for the camera_x 
+     */
     setWorld() {
         this.character.world = this;
     }
 
-    /**
+  
+    run() {
+
+        setInterval(() => {
+            this.checkCollisions();
+            this.checkThrowObjects();
+        }, 150);
+    }
+
+      /**
      * Check if something (e.g. enemy) collides with the character. 
      * hit -> this function is described in movable.objects.class.js
      * updateHealthpoints -> this function is described in manabar- or heathbar.class.ja
      */
     checkCollisions() {
-                 
-        setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-             
-                if (this.character.isColliding(enemy)) {
-                  this.character.hit();
-                  this.healthbar.updateHealthpoints();
-                }
-            });
-        }, 150);
+        this.level.enemies.forEach((enemy) => {
+
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.healthbar.updateHealthpoints();
+            }
+        });
     }
-         
-    
-  /**
-   * clearRect -> cleares the canvas, so the elements did not stack on the map and get generated multiple time.
-   * translate -> camera_x is bind at animate() in character.class.js. So everytime when the character moves right. everything generated moves for the 
-   * same value into the other direction on the X-axis. Till line 76
-   * The generated elements after that are on a fixed position in the canvas. e.g. the healthbar.
-   * requestAnimationFrame -> function repeats after everything is generated above. Over and over again(depends on the computer power).
-   */
+
+    checkThrowObjects(){
+        if(this.keyboard.LEFTMOUSE){
+            let fireball = new ThrowableObjects(this.character.x+50, this.character.y+20);
+            this.throwableObjects.push(fireball)
+        }
+    }
+
+
+    /**
+     * clearRect -> cleares the canvas, so the elements did not stack on the map and get generated multiple time.
+     * translate -> camera_x is bind at animate() in character.class.js. So everytime when the character moves right. everything generated moves for the 
+     * same value into the other direction on the X-axis. Till line 76
+     * The generated elements after that are on a fixed position in the canvas. e.g. the healthbar.
+     * requestAnimationFrame -> function repeats after everything is generated above. Over and over again(depends on the computer power).
+     */
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); 
-        this.ctx.translate(this.camera_x, 0) 
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.translate(this.camera_x, 0)
         this.addObjectsToMap(this.level.backgrounds);
         this.addToWorld(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.birds);
         this.addObjectsToMap(this.level.collectables);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObjects);
         /*this.level.enemies.forEach(enemy => {  //fast writing method for the for-loop
             this.addToWorld(enemy) // 
         });*/
@@ -87,7 +102,7 @@ class World {
 
 
         let self = this;
-        requestAnimationFrame(function () { 
+        requestAnimationFrame(function () {
             self.draw();
         });
     }
@@ -111,9 +126,9 @@ class World {
      * will showend right. If restore would be not used, the image would change between mirrored and not.
      * 
      */
-    addToWorld(movabelThing) { 
+    addToWorld(movabelThing) {
 
-        if (movabelThing.turnArround) { 
+        if (movabelThing.turnArround) {
             this.ctx.save();  // save the current image
             this.ctx.translate(130, 0); // Mirrors the image
             this.ctx.scale(-1, 1);// Save the size from the image
@@ -130,5 +145,5 @@ class World {
         }
     }
 
-    
+
 }
