@@ -35,7 +35,7 @@ class DrawableObjects {
     }
 
     
-    drawFrame(ctx) { // Zeichne den Rahmen um instanceof Klassen
+    /*drawFrame(ctx) { // Zeichne den Rahmen um instanceof Klassen
         if (this instanceof Character || this instanceof Goblin || this instanceof Dwarf || this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = '3';
@@ -43,6 +43,6 @@ class DrawableObjects {
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
-    }
+    }*/
 
 }

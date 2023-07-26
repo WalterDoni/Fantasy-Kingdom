@@ -3,7 +3,10 @@ class Character extends MovableObjects {
     y = 370;
     speed = 5;
     world;
-    walking_sound = new Audio('audio/Walking.mp3')
+    walking_sound = new Audio('audio/Walking.mp3');
+    timeWithoutDoingSomething = 0;
+    animation = false;
+    attackInterval = null;
 
 
     WALKING_IMAGES = [
@@ -69,6 +72,21 @@ class Character extends MovableObjects {
         'img/1.PlayableChars/Knight/Extra_Attack/attack_extra8.png',
     ]
 
+    IDLE_IMAGE = [
+        'img/1.PlayableChars/Knight/Idle/idle1.png',
+        'img/1.PlayableChars/Knight/Idle/idle2.png',
+        'img/1.PlayableChars/Knight/Idle/idle3.png',
+        'img/1.PlayableChars/Knight/Idle/idle4.png',
+        'img/1.PlayableChars/Knight/Idle/idle5.png',
+        'img/1.PlayableChars/Knight/Idle/idle6.png',
+        'img/1.PlayableChars/Knight/Idle/idle7.png',
+        'img/1.PlayableChars/Knight/Idle/idle8.png',
+        'img/1.PlayableChars/Knight/Idle/idle9.png',
+        'img/1.PlayableChars/Knight/Idle/idle10.png',
+        'img/1.PlayableChars/Knight/Idle/idle11.png',
+        'img/1.PlayableChars/Knight/Idle/idle12.png',
+    ]
+
 
     constructor() {
         super().loadImage('img/1.PlayableChars/Knight/knight.png') // ruft die übergordnete Funktion aus MovableObjets aus
@@ -78,6 +96,7 @@ class Character extends MovableObjects {
         this.loadImages(this.HURT_IMAGES);
         this.loadImages(this.EXTRA_ATTACK);
         this.loadImages(this.IMAGE_ATTACK);
+        this.loadImages(this.IDLE_IMAGE);
         this.applyGravity();
         this.animate();
 
@@ -89,15 +108,17 @@ class Character extends MovableObjects {
 
         setInterval(() => {
             //this.walking_sound.pause()
-            
+
             // Charakter bewegt sich nach rechts oder links
             if (this.world.keyboard.RIGHT && this.x < 5000) {
                 this.moveRight();
+                this.timeWithoutDoingSomething = 0;
                 //this.walking_sound.play()
             }
 
             if (this.world.keyboard.LEFT && this.x > -30) {
                 this.moveLeft();
+                this.timeWithoutDoingSomething = 0;
                 //this.walking_sound.play()
             }
             // Charakter springt, setzt speedY auf 20 um dann nach und nach abzufallen (acceleration)
@@ -105,10 +126,20 @@ class Character extends MovableObjects {
                 this.jump();
             }
 
+            if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT) {
+                this.timeWithoutDoingSomething += 20;
 
+            }
             this.world.camera_x = -this.x + 100; // +100 versetzt die Kamera, somit klebt der Charakter nicht so sehr am linken Rand
 
         }, 1000 / 60);
+
+        setInterval(() => {
+            if (this.timeWithoutDoingSomething >= 3500) {
+                this.playAnimation(this.IDLE_IMAGE);
+            }
+        }, 150);
+
 
         setInterval(() => {
             if (this.isDead()) {
@@ -124,21 +155,48 @@ class Character extends MovableObjects {
                     this.playAnimation(this.WALKING_IMAGES)
                 }
         }, 120);
-        
+
     }
 
     fireAttack() {
+        if (this.animation) {
+            return; // Die Animation läuft bereits, daher nichts tun
+        }
+        this.animation = true;
 
-        setInterval(() => {
+        this.attackInterval = setInterval(() => {
             this.playAnimation(this.EXTRA_ATTACK);
-        }, 100);
+        }, 110);
+
+        setTimeout(() => {
+            this.animation = false;
+            clearInterval(this.attackInterval); // Hier wird das Intervall gestoppt
+        }, 1000);
     }
+
 
     swordattack() {
-        setInterval(() => {
+
+        if (this.animation) {
+            return; // Die Animation läuft bereits, daher nichts tun
+        }
+        this.animation = true;
+
+        this.attackInterval = setInterval(() => {
             this.playAnimation(this.IMAGE_ATTACK);
-        }, 100);
+        }, 110);
+
+        setTimeout(() => {
+            this.animation = false;
+            clearInterval(this.attackInterval); // Hier wird das Intervall gestoppt
+        }, 950);
     }
 
+    IdleWhileDoNothing() {
+        this.timeWithoutDoingSomething += 1
+        if (this.timeWithoutDoingSomething >= 200) {
+            this.playAnimation(this.IDLE_IMAGE);
 
+        }
+    }
 }

@@ -2,7 +2,7 @@ class MovableObjects extends DrawableObjects {
 
    height = 190;
    width = 180;
-   speed = 0.15;
+   speed = 0;
    speedY = 0;
    acceleration = 2.5;
    lastHit = 0;
@@ -13,10 +13,10 @@ class MovableObjects extends DrawableObjects {
 
    //Berechnet die Eckpukte 
    isColliding(obj) {
-      return this.x + this.width > obj.x && // Rechter Punkt der X-Achhse > x von Objekt
+      return this.x + this.width -70 > obj.x && // Rechter Punkt der X-Achhse > x von Objekt
          this.y + this.height > obj.y &&  // Links unten Punkt der Y-Achse > y von Oblekt
          this.x < obj.x &&  // Linker Punkt der X-Achse < x von Objekt
-         this.y < obj.y + obj.height // Links oben Punkt der Y-Achse + Y und Höhe von Objekt
+         this.y  < obj.y + obj.height // Links oben Punkt der Y-Achse + Y und Höhe von Objekt
    }
 
    hit() {
@@ -74,7 +74,6 @@ class MovableObjects extends DrawableObjects {
    }
 
    moveLeft() {
-
       this.x -= this.speed;
       this.turnArround = true;
 

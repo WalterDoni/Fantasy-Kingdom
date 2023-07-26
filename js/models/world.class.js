@@ -144,7 +144,7 @@ class World {
         }
 
         movabelThing.draw(this.ctx)
-        movabelThing.drawFrame(this.ctx)
+        /*movabelThing.drawFrame(this.ctx)*/
 
         if (movabelThing.turnArround) { // Falls ein Bild verändert wurde, deshalb vorhin save
             movabelThing.x = movabelThing.x * -1;
