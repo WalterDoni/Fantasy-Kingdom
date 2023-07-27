@@ -5,6 +5,7 @@ class Character extends MovableObjects {
     world;
     walking_sound = new Audio('audio/Walking.mp3');
     timeWithoutDoingSomething = 0;
+    
     animation = false;
     attackInterval = null;
 
@@ -112,21 +113,22 @@ class Character extends MovableObjects {
             // Charakter bewegt sich nach rechts oder links
             if (this.world.keyboard.RIGHT && this.x < 5000) {
                 this.moveRight();
-                this.timeWithoutDoingSomething = 0;
+                this.handleTheIdleTimer();
                 //this.walking_sound.play()
             }
 
             if (this.world.keyboard.LEFT && this.x > -30) {
                 this.moveLeft();
-                this.timeWithoutDoingSomething = 0;
+                this.handleTheIdleTimer();
                 //this.walking_sound.play()
             }
             // Charakter springt, setzt speedY auf 20 um dann nach und nach abzufallen (acceleration)
             if (this.world.keyboard.SPACE && !this.isAboveGround() || this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
+                this.handleTheIdleTimer();
             }
 
-            if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT) {
+            if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && !this.world.keyboard.UP ) {
                 this.timeWithoutDoingSomething += 20;
 
             }
@@ -159,44 +161,57 @@ class Character extends MovableObjects {
     }
 
     fireAttack() {
-        if (this.animation) {
-            return; // Die Animation läuft bereits, daher nichts tun
+        this.handleTheIdleTimer();
+        this.currentImage = 0;
+    
+        if (this.timerToStopAnimations <= 100 && !this.attackInterval) {
+            this.attackInterval = setInterval(() => {
+                this.playAnimation(this.EXTRA_ATTACK);
+                this.timerToStopAnimations += 28;
+    
+                if (this.timerToStopAnimations > 100) {
+                    clearInterval(this.attackInterval);
+                    this.attackInterval = null;
+                    this.timerToStopAnimations = 0;
+                    this.currentImage = 0;
+                    this.loadImage('img/1.PlayableChars/Knight/knight.png')
+                }
+            }, 110);
         }
-        this.animation = true;
-
-        this.attackInterval = setInterval(() => {
-            this.playAnimation(this.EXTRA_ATTACK);
-        }, 110);
-
-        setTimeout(() => {
-            this.animation = false;
-            clearInterval(this.attackInterval); // Hier wird das Intervall gestoppt
-        }, 1000);
     }
 
-
+  
     swordattack() {
-
-        if (this.animation) {
-            return; // Die Animation läuft bereits, daher nichts tun
+        this.handleTheIdleTimer();
+        this.currentImage = 0;
+    
+        if (this.timerToStopAnimations <= 100 && !this.attackInterval) {
+            this.attackInterval = setInterval(() => {
+                this.playAnimation(this.IMAGE_ATTACK);
+                this.timerToStopAnimations += 13;
+    
+                if (this.timerToStopAnimations > 100) {
+                    clearInterval(this.attackInterval);
+                    this.attackInterval = null;
+                    this.timerToStopAnimations = 0;
+                    this.currentImage = 0;
+                    this.loadImage('img/1.PlayableChars/Knight/knight.png')
+                }
+            }, 110);
         }
-        this.animation = true;
-
-        this.attackInterval = setInterval(() => {
-            this.playAnimation(this.IMAGE_ATTACK);
-        }, 110);
-
-        setTimeout(() => {
-            this.animation = false;
-            clearInterval(this.attackInterval); // Hier wird das Intervall gestoppt
-        }, 950);
     }
 
     IdleWhileDoNothing() {
         this.timeWithoutDoingSomething += 1
         if (this.timeWithoutDoingSomething >= 200) {
             this.playAnimation(this.IDLE_IMAGE);
-
         }
+
+       
+    }
+    
+
+    handleTheIdleTimer() {
+        return this.timeWithoutDoingSomething = 0;
     }
 }

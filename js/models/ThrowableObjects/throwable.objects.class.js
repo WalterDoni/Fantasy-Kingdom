@@ -25,15 +25,26 @@ class ThrowableObjects extends MovableObjects {
     }
 
     
+   
     throw() {
-        
-        setInterval(() => {
-            this.x += 30;
-            this.playAnimation(this.IMAGES_FIRE);
-        }, 100);
+
+        this.currentImage = 0;
+    
+        if (this.timerToStopAnimations <= 100 && !this.attackInterval) {
+            this.attackInterval = setInterval(() => {
+                this.x += 30;
+                this.playAnimation(this.IMAGES_FIRE);
+                this.timerToStopAnimations +=10.18;
+    
+                if (this.timerToStopAnimations > 100) {
+                    clearInterval(this.attackInterval);
+                    this.attackInterval = null;
+                    this.timerToStopAnimations = 0;
+                    this.currentImage = 0;
+                }
+            }, 110);
+        }
     }
-
-
 
 
 }

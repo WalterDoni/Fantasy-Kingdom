@@ -7,6 +7,7 @@ class MovableObjects extends DrawableObjects {
    acceleration = 2.5;
    lastHit = 0;
    healthpoints = 100;
+   timerToStopAnimations = 0;
    
 
 
