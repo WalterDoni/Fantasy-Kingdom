@@ -12,6 +12,7 @@ class ThrowableObjects extends MovableObjects {
         'img/7.Effects/Fire/fire8.png',
         'img/7.Effects/Fire/fire9.png',
         'img/7.Effects/Fire/fire10.png',
+        'img/emptyImg.png',
     ]
 
     constructor(x, y) {
@@ -34,13 +35,14 @@ class ThrowableObjects extends MovableObjects {
             this.attackInterval = setInterval(() => {
                 this.x += 30;
                 this.playAnimation(this.IMAGES_FIRE);
-                this.timerToStopAnimations +=10.18;
+                this.timerToStopAnimations +=10;
     
                 if (this.timerToStopAnimations > 100) {
                     clearInterval(this.attackInterval);
                     this.attackInterval = null;
                     this.timerToStopAnimations = 0;
                     this.currentImage = 0;
+              
                 }
             }, 110);
         }

@@ -14,10 +14,10 @@ class MovableObjects extends DrawableObjects {
 
    //Berechnet die Eckpukte 
    isColliding(obj) {
-      return this.x + this.width -70 > obj.x && // Rechter Punkt der X-Achhse > x von Objekt
-         this.y + this.height > obj.y &&  // Links unten Punkt der Y-Achse > y von Oblekt
+      return this.x + this.width -75 > obj.x && // Rechter Punkt der X-Achhse > x von Objekt
+         this.y + this.height > obj.y + 40 &&  // Links unten Punkt der Y-Achse > y von Oblekt
          this.x < obj.x &&  // Linker Punkt der X-Achse < x von Objekt
-         this.y  < obj.y + obj.height // Links oben Punkt der Y-Achse + Y und Höhe von Objekt
+         this.y < obj.y + obj.height    // Links oben Punkt der Y-Achse + Y und Höhe von Objekt
    }
 
    hit() {
@@ -30,15 +30,20 @@ class MovableObjects extends DrawableObjects {
       
    }
 
-  
-
+   hitEnemy(){
+   
+      if(this.swordattack() && this.isColliding()){
+         this.playAnimation(this.HURT_IMAGES)
+         console.log('HITHITHIT')
+      }
+   }
 
    isDead() {
       return this.healthpoints == 0;
    }
 
    isHurt() {
-      let timepassed = new Date().getTime() - this.lastHit; // Differenz im Millisekunden
+      let timepassed = new Date().getTime() - this.lastHit; // Differenz in Millisekunden
       timepassed = timepassed / 1000; // Differenz in Sekunden
       return timepassed < 1; // return gibt quasi true retour, wenn ein Hit nach 5 Sekunden passiert;
    }
@@ -84,5 +89,59 @@ class MovableObjects extends DrawableObjects {
       this.speedY = 25;
    }
 
+   fireAttack() {
+      this.handleTheIdleTimer();
+      this.currentImage = 0;
+  
+      if (this.timerToStopAnimations <= 100 && !this.attackInterval) {
+          this.attackInterval = setInterval(() => {
+              this.playAnimation(this.EXTRA_ATTACK);
+              this.timerToStopAnimations += 28;
+  
+              if (this.timerToStopAnimations > 100) {
+                  clearInterval(this.attackInterval);
+                  this.attackInterval = null;
+                  this.timerToStopAnimations = 0;
+                  this.currentImage = 0;
+                  this.loadImage('img/1.PlayableChars/Knight/knight.png')
+              }
+          }, 110);
+      }
+  }
+
+
+  swordattack() {
+      this.handleTheIdleTimer();
+      this.currentImage = 0;
+  
+      if (this.timerToStopAnimations <= 100 && !this.attackInterval) {
+          this.attackInterval = setInterval(() => {
+              this.playAnimation(this.IMAGE_ATTACK);
+              this.timerToStopAnimations += 13;
+  
+              if (this.timerToStopAnimations > 100) {
+                  clearInterval(this.attackInterval);
+                  this.attackInterval = null;
+                  this.timerToStopAnimations = 0;
+                  this.currentImage = 0;
+                  this.loadImage('img/1.PlayableChars/Knight/knight.png')
+              }
+          }, 110);
+      }
+  }
+
+  
+  IdleWhileDoNothing() {
+      this.timeWithoutDoingSomething += 1
+      if (this.timeWithoutDoingSomething >= 200) {
+          this.playAnimation(this.IDLE_IMAGE);
+      }
+
+     
+  }
+  
+  handleTheIdleTimer() {
+      return this.timeWithoutDoingSomething = 0;
+  }
 
 }

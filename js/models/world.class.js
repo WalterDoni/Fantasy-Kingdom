@@ -143,8 +143,8 @@ class World {
             movabelThing.x = movabelThing.x * -1; // Save the place on the X-Axis
         }
 
-        movabelThing.draw(this.ctx)
-        /*movabelThing.drawFrame(this.ctx)*/
+        movabelThing.draw(this.ctx);
+        movabelThing.drawFrame(this.ctx)
 
         if (movabelThing.turnArround) { // Falls ein Bild verändert wurde, deshalb vorhin save
             movabelThing.x = movabelThing.x * -1;

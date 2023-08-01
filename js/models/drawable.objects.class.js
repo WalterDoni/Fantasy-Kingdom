@@ -35,14 +35,14 @@ class DrawableObjects {
     }
 
     
-    /*drawFrame(ctx) { // Zeichne den Rahmen um instanceof Klassen
+    drawFrame(ctx) { // Zeichne den Rahmen um instanceof Klassen
         if (this instanceof Character || this instanceof Goblin || this instanceof Dwarf || this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.rect(this.x +10, this.y + 50, this.width - 50, this.height - 60 );
             ctx.stroke();
         }
-    }*/
+    }
 
 }
