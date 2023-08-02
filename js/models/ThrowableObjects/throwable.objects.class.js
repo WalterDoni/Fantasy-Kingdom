@@ -12,7 +12,7 @@ class ThrowableObjects extends MovableObjects {
         'img/7.Effects/Fire/fire8.png',
         'img/7.Effects/Fire/fire9.png',
         'img/7.Effects/Fire/fire10.png',
-        'img/emptyImg.png',
+      
     ]
 
     constructor(x, y) {

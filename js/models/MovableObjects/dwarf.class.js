@@ -35,6 +35,13 @@ class Dwarf extends MovableObjects {
         'img/3.Enemies/Dwarf/Death/Death5.png',
 
     ]
+    
+    moreAccurateCollision = {
+        top: 10,
+        right: 85,
+        bottom: 20,
+        left: 60,
+     }
 
     constructor(x, y) {
         super().loadImage('img/3.Enemies/Dwarf/Walk/Walk1.png');

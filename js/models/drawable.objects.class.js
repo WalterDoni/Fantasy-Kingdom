@@ -17,8 +17,14 @@ class DrawableObjects {
         * @param {object} ctx context of the canvas
         */
     draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-
+        try{
+            ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        } catch(e){
+            console.warn('Error loading image', e);
+            console.log('Could not load imag', this.img.src);
+            //Catch wird nur ausgeführt sobald ein Fehler auftritt. Der entstandene
+            //Fehler wird so in der Console genau angezeigt.
+        }
     }
 
 

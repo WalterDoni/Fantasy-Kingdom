@@ -81,8 +81,7 @@ const level1 = new Levels([
         new SkyMiddleBuildUpWithoutEnd(2280,100),
         new SkyMiddleBuildUpWithoutEnd(2280,50),
         new SkyMiddleBuildUpWithoutEnd(2280,0),
-        new FlyingGroundLeft( 2720, 300),
-        new FlyingGroundRight(2770, 300),
+        
 
         new RightSideBuildUpGround(3370,530),
         new RightSideBuildUpGround(3370,480),
@@ -152,12 +151,12 @@ const level1 = new Levels([
         new Bird(800*7, 45),
 ],
    [
-    new Goblin(300, 400),
-    new Goblin(600, 400),
-    new Goblin(700, 400),
-    new Dwarf (850, 395),
-    new Dwarf (950, 395),
-    new Endboss(1100, 220),
+    new Goblin(5550, 400),
+    new Goblin(5550, 400),
+    new Goblin(5550, 400),
+    new Dwarf (5550, 395),
+    new Dwarf (5550, 395),
+    new Endboss(5550, 220),
 ],
 
 [

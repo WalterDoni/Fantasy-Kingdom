@@ -1,5 +1,7 @@
 class Goblin extends MovableObjects {
 
+
+
     WALKING_IMAGES = [
 
         'img/3.Enemies/Goblin/Walk/walk0.png',
@@ -34,10 +36,16 @@ class Goblin extends MovableObjects {
         'img/3.Enemies/Goblin/Death/death2.png',
         'img/3.Enemies/Goblin/Death/death3.png',
         'img/3.Enemies/Goblin/Death/death4.png',
-
     ]
 
-    constructor(x, y) {
+    moreAccurateCollision = {
+        top: 20,
+        right: 70,
+        bottom: 20,
+        left: 40,
+    }
+
+    constructor(x, y,) {
         super().loadImage('img/3.Enemies/Goblin/Walk/0lwalk.png')
         this.x = x;
         this.y = y;
@@ -45,7 +53,6 @@ class Goblin extends MovableObjects {
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.HURT_IMAGES);
         this.loadImages(this.DEAD_IMAGES);
-        this.hitEnemy();
         this.animate();
     }
 
@@ -56,8 +63,17 @@ class Goblin extends MovableObjects {
         setInterval(() => {
             this.playAnimation(this.WALKING_IMAGES)
         }, 180);
-        
-    }
 
+        setInterval(() => {
+            if (this.isDead()) {
+                this.playAnimation(this.DEAD_IMAGES);
+                console.log('DEAD');
+            } else if (this.healthpoints == 50) {
+                this.playAnimation(this.HURT_IMAGES);
+                console.log('HURT');
+            }
+
+        }, 120);
+    }
 
 }

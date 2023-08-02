@@ -10,6 +10,9 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    font-family: 'Bungee Shade';
+    font-size: 25px;
+    color: black;
 
 }
 
@@ -17,7 +20,22 @@ canvas {
     background-image: url(img/4.Maps/forest/Background/Bright/sky.png);
 }
 
+.keybindings{
+    font-family: 'Courier New', Courier, monospace!important;
+    font-weight: bold;
+    display: flex;
+    font-size: 25px;
+}
 @font-face {
     font-family: 'MyWebFont';
     src:  url('myfont.ttf') format('truetype');
 }
+
+/* bungee-shade-regular - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Bungee Shade';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./font/bungee-shade-v11-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }

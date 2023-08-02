@@ -1,11 +1,11 @@
 class Character extends MovableObjects {
     x = 40;
     y = 370;
-    speed = 5;
-    world;
+    speed = 10;
+
     walking_sound = new Audio('audio/Walking.mp3');
     timeWithoutDoingSomething = 0;
-    
+
     animation = false;
     attackInterval = null;
 
@@ -88,6 +88,12 @@ class Character extends MovableObjects {
         'img/1.PlayableChars/Knight/Idle/idle12.png',
     ]
 
+    moreAccurateCollision = {
+        top: 30,
+        right: 40,
+        bottom: 30,
+        left: 50,
+    }
 
     constructor() {
         super().loadImage('img/1.PlayableChars/Knight/knight.png') // ruft die übergordnete Funktion aus MovableObjets aus
@@ -111,13 +117,13 @@ class Character extends MovableObjects {
             //this.walking_sound.pause()
 
             // Charakter bewegt sich nach rechts oder links
-            if (this.world.keyboard.RIGHT && this.x < 5000) {
+            if (this.world.keyboard.RIGHT && this.x < 5000 || this.x >= 910 && this.x <= 1200 && this.y > 360 || this.x >= 2740 && this.x <= 3100 && this.y > 200 || this.x >= 3100 && this.x <= 3900 && this.y > 300) {
                 this.moveRight();
                 this.handleTheIdleTimer();
                 //this.walking_sound.play()
             }
 
-            if (this.world.keyboard.LEFT && this.x > -30) {
+            if (this.world.keyboard.LEFT && this.x > -30 || this.x >= 910 && this.x <= 1200 && this.y > 360 || this.x >= 2740 && this.x <= 3100 && this.y > 200 || this.x >= 3100 && this.x <= 3900 && this.y > 300) {
                 this.moveLeft();
                 this.handleTheIdleTimer();
                 //this.walking_sound.play()
@@ -125,10 +131,11 @@ class Character extends MovableObjects {
             // Charakter springt, setzt speedY auf 20 um dann nach und nach abzufallen (acceleration)
             if (this.world.keyboard.SPACE && !this.isAboveGround() || this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
+
                 this.handleTheIdleTimer();
             }
 
-            if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && !this.world.keyboard.UP ) {
+            if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && !this.world.keyboard.UP) {
                 this.timeWithoutDoingSomething += 20;
 
             }
@@ -151,13 +158,69 @@ class Character extends MovableObjects {
             }
             else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
-            } else
-
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    this.playAnimation(this.WALKING_IMAGES)
-                }
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.playAnimation(this.WALKING_IMAGES)
+            }
         }, 120);
 
     }
 
+    fireAttack() {
+        this.handleTheIdleTimer();
+        this.currentImage = 0;
+
+        if (this.timerToStopAnimations <= 100 && !this.attackInterval) {
+            this.attackInterval = setInterval(() => {
+                this.playAnimation(this.EXTRA_ATTACK);
+                this.timerToStopAnimations += 28;
+
+                if (this.timerToStopAnimations > 100) {
+                    clearInterval(this.attackInterval);
+                    this.attackInterval = null;
+                    this.timerToStopAnimations = 0;
+                    this.currentImage = 0;
+                    this.loadImage('img/1.PlayableChars/Knight/knight.png');
+
+                }
+            }, 140);
+        }
+    }
+
+
+    swordattack() {
+        this.handleTheIdleTimer();
+        this.currentImage = 0;
+
+        if (this.timerToStopAnimations <= 100 && !this.attackInterval) {
+            this.attackInterval = setInterval(() => {
+                this.playAnimation(this.IMAGE_ATTACK);
+                this.timerToStopAnimations += 13;
+
+                if (this.timerToStopAnimations > 100) {
+                    clearInterval(this.attackInterval);
+                    this.attackInterval = null;
+                    this.timerToStopAnimations = 0;
+                    this.currentImage = 0;
+                    this.loadImage('img/1.PlayableChars/Knight/knight.png')
+                }
+            }, 110);
+        }
+    }
+
+
+    IdleWhileDoNothing() {
+        this.timeWithoutDoingSomething += 1
+        if (this.timeWithoutDoingSomething >= 200) {
+            this.playAnimation(this.IDLE_IMAGE);
+        }
+
+
+    }
+
+    handleTheIdleTimer() {
+        return this.timeWithoutDoingSomething = 0;
+    }
+
+
+ 
 }

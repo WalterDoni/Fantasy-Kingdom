@@ -15,7 +15,7 @@ class World {
     camera_x = 0;
     turnArround = false;
     hit = 10;
-
+    lastHit = 0;
 
 
 
@@ -43,7 +43,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.useAttacksFromCharacter();
-
+            this.hitEnemy();
         }, 150);
 
     }
@@ -56,12 +56,34 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
 
-            if (this.character.isColliding(enemy)) {
+            if (this.character.isColliding(enemy) && ! this.character.isAboveGround()) {
                 this.character.hit();
                 this.healthbar.updateHealthpoints();
             }
+
         });
     }
+
+    hitEnemy() {
+        this.level.enemies.forEach((enemy) => {
+
+            if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 0) {
+                this.damageTheHittedEnemy(enemy);
+                this.character.jump();
+            }
+        });
+    }
+    
+
+    damageTheHittedEnemy(enemy){
+      enemy.healthpoints -= 50;
+      if (enemy.healthpoints < 0) {
+        enemy.healthpoints = 0;
+     }
+    }
+    
+    
+
 
     useAttacksFromCharacter() {
         if (this.keyboard.T_KEYBOARD) {
@@ -73,7 +95,6 @@ class World {
             this.character.swordattack();
         }
     }
-
 
 
     /**
