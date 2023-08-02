@@ -1,7 +1,7 @@
 class Character extends MovableObjects {
     x = 40;
     y = 370;
-    speed = 10;
+    speed = 5;
 
     walking_sound = new Audio('audio/Walking.mp3');
     timeWithoutDoingSomething = 0;
@@ -117,13 +117,13 @@ class Character extends MovableObjects {
             //this.walking_sound.pause()
 
             // Charakter bewegt sich nach rechts oder links
-            if (this.world.keyboard.RIGHT && this.x < 5000 || this.x >= 910 && this.x <= 1200 && this.y > 360 || this.x >= 2740 && this.x <= 3100 && this.y > 200 || this.x >= 3100 && this.x <= 3900 && this.y > 300) {
+            if (this.conditionsToWalkRight()) {
                 this.moveRight();
                 this.handleTheIdleTimer();
                 //this.walking_sound.play()
             }
 
-            if (this.world.keyboard.LEFT && this.x > -30 || this.x >= 910 && this.x <= 1200 && this.y > 360 || this.x >= 2740 && this.x <= 3100 && this.y > 200 || this.x >= 3100 && this.x <= 3900 && this.y > 300) {
+            if (this.conditionsToWalkLeft()) {
                 this.moveLeft();
                 this.handleTheIdleTimer();
                 //this.walking_sound.play()
@@ -222,5 +222,10 @@ class Character extends MovableObjects {
     }
 
 
- 
+    conditionsToWalkRight() {
+        return this.world.keyboard.RIGHT && this.x < 5000 || this.x >= 910 && this.x <= 1200 && this.y > 360 || this.x >= 2740 && this.x <= 3370 && this.y > 100 || this.x >= 3380 && this.x <= 3720 && this.y > 200 || this.x >= 3730 && this.x <= 3900 && this.y > 300
+    }
+    conditionsToWalkLeft() {
+        return this.world.keyboard.LEFT && this.x > -30 || this.x >= 910 && this.x <= 1200 && this.y > 360 || this.x >= 2740 && this.x <= 3370 && this.y > 100 || this.x >= 3380 && this.x <= 3720 && this.y > 200 || this.x >= 3730 && this.x <= 3900 && this.y > 300
+    }
 }

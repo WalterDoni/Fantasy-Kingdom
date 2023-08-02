@@ -160,8 +160,38 @@ const level1 = new Levels([
 ],
 
 [
-    new Coin(100,50),
-    new ManaCrystal(150,50)
+    new Coin(100,350),
+    new Coin(150,350),
+    new Coin(150,300),
+    new Coin(200,350),
+   
+    new ManaCrystal(400,450),
+
+    new ManaCrystal(1050,350),
+    new Coin(1100,350),
+
+    new ManaCrystal(1600,300),
+    new Coin(1600,350),
+    new Coin(1600,400),
+
+    new Coin(2550,350),
+
+    new Coin(2400,250),
+    new Coin(2350,250),
+    new Coin(2300,250),
+    new ManaCrystal(2250,250),
+
+
+    new Coin(3350,250),
+    new Coin(3400,250),
+    new ManaCrystal(3450,250),
+    new Coin(3500,250),
+    new Coin(3550,250),
+    
+   
+   
+   
+
 
 
 ],
