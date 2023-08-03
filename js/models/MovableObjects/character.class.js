@@ -1,5 +1,5 @@
 class Character extends MovableObjects {
-    x = 40;
+    x = 4100;
     y = 370;
     speed = 5;
 
@@ -106,6 +106,7 @@ class Character extends MovableObjects {
         this.loadImages(this.IDLE_IMAGE);
         this.applyGravity();
         this.animate();
+        
 
     }
 
@@ -131,7 +132,6 @@ class Character extends MovableObjects {
             // Charakter springt, setzt speedY auf 20 um dann nach und nach abzufallen (acceleration)
             if (this.world.keyboard.SPACE && !this.isAboveGround() || this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
-
                 this.handleTheIdleTimer();
             }
 
@@ -216,7 +216,7 @@ class Character extends MovableObjects {
 
 
     }
-
+  
     handleTheIdleTimer() {
         return this.timeWithoutDoingSomething = 0;
     }

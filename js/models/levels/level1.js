@@ -156,7 +156,7 @@ const level1 = new Levels([
     new Goblin(5550, 400),
     new Dwarf (5550, 395),
     new Dwarf (5550, 395),
-    new Endboss(5550, 220),
+    new Endboss(5000, 220),
 ],
 
 [

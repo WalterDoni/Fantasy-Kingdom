@@ -2,6 +2,7 @@ class World {
 
     level = level1;
     character = new Character();
+    endboss = new Endboss();
     healthbar = new Healthbar();
     statusbarFrameHP = new StatusbarFrameHP();
     statusbarFrameMana = new StatusbarFrameMana();
@@ -34,6 +35,7 @@ class World {
      */
     setWorld() {
         this.character.world = this;
+        this.endboss.world = this;
         this.throwableObjects.world = this;
     }
 
@@ -56,7 +58,7 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
 
-            if (this.character.isColliding(enemy) && ! this.character.isAboveGround()) {
+            if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
                 this.character.hit();
                 this.healthbar.updateHealthpoints();
             }
@@ -73,16 +75,16 @@ class World {
             }
         });
     }
-    
 
-    damageTheHittedEnemy(enemy){
-      enemy.healthpoints -= 50;
-      if (enemy.healthpoints < 0) {
-        enemy.healthpoints = 0;
-     }
+
+    damageTheHittedEnemy(enemy) {
+        enemy.healthpoints -= 50;
+        if (enemy.healthpoints < 0) {
+            enemy.healthpoints = 0;
+        }
     }
-    
-    
+
+
 
 
     useAttacksFromCharacter() {
@@ -108,9 +110,9 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0)
         this.addObjectsToMap(this.level.backgrounds);
-        this.addToWorld(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.birds);
+        this.addToWorld(this.character);
         this.addObjectsToMap(this.level.collectables);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
@@ -150,8 +152,8 @@ class World {
      * 
      * draw -> is described in drawable.objects.class.js. 
      * drawFrame -> frame for developing
-     * line 114 -> if turnArround is set on true , the images get mirrored with translate
-     * line 124 -> after turnArround was set on true reset the mirrored image. So the next image
+     *  if turnArround is set on true , the images get mirrored with translate
+     *  after turnArround was set on true reset the mirrored image. So the next image
      * will showend right. If restore would be not used, the image would change between mirrored and not.
      * 
      */

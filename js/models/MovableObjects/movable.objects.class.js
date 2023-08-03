@@ -7,6 +7,7 @@ class MovableObjects extends DrawableObjects {
    acceleration = 2.5;
    lastHit = 0;
 
+
    healthpoints = 100;
    timerToStopAnimations = 0;
    world;
@@ -47,6 +48,9 @@ class MovableObjects extends DrawableObjects {
       return timepassed < 1;  // wenn man innerhalb der letzten Sekunden getroffen wurde, gibt die Funktion true zurück
    }
 
+
+   
+  
 
    //Gravitation//
 
