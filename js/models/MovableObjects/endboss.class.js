@@ -1,10 +1,8 @@
 class Endboss extends MovableObjects {
     height = 395;
     width = 350;
-    firstContact = false;
-    walkRightInArea = false;
-    walkLeftInArea = false;
-    speed = 4;
+   
+    speed = 1;
 
 
 
@@ -77,6 +75,7 @@ class Endboss extends MovableObjects {
 
     animate() {
 
+        //---Before first Contact with Boss--//
         let bossIdle = setInterval(() => {
             this.turnArround = true;
             this.playAnimation(this.IDLE_IMAGES)
@@ -88,7 +87,6 @@ class Endboss extends MovableObjects {
             if (world.character.x > 4200 || this.firstContact) {
                 this.moveLeft();
                 this.firstContact = true;
-
             }
         }, 1000 / 40);
 
@@ -102,31 +100,31 @@ class Endboss extends MovableObjects {
 
 
 
+        //---After first Contact with Boss--//
+
         let rightWalkInArea = setInterval(() => {
-            if (this.x <= 3950 || this.walkRightInArea) {
-                this.turnArround = false;
-                this.walkRightInArea = true;
-                this.walkLeftInArea = false;
+            if (this.x <= 4000 || this.walkRightInArea) {
                 clearInterval(triggerMovement);
                 clearInterval(triggerMovement1);
-                clearInterval(lefttWalkInArea);
-                this.playAnimation(this.WALKING_IMAGES);
                 this.moveRight();
+                this.walkRightInArea = true;
+                this.walkLeftInArea = false;  
             }
-        }, 1000/18);
-
+        }, 1000/60);
+        
+        let walkInArea = setInterval(() => {
+            if ( this.walkLeftInArea  || this.walkRightInArea) 
+            this.playAnimation(this.WALKING_IMAGES);
+        }, 180);
 
         let lefttWalkInArea = setInterval(() => {
             if (this.x >= 5050 || this.walkLeftInArea ) {
-                
-                this.turnArround = true;
-                this.walkRightInArea = false;
-                this.walkLeftInArea = true;
-                clearInterval(rightWalkInArea);
-                this.playAnimation(this.WALKING_IMAGES);
                 this.moveLeft();
+                this.walkRightInArea = false;
+                this.walkLeftInArea = true;  
+                 
             }
-        }, 1000/18);
+        }, 1000/60);
 
 
 

@@ -1,5 +1,5 @@
 class Goblin extends MovableObjects {
-
+    speed = 1;
 
 
     WALKING_IMAGES = [
@@ -38,6 +38,13 @@ class Goblin extends MovableObjects {
         'img/3.Enemies/Goblin/Death/death4.png',
     ]
 
+    IDLE_IMAGES = [
+        'img/3.Enemies/Goblin/Idle/idle1.png',
+        'img/3.Enemies/Goblin/Idle/idle2.png',
+        'img/3.Enemies/Goblin/Idle/idle3.png',
+        'img/3.Enemies/Goblin/Idle/idle4.png',
+    ]
+
     moreAccurateCollision = {
         top: 20,
         right: 70,
@@ -53,15 +60,16 @@ class Goblin extends MovableObjects {
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.HURT_IMAGES);
         this.loadImages(this.DEAD_IMAGES);
+        this.loadImages(this.IDLE_IMAGES);
         this.animate();
     }
 
     animate() {
+
         setInterval(() => {
-            this.moveLeft();
-        }, 1000 / 60); // 60 FPS
-        setInterval(() => {
-            this.playAnimation(this.WALKING_IMAGES)
+            level1.enemies[0].playAnimation(this.WALKING_IMAGES);
+            level1.enemies[0].moveLeft();
+
         }, 180);
 
         setInterval(() => {
@@ -74,6 +82,38 @@ class Goblin extends MovableObjects {
             }
 
         }, 120);
+
+        
+
+        setInterval(() => {
+            if (level1.enemies[1].x <= 950 || this.walkRightInArea) {
+                level1.enemies[1].moveRight();
+                this.walkRightInArea = true;
+                this.walkLeftInArea = false;
+               
+            }
+        }, 1000 / 60);
+
+    
+        setInterval(() => {
+            if (level1.enemies[1].x >= 1170 || this.walkLeftInArea) {
+                level1.enemies[1].moveLeft();
+                this.walkRightInArea = false;
+                this.walkLeftInArea = true;
+
+            }
+        }, 1000 / 60);
+
+        setInterval(() => {
+            if (world.character.x > 80 || this.walkLeftInArea || this.walkRightInArea){
+                level1.enemies[1].playAnimation(this.WALKING_IMAGES)}
+        }, 180);
+
     }
+
+    
+
+
+
 
 }
