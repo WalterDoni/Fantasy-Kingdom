@@ -2,11 +2,10 @@ class World {
 
     level = level1;
     character = new Character();
-    endboss = new Endboss();
     healthbar = new Healthbar();
+    manabar = new Manabar();
     statusbarFrameHP = new StatusbarFrameHP();
     statusbarFrameMana = new StatusbarFrameMana();
-    manabar = new Manabar();
     avatarFrame = new AvatarFrame();
     avatarIcon = new AvatarIcon();
     throwableObjects = [];
@@ -34,8 +33,7 @@ class World {
      * Bind the character to the world, it's necessary e.g. for the camera_x 
      */
     setWorld() {
-        this.character.world = this;
-        this.endboss.world = this;
+        this.character.world = this;  
         this.throwableObjects.world = this;
     }
 

@@ -67,27 +67,38 @@ class Goblin extends MovableObjects {
     animate() {
 
         setInterval(() => {
-            level1.enemies[0].playAnimation(this.WALKING_IMAGES);
-            level1.enemies[0].moveLeft();
-
-        }, 180);
-
-        setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.DEAD_IMAGES);
-                console.log('DEAD');
+              
             } else if (this.healthpoints == 50) {
                 this.playAnimation(this.HURT_IMAGES);
-                console.log('HURT');
             }
 
         }, 120);
 
+        //--Before contact--//
+        setInterval(() => {
+            this.turnArround = true;
+            this.playAnimation(this.IDLE_IMAGES);
+        }, 230);
+
         
+        //--After contact--//
 
         setInterval(() => {
-            if (level1.enemies[1].x <= 950 || this.walkRightInArea) {
-                level1.enemies[1].moveRight();
+            if( level1.enemies[0].x - world.character.x <=500 || this.firstContact){
+                
+                this.firstContact = true;
+                level1.enemies[0].playAnimation(this.WALKING_IMAGES);
+                level1.enemies[0].moveLeft(this.WALKING_IMAGES);
+            }
+            
+        }, 230);
+
+
+        setInterval(() => {
+            if (level1.enemies[2].x <= 950 || this.walkRightInArea) {
+                level1.enemies[2].moveRight();
                 this.walkRightInArea = true;
                 this.walkLeftInArea = false;
                
@@ -96,8 +107,8 @@ class Goblin extends MovableObjects {
 
     
         setInterval(() => {
-            if (level1.enemies[1].x >= 1170 || this.walkLeftInArea) {
-                level1.enemies[1].moveLeft();
+            if (level1.enemies[2].x >= 1170 || this.walkLeftInArea) {
+                level1.enemies[2].moveLeft();
                 this.walkRightInArea = false;
                 this.walkLeftInArea = true;
 
@@ -105,8 +116,8 @@ class Goblin extends MovableObjects {
         }, 1000 / 60);
 
         setInterval(() => {
-            if (world.character.x > 80 || this.walkLeftInArea || this.walkRightInArea){
-                level1.enemies[1].playAnimation(this.WALKING_IMAGES)}
+            if (this.walkLeftInArea || this.walkRightInArea){
+                level1.enemies[2].playAnimation(this.WALKING_IMAGES)}
         }, 180);
 
     }

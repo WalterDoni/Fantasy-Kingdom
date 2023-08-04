@@ -2,7 +2,7 @@ class Endboss extends MovableObjects {
     height = 395;
     width = 350;
    
-    speed = 1;
+    speed = 3;
 
 
 
@@ -74,8 +74,18 @@ class Endboss extends MovableObjects {
 
 
     animate() {
+        setInterval(() => {
+            if (this.isDead()) {
+                this.playAnimation(this.DEAD_IMAGES);
+                console.log('DEAD');
+            } else if (this.healthpoints == 50) {
+                this.playAnimation(this.HURT_IMAGES);
+                console.log('HURT');
+            }
 
-        //---Before first Contact with Boss--//
+        }, 120);
+
+        //---Before first contact with Boss--//
         let bossIdle = setInterval(() => {
             this.turnArround = true;
             this.playAnimation(this.IDLE_IMAGES)
@@ -100,7 +110,7 @@ class Endboss extends MovableObjects {
 
 
 
-        //---After first Contact with Boss--//
+        //---After first contact with Boss--//
 
         let rightWalkInArea = setInterval(() => {
             if (this.x <= 4000 || this.walkRightInArea) {

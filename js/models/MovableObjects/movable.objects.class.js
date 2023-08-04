@@ -9,6 +9,7 @@ class MovableObjects extends DrawableObjects {
    walkRightInArea = false;
    walkLeftInArea = false;
    firstContact = false;
+   
    healthpoints = 100;
    timerToStopAnimations = 0;
    world;
