@@ -44,6 +44,8 @@ class World {
             this.checkCollisions();
             this.useAttacksFromCharacter();
             this.hitEnemy();
+            this.hitEnemyWalkingEnemies();
+            this.checkCollisionsWalkingEnemies();
         }, 150);
 
     }
@@ -64,6 +66,8 @@ class World {
         });
     }
 
+   
+
     hitEnemy() {
         this.level.enemies.forEach((enemy) => {
 
@@ -73,6 +77,34 @@ class World {
             }
         });
     }
+
+
+    //-NAMEN ANPASSEN--//
+    hitEnemyWalkingEnemies() {
+        this.level.walkingEnemies.forEach((enemy) => {
+
+            if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 0) {
+                this.damageTheHittedEnemy(enemy);
+                this.character.jump();
+            }
+        });
+    }
+
+
+
+    checkCollisionsWalkingEnemies() {
+        this.level.walkingEnemies.forEach((enemy) => {
+
+            if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
+                this.character.hit();
+                this.healthbar.updateHealthpoints();
+            }
+
+        });
+    }
+
+   //-NAMEN ANPASSEN--//
+
 
 
     damageTheHittedEnemy(enemy) {
@@ -113,6 +145,7 @@ class World {
         this.addToWorld(this.character);
         this.addObjectsToMap(this.level.collectables);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.walkingEnemies);
         this.addObjectsToMap(this.throwableObjects);
         /*this.level.enemies.forEach(enemy => {  //fast writing method for the for-loop
             this.addToWorld(enemy) // 

@@ -94,14 +94,14 @@ class Endboss extends MovableObjects {
 
         
         let triggerMovement = setInterval(() => {
-            if (world.character.x > 4200 || this.firstContact) {
+            if (world && world.character.x > 4200 || this.firstContact) {
                 this.moveLeft();
                 this.firstContact = true;
             }
         }, 1000 / 40);
 
         let triggerMovement1 = setInterval(() => {
-            if (world.character.x > 4200 || this.firstContact) {
+            if (world && world.character.x > 4200 || this.firstContact) {
                 this.playAnimation(this.WALKING_IMAGES)
                 clearInterval(bossIdle);
                 this.firstContact = true;

@@ -4,20 +4,23 @@ class Levels {
     clouds;
     birds;
     enemies;
+    walkingEnemies;
     collectables;
-    statusbarBorder;
+
+    statusbarBorder; //???
     
     
 
 
-    constructor(backgrounds, grounds, clouds, birds, enemies, collectables, statusbarBorder) {
+    constructor(backgrounds, grounds, clouds, birds, enemies, walkingEnemies, collectables, statusbarBorder) {
         this.backgrounds = backgrounds;
         this.grounds = grounds;
         this.clouds = clouds;
         this.birds = birds;
         this.enemies = enemies;
+        this.walkingEnemies = walkingEnemies;
         this.collectables = collectables;
-        this.statusbarBorder = statusbarBorder;
+        this.statusbarBorder = statusbarBorder;//???
 
 
         this.createFloorLevel1Part1();

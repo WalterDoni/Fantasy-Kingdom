@@ -1,7 +1,7 @@
-class Dwarf extends MovableObjects {
+class WalkingDwarf extends MovableObjects{
 
-speed = 1
-
+    walkLeftInArea = true;
+    speed = 0.5;
 
     WALKING_IMAGES = [
 
@@ -49,8 +49,8 @@ speed = 1
         left: 60,
      }
 
-    constructor(x, y) {
-        super().loadImage('img/3.Enemies/Dwarf/Walk/Walk1.png');
+    constructor(x, y,) {
+        super().loadImage('img/3.Enemies/Dwarf/Walk/Walk1.png'); 
         this.x = x;
         this.y = y;
         this.loadImages(this.WALKING_IMAGES);
@@ -61,38 +61,42 @@ speed = 1
         this.animate();
     }
 
-
-
     animate() {
+
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.DEAD_IMAGES);
-              
             } else if (this.healthpoints == 50) {
                 this.playAnimation(this.HURT_IMAGES);
             }
-
         }, 120);
 
-        //--Before contact--//
-        let idleInt = setInterval(() => {
-            this.turnArround = true;
-            this.playAnimation(this.IDLE_IMAGES)
-        }, 230);
-    
-        //--After contact--//
+
         setInterval(() => {
-            if( level1.enemies[1].x - world.character.x <= 400 || this.firstContact){
-                clearInterval(idleInt);
-                this.firstContact = true;
-                level1.enemies[1].playAnimation(this.WALKING_IMAGES);
-                level1.enemies[1].moveLeft(this.WALKING_IMAGES);
-                level1.enemies[4].playAnimation(this.WALKING_IMAGES);
-                level1.enemies[4].moveLeft(this.WALKING_IMAGES);
-            }
-            
-        }, 120);
-    }
-     
-}
+            if (this.x <= 2300 || this.walkRightInArea) {
+                this.moveRight();
+                this.walkRightInArea = true;
+                this.walkLeftInArea = false;
 
+            }if (this.x >= 2520 || this.walkLeftInArea){
+                this.moveLeft();
+                this.walkRightInArea = false;
+                this.walkLeftInArea = true;
+            }
+        }, 1000 / 60);
+
+
+        setInterval(() => {
+            if (this.walkLeftInArea || this.walkRightInArea) {
+                this.playAnimation(this.WALKING_IMAGES);
+            }
+        }, 180);
+
+
+
+    }
+
+
+
+
+}

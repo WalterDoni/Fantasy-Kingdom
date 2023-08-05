@@ -1,5 +1,6 @@
-class Goblin extends MovableObjects {
-    speed = 0.2;
+class WalkingGoblin extends MovableObjects {
+
+    speed = 0.5;
 
 
     WALKING_IMAGES = [
@@ -74,37 +75,32 @@ class Goblin extends MovableObjects {
             }
         }, 120);
 
-        
-        //--Before contact--//
-        let Idle = setInterval(() => {
-            this.turnArround = true;
-            this.playAnimation(this.IDLE_IMAGES);
-        }, 230);
 
-        //--After contact--//
+        //-Goblin0-//
 
         setInterval(() => {
-            if (level1.enemies[0].x - world.character.x <= 500 || this.firstContact) {
-                clearInterval(Idle);
-                this.firstContact = true;
-                this.moveLeft();
-            }
+            if (this.x <= 975 || this.walkRightInArea) {
+                this.moveRight();
+                this.walkRightInArea = true;
+                this.walkLeftInArea = false;
 
+            }if (this.x >= 1150 || this.walkLeftInArea){
+                this.moveLeft();
+                this.walkRightInArea = false;
+                this.walkLeftInArea = true;
+            }
         }, 1000 / 60);
 
+
         setInterval(() => {
-            if (this.firstContact) {
-               this.playAnimation(this.WALKING_IMAGES);
+            if (this.walkLeftInArea || this.walkRightInArea) {
+                this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
 
-       
 
-    
 
     }
-
-
 
 
 
