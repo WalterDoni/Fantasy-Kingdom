@@ -84,7 +84,7 @@ class Goblin extends MovableObjects {
         //--After contact--//
 
         setInterval(() => {
-            if (level1.enemies[0].x - world.character.x <= 500 || this.firstContact) {
+            if (world && level1.enemies[0].x - world.character.x <= 500 || this.firstContact) {
                 clearInterval(Idle);
                 this.firstContact = true;
                 this.moveLeft();

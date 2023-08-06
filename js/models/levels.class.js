@@ -20,7 +20,7 @@ class Levels {
         this.enemies = enemies;
         this.walkingEnemies = walkingEnemies;
         this.collectables = collectables;
-        this.statusbarBorder = statusbarBorder;//???
+     
 
 
         this.createFloorLevel1Part1();

@@ -155,16 +155,16 @@ const level1 = new Levels([
         new Dwarf(900, 400),// 1
         new Goblin(1700, 400),// 3
         new Goblin(1800, 400),// 4
-        new Dwarf(2500, 400),// 5
-        new Goblin(3050, 100),// 7 third floor enemie
-        new Dwarf(3500, 198),// 8 fourth floor enemie
-        new Goblin(3850, 302),// 9 fifth floor enemie
+        new Dwarf(2500, 400),// 5 a
         new Endboss(5000, 220),
     ],
 
     [
-        new WalkingGoblin(1170, 300),
+        new WalkingGoblin(1150, 300),
         new WalkingDwarf(2450, 170),
+        new WalkingGoblin(3050, 100),// 7 third floor enemie
+        new WalkingDwarf(3500, 198),// 8 fourth floor enemie
+        new WalkingGoblin(3850, 302),// 9 fifth floor enemie
 
     ],
 

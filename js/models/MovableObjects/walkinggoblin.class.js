@@ -1,8 +1,7 @@
 class WalkingGoblin extends MovableObjects {
 
     speed = 0.5;
-
-
+  
     WALKING_IMAGES = [
 
         'img/3.Enemies/Goblin/Walk/walk0.png',
@@ -76,20 +75,22 @@ class WalkingGoblin extends MovableObjects {
         }, 120);
 
 
-        //-Goblin0-//
+     
 
         setInterval(() => {
-            if (this.x <= 975 || this.walkRightInArea) {
-                this.moveRight();
-                this.walkRightInArea = true;
-                this.walkLeftInArea = false;
+            if (world && level1.walkingEnemies[0].x <= 975 || this.walkRightInArea) {
+                level1.walkingEnemies[0].moveRight();
+                level1.walkingEnemies[0].walkRightInArea = true;
+                level1.walkingEnemies[0].walkLeftInArea = false;
 
-            }if (this.x >= 1150 || this.walkLeftInArea){
-                this.moveLeft();
-                this.walkRightInArea = false;
-                this.walkLeftInArea = true;
+            }if (world && level1.walkingEnemies[0].x >= 1150 || this.walkLeftInArea){
+                level1.walkingEnemies[0].moveLeft();
+                level1.walkingEnemies[0].walkRightInArea = false;
+                level1.walkingEnemies[0].walkLeftInArea = true;
             }
         }, 1000 / 60);
+
+
 
 
         setInterval(() => {

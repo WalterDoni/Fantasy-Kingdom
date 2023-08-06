@@ -1,6 +1,6 @@
 class Character extends MovableObjects {
-    x = 40;
-    y = 70;
+    x = 2600;
+    y = 170;
     speed = 5;
 
     walking_sound = new Audio('audio/Walking.mp3');

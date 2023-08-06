@@ -72,13 +72,14 @@ class WalkingDwarf extends MovableObjects{
         }, 120);
 
 
-        setInterval(() => {
-            if (this.x <= 2300 || this.walkRightInArea) {
+
+  setInterval(() => {
+            if (world && level1.walkingEnemies[1].x <= 2300 || this.walkRightInArea) {
                 this.moveRight();
                 this.walkRightInArea = true;
                 this.walkLeftInArea = false;
 
-            }if (this.x >= 2520 || this.walkLeftInArea){
+            }if (world && level1.walkingEnemies[1].x >= 2520 || this.walkLeftInArea){
                 this.moveLeft();
                 this.walkRightInArea = false;
                 this.walkLeftInArea = true;

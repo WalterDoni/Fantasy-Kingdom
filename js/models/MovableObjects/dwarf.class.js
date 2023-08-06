@@ -15,7 +15,7 @@ speed = 1
 
     IMAGE_ATTACK = [
         'img/3.Enemies/Dwarf/Attack/Attack1.png',
-        'img/3.Enemies/Dwarf/Attack/Attack2png',
+        'img/3.Enemies/Dwarf/Attack/Attack2.png',
         'img/3.Enemies/Dwarf/Attack/Attack3.png',
         'img/3.Enemies/Dwarf/Attack/Attack4.png',
         'img/3.Enemies/Dwarf/Attack/Attack5.png',
@@ -82,13 +82,15 @@ speed = 1
     
         //--After contact--//
         setInterval(() => {
-            if( level1.enemies[1].x - world.character.x <= 400 || this.firstContact){
+            if( world && level1.enemies[1].x - world.character.x <= 400 || this.firstContact){
                 clearInterval(idleInt);
                 this.firstContact = true;
                 level1.enemies[1].playAnimation(this.WALKING_IMAGES);
                 level1.enemies[1].moveLeft(this.WALKING_IMAGES);
                 level1.enemies[4].playAnimation(this.WALKING_IMAGES);
                 level1.enemies[4].moveLeft(this.WALKING_IMAGES);
+                level1.enemies[6].playAnimation(this.WALKING_IMAGES);
+                level1.enemies[6].moveLeft(this.WALKING_IMAGES);
             }
             
         }, 120);
