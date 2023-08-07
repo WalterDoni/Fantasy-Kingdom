@@ -89,8 +89,7 @@ speed = 1
                 level1.enemies[1].moveLeft(this.WALKING_IMAGES);
                 level1.enemies[4].playAnimation(this.WALKING_IMAGES);
                 level1.enemies[4].moveLeft(this.WALKING_IMAGES);
-                level1.enemies[6].playAnimation(this.WALKING_IMAGES);
-                level1.enemies[6].moveLeft(this.WALKING_IMAGES);
+              
             }
             
         }, 120);

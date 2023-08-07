@@ -38,12 +38,7 @@ class WalkingGoblin extends MovableObjects {
         'img/3.Enemies/Goblin/Death/death4.png',
     ]
 
-    IDLE_IMAGES = [
-        'img/3.Enemies/Goblin/Idle/idle1.png',
-        'img/3.Enemies/Goblin/Idle/idle2.png',
-        'img/3.Enemies/Goblin/Idle/idle3.png',
-        'img/3.Enemies/Goblin/Idle/idle4.png',
-    ]
+
 
     moreAccurateCollision = {
         top: 20,
@@ -60,7 +55,6 @@ class WalkingGoblin extends MovableObjects {
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.HURT_IMAGES);
         this.loadImages(this.DEAD_IMAGES);
-        this.loadImages(this.IDLE_IMAGES);
         this.animate();
     }
 
@@ -74,8 +68,6 @@ class WalkingGoblin extends MovableObjects {
             }
         }, 120);
 
-
-     
 
         setInterval(() => {
             if (world && level1.walkingEnemies[0].x <= 975 || this.walkRightInArea) {
@@ -91,10 +83,36 @@ class WalkingGoblin extends MovableObjects {
         }, 1000 / 60);
 
 
+        setInterval(() => {
+            if (world && level1.walkingEnemies[2].x <= 2800 || this.walkRightInArea1) {
+                level1.walkingEnemies[2].moveRight();
+                level1.walkingEnemies[2].walkRightInArea1 = true;
+                level1.walkingEnemies[2].walkLeftInArea1 = false;
+
+            }if (world && level1.walkingEnemies[2].x >= 3300 || this.walkLeftInArea1){
+                level1.walkingEnemies[2].moveLeft();
+                level1.walkingEnemies[2].walkRightInArea1 = false;
+                level1.walkingEnemies[2].walkLeftInArea1 = true;
+            }
+        }, 1000 / 60);
+
+        setInterval(() => {
+            if (world && level1.walkingEnemies[4].x <= 3720 || this.walkRightInArea2) {
+                level1.walkingEnemies[4].moveRight();
+                level1.walkingEnemies[4].walkRightInArea2 = true;
+                level1.walkingEnemies[4].walkLeftInArea2 = false;
+
+            }if (world && level1.walkingEnemies[4].x >= 3850 || this.walkLeftInArea2){
+                level1.walkingEnemies[4].moveLeft();
+                level1.walkingEnemies[4].walkRightInArea2 = false;
+                level1.walkingEnemies[4].walkLeftInArea2 = true;
+            }
+        }, 1000 / 60);
+
 
 
         setInterval(() => {
-            if (this.walkLeftInArea || this.walkRightInArea) {
+            if (this.walkLeftInArea || this.walkRightInArea || this.walkLeftInArea1 || this.walkRightInArea1 || this.walkLeftInArea2 || this.walkRightInArea2) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);

@@ -1,6 +1,5 @@
-class WalkingDwarf extends MovableObjects{
+class WalkingDwarf extends MovableObjects {
 
-    walkLeftInArea = true;
     speed = 0.5;
 
     WALKING_IMAGES = [
@@ -36,28 +35,23 @@ class WalkingDwarf extends MovableObjects{
 
     ]
 
-    IDLE_IMAGES = [
-        'img/3.Enemies/Dwarf/Idle/Idle1.png',
-        'img/3.Enemies/Dwarf/Idle/Idle2.png',
-        'img/3.Enemies/Dwarf/Idle/Idle3.png',
-    ]
-    
+   
+
     moreAccurateCollision = {
         top: 10,
         right: 85,
         bottom: 20,
         left: 60,
-     }
+    }
 
     constructor(x, y,) {
-        super().loadImage('img/3.Enemies/Dwarf/Walk/Walk1.png'); 
+        super().loadImage('img/3.Enemies/Dwarf/Walk/Walk1.png');
         this.x = x;
         this.y = y;
         this.loadImages(this.WALKING_IMAGES);
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.HURT_IMAGES);
         this.loadImages(this.DEAD_IMAGES);
-        this.loadImages(this.IDLE_IMAGES);
         this.animate();
     }
 
@@ -73,22 +67,35 @@ class WalkingDwarf extends MovableObjects{
 
 
 
-  setInterval(() => {
+        setInterval(() => {
             if (world && level1.walkingEnemies[1].x <= 2300 || this.walkRightInArea) {
-                this.moveRight();
-                this.walkRightInArea = true;
-                this.walkLeftInArea = false;
+                level1.walkingEnemies[1].moveRight();
+                level1.walkingEnemies[1].walkRightInArea = true;
+                level1.walkingEnemies[1].walkLeftInArea = false;
 
-            }if (world && level1.walkingEnemies[1].x >= 2520 || this.walkLeftInArea){
-                this.moveLeft();
-                this.walkRightInArea = false;
-                this.walkLeftInArea = true;
+            } if (world && level1.walkingEnemies[1].x >= 2500 || this.walkLeftInArea) {
+                level1.walkingEnemies[1].moveLeft();
+                level1.walkingEnemies[1].walkRightInArea = false;
+                level1.walkingEnemies[1].walkLeftInArea = true;
+            }
+        }, 1000 / 60);
+
+        setInterval(() => {
+            if (world && level1.walkingEnemies[3].x <= 3400 || this.walkRightInArea1) {
+                level1.walkingEnemies[3].moveRight();
+                level1.walkingEnemies[3].walkRightInArea1= true;
+                level1.walkingEnemies[3].walkLeftInArea1 = false;
+
+            } if (world && level1.walkingEnemies[3].x >= 3650 || this.walkLeftInArea1) {
+                level1.walkingEnemies[3].moveLeft();
+                level1.walkingEnemies[3].walkRightInArea1 = false;
+                level1.walkingEnemies[3].walkLeftInArea1 = true;
             }
         }, 1000 / 60);
 
 
         setInterval(() => {
-            if (this.walkLeftInArea || this.walkRightInArea) {
+            if (this.walkLeftInArea || this.walkRightInArea || this.walkRightInArea1 || this.walkLeftInArea1) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);

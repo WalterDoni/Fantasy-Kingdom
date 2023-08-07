@@ -98,6 +98,16 @@ class Goblin extends MovableObjects {
             }
         }, 180);
 
+
+        setInterval(() => {
+          if(world && this.x - world.character.x <= 150){
+            this.playAnimation(this.IMAGE_ATTACK);
+           
+          }
+        
+
+        }, 140)
+
        
 
     

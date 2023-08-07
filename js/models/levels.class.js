@@ -7,12 +7,12 @@ class Levels {
     walkingEnemies;
     collectables;
 
-    statusbarBorder; //???
+ 
     
     
 
 
-    constructor(backgrounds, grounds, clouds, birds, enemies, walkingEnemies, collectables, statusbarBorder) {
+    constructor(backgrounds, grounds, clouds, birds, enemies, walkingEnemies, collectables) {
         this.backgrounds = backgrounds;
         this.grounds = grounds;
         this.clouds = clouds;

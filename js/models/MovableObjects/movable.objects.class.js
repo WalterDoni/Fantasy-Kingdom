@@ -8,6 +8,8 @@ class MovableObjects extends DrawableObjects {
    lastHit = 0;
    walkRightInArea = false;
    walkLeftInArea = false;
+   walkRightInArea1 = false;
+   walkLeftInArea1 = false;
    firstContact = false;
    
    healthpoints = 100;
