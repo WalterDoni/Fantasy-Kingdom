@@ -6,12 +6,16 @@ class MovableObjects extends DrawableObjects {
    speedY = 0;
    acceleration = 2.5;
    lastHit = 0;
+
    walkRightInArea = false;
    walkLeftInArea = false;
    walkRightInArea1 = false;
    walkLeftInArea1 = false;
    firstContact = false;
-   
+   pauseAnimation = false;
+   hurt = 0;
+   dead = 0;
+
    healthpoints = 100;
    timerToStopAnimations = 0;
    world;
@@ -30,6 +34,16 @@ class MovableObjects extends DrawableObjects {
          this.x + this.moreAccurateCollision.left < obj.x + obj.width - obj.moreAccurateCollision.right &&  // Linker Punkt der X-Achse < rechter Punkt x von Objekt
          this.y + this.moreAccurateCollision.top < obj.y + obj.height - obj.moreAccurateCollision.bottom   // Oberer Punkt der Y-Achse < unterer Punkt Y von Objekt
    }    // moreAccurateCollision --> Zieht Werte ab oder addiert Werte um die Collision genauer zu machen
+
+   isCollidingWhileSwordAttack(obj) {
+      return this.x + this.width + 10 > obj.x + obj.moreAccurateCollision.left && // Rechter Punkt der X-Achhse > linker Punkt x von Objekt
+         this.y + this.height - this.moreAccurateCollision.bottom > obj.y + obj.moreAccurateCollision.top &&  // Unterer Punkt der Y-Achse > Oberer Punkt y von Objekt
+         this.x + this.moreAccurateCollision.left < obj.x + obj.width - obj.moreAccurateCollision.right &&  // Linker Punkt der X-Achse < rechter Punkt x von Objekt
+         this.y + this.moreAccurateCollision.top < obj.y + obj.height - obj.moreAccurateCollision.bottom   // Oberer Punkt der Y-Achse < unterer Punkt Y von Objekt
+   }    // moreAccurateCollision --> Zieht Werte ab oder addiert Werte um die Collision genauer zu machen
+
+
+
 
    hit() {
       this.healthpoints -= 10;
@@ -53,8 +67,8 @@ class MovableObjects extends DrawableObjects {
    }
 
 
-   
-  
+
+
 
    //Gravitation//
 
@@ -80,11 +94,15 @@ class MovableObjects extends DrawableObjects {
          return this.y < 165;
       } if (this.world.character.x >= 3710 && this.world.character.x <= 3900) {
          return this.y < 265;
-      }  else {
+      } else {
          return this.y < 365;
       }
    }
    //Gravitation//
+
+
+
+
 
 
    playAnimation(image) {

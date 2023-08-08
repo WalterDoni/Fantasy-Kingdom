@@ -2,6 +2,7 @@ class Goblin extends MovableObjects {
     speed = 0.2;
 
 
+
     WALKING_IMAGES = [
 
         'img/3.Enemies/Goblin/Walk/walk0.png',
@@ -66,15 +67,33 @@ class Goblin extends MovableObjects {
 
     animate() {
 
-        setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.DEAD_IMAGES);
-            } else if (this.healthpoints == 50) {
-                this.playAnimation(this.HURT_IMAGES);
-            }
-        }, 120);
-
         
+        setInterval(() => {
+            if (this.isDead() && this.dead <= 1) {
+                clearInterval(conditionsToMove);
+                clearInterval(startMoving);
+                clearInterval(startMoving1);
+                clearInterval(attacks);
+                this.playAnimation(this.DEAD_IMAGES);
+                this.dead += 1;  
+                this.speedY = 10;
+
+            } else if (this.healthpoints == 50 && this.hurt <= 50) {
+                this.playAnimation(this.HURT_IMAGES);
+                this.hurt += 15;
+            }
+        }, 140);
+
+
+        setInterval(() => {
+            if (this.isDead() || this.speedY > 0) {
+               this.y -= this.speedY;
+               this.speedY -= this.acceleration;
+            }
+         }, 1000 / 25)
+      
+
+
         //--Before contact--//
         let Idle = setInterval(() => {
             this.turnArround = true;
@@ -83,34 +102,39 @@ class Goblin extends MovableObjects {
 
         //--After contact--//
 
-        setInterval(() => {
+        let conditionsToMove = setInterval(() => {
             if (world && level1.enemies[0].x - world.character.x <= 500 || this.firstContact) {
                 clearInterval(Idle);
                 this.firstContact = true;
+
+            }
+
+        }, 1000 / 60);
+
+        let startMoving = setInterval(() => {
+            if (this.firstContact && world && this.x - world.character.x >= 180 || this.firstContact && world && this.y - world.character.y >= 50) {
                 this.moveLeft();
             }
 
         }, 1000 / 60);
 
-        setInterval(() => {
-            if (this.firstContact) {
-               this.playAnimation(this.WALKING_IMAGES);
+
+        let startMoving1 = setInterval(() => {
+            if (this.firstContact && world && this.x - world.character.x >= 180 || this.firstContact && world && this.y - world.character.y >= 50) {
+                this.playAnimation(this.WALKING_IMAGES);
+                this.moveLeft();
             }
         }, 180);
 
 
-        setInterval(() => {
-          if(world && this.x - world.character.x <= 150){
-            this.playAnimation(this.IMAGE_ATTACK);
-           
-          }
-        
+        let attacks = setInterval(() => {
+            if (world && this.x - world.character.x <= 180 && this.y - world.character.y <= 30) {
+                this.playAnimation(this.IMAGE_ATTACK);
+
+            }
 
         }, 140)
-
-       
-
-    
+      
 
     }
 

@@ -33,7 +33,7 @@ class World {
      * Bind the character to the world, it's necessary e.g. for the camera_x 
      */
     setWorld() {
-        this.character.world = this;  
+        this.character.world = this;
         this.throwableObjects.world = this;
     }
 
@@ -46,6 +46,7 @@ class World {
             this.hitEnemy();
             this.hitEnemyWalkingEnemies();
             this.checkCollisionsWalkingEnemies();
+
         }, 150);
 
     }
@@ -66,7 +67,7 @@ class World {
         });
     }
 
-   
+
 
     hitEnemy() {
         this.level.enemies.forEach((enemy) => {
@@ -75,11 +76,18 @@ class World {
                 this.damageTheHittedEnemy(enemy);
                 this.character.jump();
             }
+            
+            if (this.character.isCollidingWhileSwordAttack(enemy) && this.keyboard.LEFTMOUSE){
+                this.damageTheHittedEnemy(enemy);
+            }
+
         });
     }
 
 
-    //-NAMEN ANPASSEN--//
+
+
+    //-WalkingEnemies--//
     hitEnemyWalkingEnemies() {
         this.level.walkingEnemies.forEach((enemy) => {
 
@@ -103,7 +111,7 @@ class World {
         });
     }
 
-   //-NAMEN ANPASSEN--//
+    //-WalkingEnemies--//
 
 
 
@@ -124,7 +132,8 @@ class World {
             this.character.fireAttack();
         }
         if (this.keyboard.LEFTMOUSE) {
-            this.character.swordattack();
+            this.character.swordAttack();
+         
         }
     }
 

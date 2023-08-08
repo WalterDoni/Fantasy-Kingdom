@@ -106,7 +106,7 @@ class Character extends MovableObjects {
         this.loadImages(this.IDLE_IMAGE);
         this.applyGravity();
         this.animate();
-        
+
 
     }
 
@@ -187,7 +187,7 @@ class Character extends MovableObjects {
     }
 
 
-    swordattack() {
+    swordAttack() {
         this.handleTheIdleTimer();
         this.currentImage = 0;
 
@@ -207,16 +207,16 @@ class Character extends MovableObjects {
         }
     }
 
+    
+
 
     IdleWhileDoNothing() {
         this.timeWithoutDoingSomething += 1
         if (this.timeWithoutDoingSomething >= 200) {
             this.playAnimation(this.IDLE_IMAGE);
         }
-
-
     }
-  
+
     handleTheIdleTimer() {
         return this.timeWithoutDoingSomething = 0;
     }

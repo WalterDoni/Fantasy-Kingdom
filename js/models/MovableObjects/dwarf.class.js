@@ -64,36 +64,78 @@ speed = 1
 
 
     animate() {
+        
         setInterval(() => {
-            if (this.isDead()) {
+            if (this.isDead() && this.dead <= 1) {
+                clearInterval(conditionsToMove);
+                clearInterval(startMoving);
+                clearInterval(startMoving1);
+                clearInterval(attacks);
                 this.playAnimation(this.DEAD_IMAGES);
-              
-            } else if (this.healthpoints == 50) {
-                this.playAnimation(this.HURT_IMAGES);
-            }
+                this.dead += 1;  
+                this.speedY = 10;
 
-        }, 120);
+            } else if (this.healthpoints == 50 && this.hurt <= 50) {
+                this.playAnimation(this.HURT_IMAGES);
+                this.hurt += 15;
+            }
+        }, 140);
+
+
+        setInterval(() => {
+            if (this.isDead() || this.speedY > 0) {
+               this.y -= this.speedY;
+               this.speedY -= this.acceleration;
+            }
+         }, 1000 / 25)
+      
+
 
         //--Before contact--//
-        let idleInt = setInterval(() => {
+        let Idle = setInterval(() => {
             this.turnArround = true;
-            this.playAnimation(this.IDLE_IMAGES)
+            this.playAnimation(this.IDLE_IMAGES);
         }, 230);
-    
+
         //--After contact--//
-        setInterval(() => {
-            if( world && level1.enemies[1].x - world.character.x <= 400 || this.firstContact){
-                clearInterval(idleInt);
+
+        let conditionsToMove = setInterval(() => {
+            if (world && level1.enemies[1].x - world.character.x <= 500 || this.firstContact) {
+                clearInterval(Idle);
                 this.firstContact = true;
-                level1.enemies[1].playAnimation(this.WALKING_IMAGES);
-                level1.enemies[1].moveLeft(this.WALKING_IMAGES);
-                level1.enemies[4].playAnimation(this.WALKING_IMAGES);
-                level1.enemies[4].moveLeft(this.WALKING_IMAGES);
-              
+
             }
-            
-        }, 120);
+
+        }, 1000 / 60);
+
+        let startMoving = setInterval(() => {
+            if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 50) {
+                this.moveLeft();
+            }
+
+        }, 1000 / 60);
+
+
+        let startMoving1 = setInterval(() => {
+            if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 50) {
+                this.playAnimation(this.WALKING_IMAGES);
+                this.moveLeft();
+            }
+        }, 180);
+
+
+        let attacks = setInterval(() => {
+            if (world && this.x - world.character.x <= 120 && this.y - world.character.y <= 30) {
+                this.playAnimation(this.IMAGE_ATTACK);
+
+            }
+
+        }, 140)
+
     }
-     
+
+
+
+
 }
 
