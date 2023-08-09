@@ -151,7 +151,7 @@ const level1 = new Levels([
         new Bird(800 * 7, 45),
     ],
     [
-        new Goblin(400, 400),// 0
+        new Goblin(800, 400),// 0
         new Dwarf(900, 400),// 1
         new Goblin(1700, 400),// 2
         new Goblin(1800, 400),// 3

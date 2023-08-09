@@ -180,6 +180,7 @@ class Character extends MovableObjects {
                     this.timerToStopAnimations = 0;
                     this.currentImage = 0;
                     this.loadImage('img/1.PlayableChars/Knight/knight.png');
+                    this.throwableObjects.splice(0, 1);
 
                 }
             }, 140);

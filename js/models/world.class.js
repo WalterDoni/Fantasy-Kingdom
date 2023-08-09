@@ -46,6 +46,7 @@ class World {
             this.hitEnemy();
             this.hitEnemyWalkingEnemies();
             this.checkCollisionsWalkingEnemies();
+            this.checkIfThrowableObjectHitsEnemie();
 
         }, 150);
 
@@ -66,7 +67,20 @@ class World {
 
         });
     }
+    
 
+    checkIfThrowableObjectHitsEnemie() {
+        this.level.enemies.forEach((enemy) => {
+            if (enemy.isDead()) { return }
+            this.throwableObjects.forEach((fireball) => {
+                if (fireball.isColliding(enemy)) {
+                    this.damageTheHittedEnemy(enemy);
+                    
+                   
+                }
+            });
+        });
+    }
 
 
     hitEnemy() {
@@ -94,6 +108,9 @@ class World {
             if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 0) {
                 this.damageTheHittedEnemy(enemy);
                 this.character.jump();
+                
+            } if (this.character.isCollidingWhileSwordAttack(enemy) && this.keyboard.LEFTMOUSE){
+                this.damageTheHittedEnemy(enemy);
             }
         });
     }
@@ -110,7 +127,8 @@ class World {
 
         });
     }
-
+    
+ 
     //-WalkingEnemies--//
 
 
