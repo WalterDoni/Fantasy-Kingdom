@@ -20,7 +20,7 @@ class WalkingDwarf extends MovableObjects {
 
     IMAGE_ATTACK = [
         'img/3.Enemies/Dwarf/Attack/Attack1.png',
-        'img/3.Enemies/Dwarf/Attack/Attack2png',
+        'img/3.Enemies/Dwarf/Attack/Attack2.png',
         'img/3.Enemies/Dwarf/Attack/Attack3.png',
         'img/3.Enemies/Dwarf/Attack/Attack4.png',
         'img/3.Enemies/Dwarf/Attack/Attack5.png',

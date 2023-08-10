@@ -41,14 +41,14 @@ class DrawableObjects {
     }
 
     
-    drawFrame(ctx) { // Zeichne den Rahmen um instanceof Klassen
-        if (this instanceof Character || this instanceof Goblin || this instanceof Dwarf || this instanceof Endboss || this instanceof WalkingGoblin || this instanceof WalkingDwarf ) {
+   /* drawFrame(ctx) { // Zeichne den Rahmen um instanceof Klassen
+        if (this instanceof Character || this instanceof Goblin || this instanceof Dwarf || this instanceof Endboss || this instanceof Coin || this instanceof WalkingDwarf || this instanceof WalkingDwarf) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue';
-            ctx.rect(this.x +10, this.y + 50, this.width - 50, this.height - 60 );
+            ctx.rect(this.x + 20, this.y + 50, this.width - 80, this.height -70 );
             ctx.stroke();
         }
-    }
+    } */
 
 }

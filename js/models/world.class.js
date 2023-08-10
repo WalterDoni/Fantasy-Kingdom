@@ -8,6 +8,8 @@ class World {
     statusbarFrameMana = new StatusbarFrameMana();
     avatarFrame = new AvatarFrame();
     avatarIcon = new AvatarIcon();
+    coinImage = new CoinImageUI();
+    coinCounter = new CoinCounter();
     throwableObjects = [];
     canvas;
     ctx;
@@ -28,6 +30,7 @@ class World {
         this.setWorld();
         this.draw();
         this.run();
+        this.collectCoins();
     }
     /**
      * Bind the character to the world, it's necessary e.g. for the camera_x 
@@ -47,9 +50,23 @@ class World {
             this.hitEnemyWalkingEnemies();
             this.checkCollisionsWalkingEnemies();
             this.checkIfThrowableObjectHitsEnemie();
+           
 
         }, 150);
 
+    }
+
+    collectCoins(){
+        setInterval(() => {
+this.level.collectables.forEach((collectable) =>{
+        if(this.character.x - collectable.x >= 1 && this.character.x - collectable.x <= 15 && this.character.y + this.character.height - collectable.y >= 0 && this.character.y  - collectable.y <= 10 ){
+            console.log(this.character.y % collectable.y);
+            this.level.collectables.splice(collectable,1);
+            this.coinCounter.updateCoinCounter();
+            this.coinCounter.renderCoinCounter();
+        
+        }
+    }) }, 1000 /60);
     }
 
     /**
@@ -75,6 +92,19 @@ class World {
             this.throwableObjects.forEach((fireball) => {
                 if (fireball.isColliding(enemy)) {
                     this.damageTheHittedEnemy(enemy);
+                    this.throwableObjects.splice(fireball, 1);
+                    
+                   
+                }
+            });
+        });
+
+        this.level.walkingEnemies.forEach((enemy) => {
+            if (enemy.isDead()) { return }
+            this.throwableObjects.forEach((fireball) => {
+                if (fireball.isColliding(enemy)) {
+                    this.damageTheHittedEnemy(enemy);
+                    this.throwableObjects.splice(fireball, 1);
                     
                    
                 }
@@ -171,6 +201,7 @@ class World {
         this.addObjectsToMap(this.level.birds);
         this.addToWorld(this.character);
         this.addObjectsToMap(this.level.collectables);
+        this.addObjectsToMap(this.level.manapotions);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.walkingEnemies);
         this.addObjectsToMap(this.throwableObjects);
@@ -187,6 +218,10 @@ class World {
         this.addToWorld(this.statusbarFrameMana);
         this.addToWorld(this.avatarFrame);
         this.addToWorld(this.avatarIcon);
+        this.addToWorld(this.coinImage);
+        this.coinCounter.renderCoinCounter(this.ctx);
+        this.coinCounter.renderXFromCounter(this.ctx);
+       
         //-- Fixed elements on the canvas - End -- //
 
 
@@ -225,7 +260,7 @@ class World {
         }
 
         movabelThing.draw(this.ctx);
-        movabelThing.drawFrame(this.ctx)
+        /*movabelThing.drawFrame(this.ctx);*/
 
         if (movabelThing.turnArround) { // Falls ein Bild verändert wurde, deshalb vorhin save
             movabelThing.x = movabelThing.x * -1;

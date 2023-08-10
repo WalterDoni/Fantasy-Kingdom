@@ -4,7 +4,12 @@ class Coin extends MovableObjects {
     height = 35;
     speed = 0;
 
-
+    moreAccurateCollision = {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+    }
     IMAGES = [
 
         'img/5.CollectableItems/coin1.png',
@@ -28,7 +33,7 @@ class Coin extends MovableObjects {
     }
 
     animate() {
-        this.moveRight();
+        this.moveLeft();
 
         setInterval(() => {
             this.playAnimation(this.IMAGES)

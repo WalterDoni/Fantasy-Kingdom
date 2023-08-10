@@ -133,6 +133,7 @@ class Character extends MovableObjects {
             if (this.world.keyboard.SPACE && !this.isAboveGround() || this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
                 this.handleTheIdleTimer();
+               
             }
 
             if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && !this.world.keyboard.UP) {
@@ -180,7 +181,7 @@ class Character extends MovableObjects {
                     this.timerToStopAnimations = 0;
                     this.currentImage = 0;
                     this.loadImage('img/1.PlayableChars/Knight/knight.png');
-                    this.throwableObjects.splice(0, 1);
+                    
 
                 }
             }, 140);

@@ -12,7 +12,7 @@ class MovableObjects extends DrawableObjects {
    walkRightInArea1 = false;
    walkLeftInArea1 = false;
    firstContact = false;
-   pauseAnimation = false;
+
    hurt = 0;
    dead = 0;
 
@@ -38,7 +38,7 @@ class MovableObjects extends DrawableObjects {
    isCollidingWhileSwordAttack(obj) {
       return this.x + this.width + 10 > obj.x + obj.moreAccurateCollision.left && // Rechter Punkt der X-Achhse > linker Punkt x von Objekt
          this.y + this.height - this.moreAccurateCollision.bottom > obj.y + obj.moreAccurateCollision.top &&  // Unterer Punkt der Y-Achse > Oberer Punkt y von Objekt
-         this.x + this.moreAccurateCollision.left < obj.x + obj.width - obj.moreAccurateCollision.right &&  // Linker Punkt der X-Achse < rechter Punkt x von Objekt
+         this.x - 10 < obj.x + obj.width - obj.moreAccurateCollision.right &&  // Linker Punkt der X-Achse < rechter Punkt x von Objekt
          this.y + this.moreAccurateCollision.top < obj.y + obj.height - obj.moreAccurateCollision.bottom   // Oberer Punkt der Y-Achse < unterer Punkt Y von Objekt
    }    // moreAccurateCollision --> Zieht Werte ab oder addiert Werte um die Collision genauer zu machen
 
