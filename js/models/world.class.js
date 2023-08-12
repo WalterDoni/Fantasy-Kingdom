@@ -1,6 +1,16 @@
 class World {
 
     level = level1;
+    throwableObjects = [];
+    canvas;
+    ctx;
+    keyboard;
+    camera_x = 0;
+    turnArround = false;
+    hit = 10;
+    lastHit = 0;
+
+    //--Character--//
     character = new Character();
     healthbar = new Healthbar();
     manabar = new Manabar();
@@ -10,14 +20,14 @@ class World {
     avatarIcon = new AvatarIcon();
     coinImage = new CoinImageUI();
     coinCounter = new CoinCounter();
-    throwableObjects = [];
-    canvas;
-    ctx;
-    keyboard;
-    camera_x = 0;
-    turnArround = false;
-    hit = 10;
-    lastHit = 0;
+
+    //--Endboss--//
+    endboss = new Endboss();
+    endbossHP = new EndbossHP();
+    endbossHPFrame = new endbossStatusbarFrameHP();
+    endbossAvatarFrame = new EndbossAvatarFrame();
+    endbossAvatarIcon = new EndbossAvatarIcon();
+
 
 
 
@@ -37,6 +47,7 @@ class World {
      */
     setWorld() {
         this.character.world = this;
+        this.endboss.world = this;  // Aktuelle Arbeit-------------------
         this.throwableObjects.world = this;
     }
 
@@ -48,25 +59,37 @@ class World {
             this.useAttacksFromCharacter();
             this.hitEnemy();
             this.hitEnemyWalkingEnemies();
+            this.hitEndboss();
             this.checkCollisionsWalkingEnemies();
             this.checkIfThrowableObjectHitsEnemie();
-           
+
 
         }, 150);
 
     }
 
-    collectCoins(){
+    collectCoins() {
         setInterval(() => {
-this.level.collectables.forEach((collectable) =>{
-        if(this.character.x - collectable.x >= 1 && this.character.x - collectable.x <= 15 && this.character.y + this.character.height - collectable.y >= 0 && this.character.y  - collectable.y <= 10 ){
-            console.log(this.character.y % collectable.y);
-            this.level.collectables.splice(collectable,1);
-            this.coinCounter.updateCoinCounter();
-            this.coinCounter.renderCoinCounter();
-        
-        }
-    }) }, 1000 /60);
+            this.level.collectables.forEach((collectable) => {
+                if (this.character.x - collectable.x >= 1 && this.character.x - collectable.x <= 15 && this.character.y + this.character.height - collectable.y >= 0 && this.character.y - collectable.y <= 10) {
+                    this.level.collectables.splice(collectable, 1);
+                    this.coinCounter.updateCoinCounter();
+                    this.coinCounter.renderCoinCounter();
+
+                }
+            })
+
+            this.level.manapotions.forEach((potion) => {
+
+                if (this.manabar.manabarMax < 200) {
+                    if (this.character.x - potion.x >= 1 && this.character.x - potion.x <= 15 && this.character.y + this.character.height - potion.y >= 0 && this.character.y - potion.y <= 10) {
+                        this.level.manapotions.splice(potion, 1);
+                        this.manabar.updateManapointsPlus();
+
+                    }
+                }
+            })
+        }, 1000 / 60);
     }
 
     /**
@@ -84,7 +107,7 @@ this.level.collectables.forEach((collectable) =>{
 
         });
     }
-    
+
 
     checkIfThrowableObjectHitsEnemie() {
         this.level.enemies.forEach((enemy) => {
@@ -93,8 +116,8 @@ this.level.collectables.forEach((collectable) =>{
                 if (fireball.isColliding(enemy)) {
                     this.damageTheHittedEnemy(enemy);
                     this.throwableObjects.splice(fireball, 1);
-                    
-                   
+
+
                 }
             });
         });
@@ -105,8 +128,8 @@ this.level.collectables.forEach((collectable) =>{
                 if (fireball.isColliding(enemy)) {
                     this.damageTheHittedEnemy(enemy);
                     this.throwableObjects.splice(fireball, 1);
-                    
-                   
+
+
                 }
             });
         });
@@ -120,12 +143,14 @@ this.level.collectables.forEach((collectable) =>{
                 this.damageTheHittedEnemy(enemy);
                 this.character.jump();
             }
-            
-            if (this.character.isCollidingWhileSwordAttack(enemy) && this.keyboard.LEFTMOUSE){
+
+            if (this.character.isCollidingWhileSwordAttack(enemy) && this.keyboard.LEFTMOUSE) {
                 this.damageTheHittedEnemy(enemy);
             }
 
         });
+
+
     }
 
 
@@ -138,8 +163,8 @@ this.level.collectables.forEach((collectable) =>{
             if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 0) {
                 this.damageTheHittedEnemy(enemy);
                 this.character.jump();
-                
-            } if (this.character.isCollidingWhileSwordAttack(enemy) && this.keyboard.LEFTMOUSE){
+
+            } if (this.character.isCollidingWhileSwordAttack(enemy) && this.keyboard.LEFTMOUSE) {
                 this.damageTheHittedEnemy(enemy);
             }
         });
@@ -157,8 +182,8 @@ this.level.collectables.forEach((collectable) =>{
 
         });
     }
-    
- 
+
+
     //-WalkingEnemies--//
 
 
@@ -178,13 +203,27 @@ this.level.collectables.forEach((collectable) =>{
             let fireball = new ThrowableObjects(this.character.x + 50, this.character.y + 20);
             this.throwableObjects.push(fireball);
             this.character.fireAttack();
+            this.manabar.updateManapointsMinus();
         }
         if (this.keyboard.LEFTMOUSE) {
             this.character.swordAttack();
-         
+
         }
     }
+    
 
+    hitEndboss(){ // Aktuelle Arbeit-------------------
+        if (this.character.isColliding(this.endboss) && this.character.isAboveGround() && this.character.speedY < 0) {
+            this.damageTheHittedEnemy(this.endboss);
+            this.endbossHP.updateHealthpoints();
+            this.character.jump();
+        }
+
+        if (this.character.isCollidingWhileSwordAttack(this.endboss) && this.keyboard.LEFTMOUSE) {
+            this.damageTheHittedEnemy(this.endboss);
+        }
+
+    }
 
     /**
      * clearRect -> cleares the canvas, so the elements did not stack on the map and get generated multiple time.
@@ -221,7 +260,14 @@ this.level.collectables.forEach((collectable) =>{
         this.addToWorld(this.coinImage);
         this.coinCounter.renderCoinCounter(this.ctx);
         this.coinCounter.renderXFromCounter(this.ctx);
-       
+
+        if (this.endboss.firstContact) {
+            this.endbossHP.renderStatusbars(this.ctx);
+            this.addToWorld(this.endbossAvatarFrame);
+            this.addToWorld(this.endbossAvatarIcon);
+            this.addToWorld(this.endbossHPFrame);
+        }
+
         //-- Fixed elements on the canvas - End -- //
 
 

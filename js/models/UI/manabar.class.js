@@ -6,9 +6,10 @@ class Manabar extends DrawableObjects {
       this.y = 80;
       this.width = 200;
       this.height = 25;
-      this.maxHealth = 100;
+      this.maxMana = 100;
       this.maxWidth = this.width;
-      this.health =  this.maxHealth;
+      this.mana =  this.maxMana;
+      this.manabarMax = 200;
       
   
     }
@@ -17,8 +18,26 @@ class Manabar extends DrawableObjects {
     ctx.lineWidth = 2;
     ctx.strokeStyle = '#333';
     ctx.fillStyle = 'blue';
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.fillRect(this.x, this.y, this.manabarMax, this.height);
     ctx.strokeRect(this.x, this.y, this.maxWidth, this.height);
   }
   
+
+  updateManapointsMinus() {
+
+    if (this.manabarMax >= 1) {
+      this.mana -= 50;
+      this.manabarMax = (this.mana / this.maxMana) * this.maxWidth;
+    }
+  }
+  
+
+  updateManapointsPlus(){
+
+    if(this.manabarMax < 200){
+      this.mana += 50;
+      this.manabarMax = (this.mana / this.maxMana) * this.maxWidth;
+    }
+  }
+
   }

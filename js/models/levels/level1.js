@@ -151,10 +151,10 @@ const level1 = new Levels([
         new Bird(800 * 7, 45),
     ],
     [
-        new Goblin(800, 400),// 0
+        new Goblin(800, 405),// 0
         new Dwarf(900, 400),// 1
-        new Goblin(1700, 400),// 2
-        new Goblin(1800, 400),// 3
+        new Goblin(1700, 405),// 2
+        new Goblin(1800, 405),// 3
         new Dwarf(2500, 400),// 4 
         new Endboss(5000, 220),
     ],
@@ -169,7 +169,7 @@ const level1 = new Levels([
     ],
 
     [
-        new Coin(150, 470),
+        new Coin(100, 350),
         new Coin(150, 350),
         new Coin(150, 300),
         new Coin(200, 350),

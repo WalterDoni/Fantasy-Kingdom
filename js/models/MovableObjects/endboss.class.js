@@ -1,12 +1,7 @@
 class Endboss extends MovableObjects {
     height = 395;
     width = 350;
-   
     speed = 3;
-
-
-
-
 
 
     WALKING_IMAGES = [
@@ -75,12 +70,16 @@ class Endboss extends MovableObjects {
 
     animate() {
         setInterval(() => {
-            if (this.isDead()) {
+            if (this.isDead() && this.dead <= 1) {
+                clearInterval(rightWalkInArea);
+                clearInterval(lefttWalkInArea);
+                clearInterval(walkInArea);
                 this.playAnimation(this.DEAD_IMAGES);
-                console.log('DEAD');
-            } else if (this.healthpoints == 50) {
+                this.dead += 1; 
+
+            } else if (this.healthpoints == 50 ) {
                 this.playAnimation(this.HURT_IMAGES);
-                console.log('HURT');
+
             }
 
         }, 120);
@@ -92,7 +91,7 @@ class Endboss extends MovableObjects {
         }, 230);
 
 
-        
+
         let triggerMovement = setInterval(() => {
             if (world && world.character.x > 4200 || this.firstContact) {
                 this.moveLeft();
@@ -118,23 +117,23 @@ class Endboss extends MovableObjects {
                 clearInterval(triggerMovement1);
                 this.moveRight();
                 this.walkRightInArea = true;
-                this.walkLeftInArea = false;  
+                this.walkLeftInArea = false;
             }
-        }, 1000/60);
-        
+        }, 1000 / 60);
+
         let walkInArea = setInterval(() => {
-            if ( this.walkLeftInArea  || this.walkRightInArea) 
-            this.playAnimation(this.WALKING_IMAGES);
+            if (this.walkLeftInArea || this.walkRightInArea)
+                this.playAnimation(this.WALKING_IMAGES);
         }, 180);
 
         let lefttWalkInArea = setInterval(() => {
-            if (this.x >= 5050 || this.walkLeftInArea ) {
+            if (this.x >= 5050 || this.walkLeftInArea) {
                 this.moveLeft();
                 this.walkRightInArea = false;
-                this.walkLeftInArea = true;  
-                 
+                this.walkLeftInArea = true;
+
             }
-        }, 1000/60);
+        }, 1000 / 60);
 
 
 
