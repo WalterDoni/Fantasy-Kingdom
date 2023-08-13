@@ -130,13 +130,13 @@ class Character extends MovableObjects {
                 //this.walking_sound.play()
             }
             // Charakter springt, setzt speedY auf 20 um dann nach und nach abzufallen (acceleration)
-            if (this.world.keyboard.SPACE && !this.isAboveGround() || this.world.keyboard.UP && !this.isAboveGround()) {
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
                 this.handleTheIdleTimer();
                
             }
 
-            if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && !this.world.keyboard.UP) {
+            if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT) {
                 this.timeWithoutDoingSomething += 20;
 
             }

@@ -9,6 +9,7 @@ class World {
     turnArround = false;
     hit = 10;
     lastHit = 0;
+    titleMusic;
  
     
 
@@ -66,10 +67,25 @@ class World {
             this.checkIfThrowableObjectHitsEnemie();
             this.checkCollisionsWithEndboss();
             this.hitEndboss();
+            this.playSound();
 
         }, 150);
 
     }
+
+
+
+    playSound() {
+        if (titleMusic) {
+            game_sound.volume = 0.1;
+            game_sound.play();
+        } else if (!titleMusic){
+            game_sound.pause();
+
+        }
+    }
+
+    
 
 
     collectCoins() {
@@ -160,7 +176,7 @@ class World {
                 this.character.jump();
             }
 
-            if (this.character.isCollidingWhileSwordAttack(enemy) && this.keyboard.LEFTMOUSE) {
+            if (this.character.isCollidingWhileSwordAttack(enemy) && this.keyboard.F_KEYBOARD) {
                 this.damageTheHittedEnemy(enemy);
             }
 
@@ -180,7 +196,7 @@ class World {
                 this.damageTheHittedEnemy(enemy);
                 this.character.jump();
 
-            } if (this.character.isCollidingWhileSwordAttack(enemy) && this.keyboard.LEFTMOUSE) {
+            } if (this.character.isCollidingWhileSwordAttack(enemy) && this.keyboard.F_KEYBOARD) {
                 this.damageTheHittedEnemy(enemy);
             }
         });
@@ -221,7 +237,7 @@ class World {
             this.character.fireAttack();
             this.manabar.updateManapointsMinus();
         }
-        if (this.keyboard.LEFTMOUSE) {
+        if (this.keyboard.F_KEYBOARD) {
             this.character.swordAttack();
 
         }
@@ -250,7 +266,7 @@ class World {
                 this.endbossHP.updateHealthpoints();
                 this.character.jump();
 
-            } if (this.character.isCollidingWhileSwordAttack(boss) && this.keyboard.LEFTMOUSE) {
+            } if (this.character.isCollidingWhileSwordAttack(boss) && this.keyboard.F_KEYBOARD) {
                 this.damageTheEndboss(boss);
                 this.endbossHP.updateHealthpoints();
             }

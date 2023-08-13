@@ -15,7 +15,7 @@ function init() {
 function startGame() {
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('startscreen').classList.add('d-none');
-    playSound();
+ 
     initLevel();
     init();
 
@@ -56,13 +56,6 @@ function exitFullscreen() {
 }
 
 
-function playSound() {
-    if (titleMusic) {
-        game_sound.volume = 0.1;
-        game_sound.play();
-    }
-}
-
 function pauseMusic() {
     if (titleMusic) {
         titleMusic = false;
@@ -86,73 +79,49 @@ function pauseMusic() {
 window.addEventListener("keydown", (event) => {
     const key = event.key;
 
-    if (key === "ArrowRight" || key === "d") {
+    if (key === "ArrowRight" || key === "d" || key === "D") {
         keyboard.RIGHT = true;
     }
 
-    if (key === "ArrowUp" || key === "w") {
-        keyboard.UP = true;
-    }
-
-    if (key === "ArrowLeft" || key === "a") {
+    if (key === "ArrowLeft" || key === "a" || key === "A") {
         keyboard.LEFT = true;
-    }
-
-    if (key === "ArrowDown" || key === "s") {
-        keyboard.DOWN = true;
     }
 
     if (key === " ") {
         keyboard.SPACE = true;
     }
 
-    if (key === "t") {
+    if (key === "t" || key === "T") {
         keyboard.T_KEYBOARD = true;
     }
 
-
-});
-
-window.addEventListener("mousedown", (event) => {
-    const key = event.button;
-
-    if (key === 0) {
-        keyboard.LEFTMOUSE = true;
+    if (key === "f" || key === "F") {
+        keyboard.F_KEYBOARD = true;
     }
+
 });
 
-window.addEventListener("mouseup", (event) => {
-    const key = event.button;
-
-    if (key === 0) {
-        keyboard.LEFTMOUSE = false;
-    }
-});
 
 window.addEventListener("keyup", (event) => {
     const key = event.key;
 
-    if (key === "ArrowRight" || key === "d") {
+    if (key === "ArrowRight" || key === "d" || key === "D") {
         keyboard.RIGHT = false;
     }
 
-    if (key === "ArrowUp" || key === "w") {
-        keyboard.UP = false;
-    }
-
-    if (key === "ArrowLeft" || key === "a") {
+    if (key === "ArrowLeft" || key === "a" || key === "A") {
         keyboard.LEFT = false;
-    }
-
-    if (key === "ArrowDown" || key === "s") {
-        keyboard.DOWN = false;
     }
 
     if (key === " ") {
         keyboard.SPACE = false;
     }
-    if (key === "t") {
+    if (key === "t" || key === "T") {
         keyboard.T_KEYBOARD = false;
+    }
+
+    if (key === "f" || key === "F") {
+        keyboard.F_KEYBOARD = false;
     }
 
 });
