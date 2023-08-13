@@ -4,7 +4,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin:0;
+    margin: 0;
     background-image: url(img/backgroundWeb.png);
     background-position: center;
     background-size: cover;
@@ -18,17 +18,129 @@ body {
 
 canvas {
     background-image: url(img/4.Maps/forest/Background/Bright/sky.png);
+    display: block;
 }
 
-.keybindings{
-    font-family: 'Courier New', Courier, monospace!important;
+.content {
+   
+    max-width: 1024px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px 6px rgba(160, 10, 10, 0.7);
+}
+
+.keybindings {
+    font-family: 'Courier New', Courier, monospace !important;
     font-weight: bold;
     display: flex;
     font-size: 25px;
 }
+
+.startscreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1024px;
+    height: 576px;
+}
+
+.startImage {
+    width: 1024px;
+    height: 576px;
+}
+
+.startImageChar {
+    position: absolute;
+
+}
+
+.title {
+    position: absolute;
+    top: 30vh;
+}
+
+.buttonsStartscreen {
+    display: flex;
+    position: absolute;
+    top: 60vh;
+    margin-left:15px;
+    
+}
+
+.startScreenFullscreen,
+.startscreenSound,
+.startscreenStart {
+    border: none;
+    background: none;
+
+}
+
+.startScreenFullscreen,
+.startscreenSound{
+    background-color: orange;
+    border-radius: 100%;
+    height: 50px;
+    margin-top: 10px;
+}
+.startScreenFullscreen img,
+.startscreenSound img{
+    padding:5px;
+    width: 30px;
+    height: 30px;
+}
+
+
+.startscreenStart{
+    padding: 0px 25px 0px 25px;
+}
+.startscreenStart img {
+    width: 70px;
+}
+
+.startScreenFullscreen:hover ,
+.startscreenSound:hover ,
+.startscreenStart:hover {
+    transform: scale(1.1);
+    transition: 250ms ease-in-out;
+    cursor: pointer;
+}
+
+.d-none {
+    display: none;
+}
+
+/*--Smartphone--*/
+
+@media only screen and (max-width: 1024px) {
+    canvas {
+        width: 100%;
+    }
+
+    .startscreen {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height: 576px) {
+    canvas {
+        height: 100vh;
+    }
+
+    .startscreen {
+        height: 100vh;
+    }
+}
+
+
+/*--Smartphone--*/
+
+
+
 @font-face {
     font-family: 'MyWebFont';
-    src:  url('myfont.ttf') format('truetype');
+    src: url('myfont.ttf') format('truetype');
 }
 
 /* bungee-shade-regular - latin */
@@ -37,5 +149,6 @@ canvas {
     font-family: 'Bungee Shade';
     font-style: normal;
     font-weight: 400;
-    src: url('./font/bungee-shade-v11-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
+    src: url('./font/bungee-shade-v11-latin-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}

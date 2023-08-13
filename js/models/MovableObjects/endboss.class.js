@@ -77,7 +77,7 @@ class Endboss extends MovableObjects {
                 this.playAnimation(this.DEAD_IMAGES);
                 this.dead += 1; 
 
-            } else if (this.healthpoints == 50 ) {
+            } else if (this.healthpoints == 80 ) {
                 this.playAnimation(this.HURT_IMAGES);
 
             }

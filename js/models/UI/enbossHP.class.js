@@ -28,7 +28,7 @@ class EndbossHP extends DrawableObjects {
     updateHealthpoints() {
   
       if (this.healthbarMax >= 1) {
-        this.healthpoints -= 5;
+        this.healthpoints -= 20;
         this.healthbarMax = (this.healthpoints / this.maxHealth) * this.maxWidth;
       }
     }

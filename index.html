@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    
+
     <script src="js/models/drawable.objects.class.js"></script>
     <script src="./js/models/MovableObjects/movable.objects.class.js"></script>
     <script src="./js/models/UI/AvatarIcon.class.js"></script>
@@ -46,7 +46,7 @@
     <script src="./js/models/MovableObjects/endboss.class.js"></script>
     <script src="./js/models/CollectableItems/coin.class.js"></script>
     <script src="./js/models/CollectableItems/ManaPotion.class.js"></script>
-    <script src ="js/models/ThrowableObjects/throwable.objects.class.js"></script>
+    <script src="js/models/ThrowableObjects/throwable.objects.class.js"></script>
     <script src="./js/models/keyboard.class.js"></script>
     <script src="./js/models/levels.class.js"></script>
     <script src="./js/models/levels/level1.js"></script>
@@ -57,16 +57,32 @@
 
 <body onload="init()">
 
-    <h1>Fantasy-Kingdom</h1>
 
-    <canvas id="canvas" width="1024" height="576"></canvas>
-<div class="keybindings">
-    <p>LEFT: A or ArrowLeft</p>
-    <p>RIGHT: D or ArrowRight</p>
-    <p>JUMP: W,Space or ArrowUp</p>
-    <p>SWORDATTACK: LeftMouseButton</p>
-    <p>SPECIALATTACK: T</p>
-</div>
+
+    <div class="content" id="content">
+
+        <div id="startscreen" class="startscreen">
+            <h1 class="title">Fantasy-Kingdom</h1>
+            <img class="startImageChar" src="img/9.Interface/Startscreen/characters.png">
+            <img class="startImage" src="img/9.Interface/Startscreen/bg.png">
+            
+            <div class="buttonsStartscreen">
+            <button onclick="pauseMusic()" class="startscreenSound" id="musicButton"><img
+                    src="img/9.Interface/Startscreen/soundOn.png"></button>
+            <button onclick="startGame()" class="startscreenStart"><img
+                    src="img/9.Interface/Startscreen/forward_button.png"></button>
+            <button onclick="fullscreen()" class="startScreenFullscreen" id="fullscreenOn"><img
+                    src="img/9.Interface/Startscreen/fullscreen.png"></button>
+            <button onclick="leaveFullscreen()" class="startScreenFullscreen d-none" id="fullscreenOff"><img
+                    src="img/9.Interface/Startscreen/fullscreen-exit.png"></button>
+            </div>
+        </div>
+
+        <canvas class="d-none" id="canvas" width="1024" height="576"></canvas>
+
+    </div>
+
+
 </body>
 
 </html>

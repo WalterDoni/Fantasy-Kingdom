@@ -13,13 +13,14 @@ class Levels {
     
 
 
-    constructor(backgrounds, grounds, clouds, birds, enemies, walkingEnemies, collectables,manapotions) {
+    constructor(backgrounds, grounds, clouds, birds, enemies, walkingEnemies, endboss, collectables,manapotions) {
         this.backgrounds = backgrounds;
         this.grounds = grounds;
         this.clouds = clouds;
         this.birds = birds;
         this.enemies = enemies;
         this.walkingEnemies = walkingEnemies;
+        this.endboss = endboss;
         this.collectables = collectables;
         this.manapotions = manapotions;
      

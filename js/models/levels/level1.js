@@ -1,4 +1,7 @@
-const level1 = new Levels([
+ let level1;
+
+function initLevel(){
+ level1 = new Levels([
     new BackgroundObjects('img/4.Maps/forest/Background/Bright/clouds_back_layer2.png', -1024, 10),
     new BackgroundObjects('img/4.Maps/forest/Background/Bright/clouds_back_layer1.png', -1024, 50),
     new BackgroundObjects('img/4.Maps/forest/Background/Bright/mountains.png', -1024, 110),
@@ -156,7 +159,7 @@ const level1 = new Levels([
         new Goblin(1700, 405),// 2
         new Goblin(1800, 405),// 3
         new Dwarf(2500, 400),// 4 
-        new Endboss(5000, 220),
+
     ],
 
     [
@@ -168,6 +171,9 @@ const level1 = new Levels([
 
     ],
 
+
+    [new Endboss(5000, 220)],
+    
     [
         new Coin(100, 350),
         new Coin(150, 350),
@@ -188,15 +194,16 @@ const level1 = new Levels([
     ],
 
     [
-       
+
 
         new ManaCrystal(400, 450),
         new ManaCrystal(1050, 350),
         new ManaCrystal(1600, 300),
         new ManaCrystal(2250, 250),
         new ManaCrystal(3450, 250),
-     
+
     ],
 
 )
 
+}
