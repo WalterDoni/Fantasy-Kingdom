@@ -71,7 +71,7 @@ class WalkingGoblin extends MovableObjects {
     animate() {
 
         //--Enemie0--//
-        let walk0 = setInterval(() => {
+        let walk0 = setStoppableInterval(() => {
             if (world && level1.walkingEnemies[0].x <= 975 || this.walkRightInArea) {
                 level1.walkingEnemies[0].moveRight();
                 level1.walkingEnemies[0].walkRightInArea = true;
@@ -84,13 +84,13 @@ class WalkingGoblin extends MovableObjects {
             }
         }, 1000 / 60);
 
-        let walking0 = setInterval(() => {
+        let walking0 = setStoppableInterval(() => {
             if (this.walkLeftInArea || this.walkRightInArea) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (level1.walkingEnemies[0].isDead() && this.dead0 <= 1) {
                 clearInterval(walk0);
                 clearInterval(walking0);
@@ -105,7 +105,7 @@ class WalkingGoblin extends MovableObjects {
         }, 140);
 
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (level1.walkingEnemies[0].isDead() || this.speedY0 > 0) {
                 level1.walkingEnemies[0].y -= this.speedY0;
                 this.speedY0 -= this.acceleration;
@@ -114,7 +114,7 @@ class WalkingGoblin extends MovableObjects {
 
 
         //--Enemie2--//
-        let walk2 = setInterval(() => {
+        let walk2 = setStoppableInterval(() => {
             if (world && level1.walkingEnemies[2].x <= 2800 || this.walkRightInArea1) {
                 level1.walkingEnemies[2].moveRight();
                 level1.walkingEnemies[2].walkRightInArea1 = true;
@@ -127,13 +127,13 @@ class WalkingGoblin extends MovableObjects {
             }
         }, 1000 / 60);
 
-        let walking2 = setInterval(() => {
+        let walking2 = setStoppableInterval(() => {
             if (this.walkLeftInArea1 || this.walkRightInArea1) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (level1.walkingEnemies[2].isDead() && this.dead2 <= 1) {
                 clearInterval(walk2);
                 clearInterval(walking2);
@@ -148,7 +148,7 @@ class WalkingGoblin extends MovableObjects {
         }, 140);
 
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (level1.walkingEnemies[2].isDead() || this.speedY2 > 0) {
                 level1.walkingEnemies[2].y -= this.speedY2;
                 this.speedY2 -= this.acceleration;
@@ -159,7 +159,7 @@ class WalkingGoblin extends MovableObjects {
 
         //--Enemie4--//
 
-        let walk4 = setInterval(() => {
+        let walk4 = setStoppableInterval(() => {
             if (world && level1.walkingEnemies[4].x <= 3720 || this.walkRightInArea2) {
                 level1.walkingEnemies[4].moveRight();
                 level1.walkingEnemies[4].walkRightInArea2 = true;
@@ -172,12 +172,12 @@ class WalkingGoblin extends MovableObjects {
             }
         }, 1000 / 60);
 
-       let walking4 = setInterval(() => {
+       let walking4 = setStoppableInterval(() => {
             if (this.walkLeftInArea2 || this.walkRightInArea2) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (level1.walkingEnemies[4].isDead() && this.dead4 <= 1) {
                 clearInterval(walk4);
                 clearInterval(walking4);
@@ -192,7 +192,7 @@ class WalkingGoblin extends MovableObjects {
         }, 140);
 
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (level1.walkingEnemies[4].isDead() || this.speedY4 > 0) {
                 level1.walkingEnemies[4].y -= this.speedY4;
                 this.speedY4 -= this.acceleration;
@@ -201,7 +201,7 @@ class WalkingGoblin extends MovableObjects {
 
 
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.walkLeftInArea || this.walkRightInArea || this.walkLeftInArea1 || this.walkRightInArea1 || this.walkLeftInArea2 || this.walkRightInArea2) {
                 this.playAnimation(this.WALKING_IMAGES);
             }

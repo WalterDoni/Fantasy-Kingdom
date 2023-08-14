@@ -69,7 +69,7 @@ class Endboss extends MovableObjects {
 
 
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.isDead() && this.dead <= 1) {
                 clearInterval(rightWalkInArea);
                 clearInterval(lefttWalkInArea);
@@ -85,21 +85,21 @@ class Endboss extends MovableObjects {
         }, 120);
 
         //---Before first contact with Boss--//
-        let bossIdle = setInterval(() => {
+        let bossIdle = setStoppableInterval(() => {
             this.turnArround = true;
             this.playAnimation(this.IDLE_IMAGES)
         }, 230);
 
 
 
-        let triggerMovement = setInterval(() => {
+        let triggerMovement = setStoppableInterval(() => {
             if (world && world.character.x > 4200 || this.firstContact) {
                 this.moveLeft();
                 this.firstContact = true;
             }
         }, 1000 / 40);
 
-        let triggerMovement1 = setInterval(() => {
+        let triggerMovement1 = setStoppableInterval(() => {
             if (world && world.character.x > 4200 || this.firstContact) {
                 this.playAnimation(this.WALKING_IMAGES)
                 clearInterval(bossIdle);
@@ -111,7 +111,7 @@ class Endboss extends MovableObjects {
 
         //---After first contact with Boss--//
 
-        let rightWalkInArea = setInterval(() => {
+        let rightWalkInArea = setStoppableInterval(() => {
             if (this.x <= 4000 || this.walkRightInArea) {
                 clearInterval(triggerMovement);
                 clearInterval(triggerMovement1);
@@ -121,12 +121,12 @@ class Endboss extends MovableObjects {
             }
         }, 1000 / 60);
 
-        let walkInArea = setInterval(() => {
+        let walkInArea = setStoppableInterval(() => {
             if (this.walkLeftInArea || this.walkRightInArea)
                 this.playAnimation(this.WALKING_IMAGES);
         }, 180);
 
-        let lefttWalkInArea = setInterval(() => {
+        let lefttWalkInArea = setStoppableInterval(() => {
             if (this.x >= 5050 || this.walkLeftInArea) {
                 this.moveLeft();
                 this.walkRightInArea = false;

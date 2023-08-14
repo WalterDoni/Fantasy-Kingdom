@@ -2,10 +2,14 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let allIntervals = [];
 game_sound = new Audio('audio/Titlemusic.mp3');
 let titleMusic = true;
 
-
+function setStoppableInterval(fn, time) {
+    let id = setInterval(fn, time);
+    allIntervals.push(id);
+}
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -15,10 +19,14 @@ function init() {
 function startGame() {
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('startscreen').classList.add('d-none');
- 
+    document.getElementById('winScreen').classList.add('d-none');
+    document.getElementById('defeatScreen').classList.add('d-none');
     initLevel();
     init();
+}
 
+function stopGame(){
+    allIntervals.forEach(clearInterval);
 }
 
 

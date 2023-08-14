@@ -114,7 +114,7 @@ class Character extends MovableObjects {
 
     animate() {
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             //this.walking_sound.pause()
 
             // Charakter bewegt sich nach rechts oder links
@@ -144,14 +144,14 @@ class Character extends MovableObjects {
 
         }, 1000 / 60);
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.timeWithoutDoingSomething >= 3500) {
                 this.playAnimation(this.IDLE_IMAGE);
             }
         }, 150);
 
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.DEAD_IMAGES);
             } else if (this.isHurt()) {

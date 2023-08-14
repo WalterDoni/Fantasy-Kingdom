@@ -55,7 +55,7 @@
     <title>Fantasy-Kingdom</title>
 </head>
 
-<body onload="init()">
+<body >
 
     <div class="content" id="content">
 
@@ -76,19 +76,19 @@
             <button onclick="startGame()" class="startscreenStart"><img src="img/9.Interface/Startscreen/forward_button.png"></button>
         </div>
 
-        <div class="winScreen d-none">
-            <img src="img/9.Interface/VictoryAndDefeat/knight+tape.png" alt="">
+        <div class="winScreen d-none" id="winScreen">
+            <img  class="imageWin" src="img/9.Interface/VictoryAndDefeat/knight+tape.png" alt="">
             <img class ="winScreenRestart" src="img/9.Interface/VictoryAndDefeat/button_yellow.png" alt="">
             <p class="victoryLine">VICTORY!</p>
-            <p onclick="startGame()" class="restartLine">Restart?</p>
+            <p onclick="startGame()" class="restartLineWin">Restart?</p>
         </div>
 
-        <div class="winScreen">
-            <img src="img/9.Interface/VictoryAndDefeat/knight_loose.png" alt="">
-            <img src="img/9.Interface/VictoryAndDefeat/defeat.png" alt="">
-            <img class ="winScreenRestart" src="img/9.Interface/VictoryAndDefeat/button_yellow.png" alt="">
-            <p class="victoryLine">DEFEAT!</p>
-            <p onclick="startGame()" class="restartLine">Restart?</p>
+        <div class="defeatScreen d-none" id="defeatScreen">
+            <img  class="imageDefeat"src="img/9.Interface/VictoryAndDefeat/knight_loose.png" alt="">
+            <img class="imageDefeatPaperForDefeatText"src="img/9.Interface/VictoryAndDefeat/defeat.png" alt="">
+            <img class ="defeatScreenRestart" src="img/9.Interface/VictoryAndDefeat/button_yellow.png" alt="">
+            <p class="defeatLine">DEFEAT!</p>
+            <p onclick="startGame()" class="restartLineDefeat">Restart?</p>
         </div>
         
 

@@ -10,8 +10,10 @@ class World {
     hit = 10;
     lastHit = 0;
     titleMusic;
- 
-    
+    defeat_sound = new Audio('audio/defeat.mp3');
+    victory_sound = new Audio('audio/victory.mp3')
+
+
 
     //--Character--//
     character = new Character();
@@ -32,7 +34,7 @@ class World {
     endbossAvatarIcon = new EndbossAvatarIcon();
 
 
-   
+
 
 
     constructor(canvas, keyboard) { // constructor wird immer zuerst aufgerufen!!
@@ -44,7 +46,7 @@ class World {
         this.draw();
         this.run();
         this.collectCoins();
-     
+
     }
     /**
      * Bind the character to the world, it's necessary e.g. for the camera_x 
@@ -57,7 +59,7 @@ class World {
 
     run() {
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.checkCollisions();
             this.useAttacksFromCharacter();
             this.hitEnemy();
@@ -68,6 +70,7 @@ class World {
             this.checkCollisionsWithEndboss();
             this.hitEndboss();
             this.playSound();
+            this.showWinOrDefeatScreen();
 
         }, 150);
 
@@ -79,17 +82,41 @@ class World {
         if (titleMusic) {
             game_sound.volume = 0.1;
             game_sound.play();
-        } else if (!titleMusic){
+        } else if (!titleMusic) {
             game_sound.pause();
 
         }
     }
 
-    
+    showWinOrDefeatScreen() {
+        if (this.character.healthpoints == 0 && this.endbossHP.healthpoints > 0) {
+            document.getElementById('defeatScreen').classList.remove('d-none');
+            game_sound.pause();
+            this.defeat_sound.volume = 0.5;
+            this.defeat_sound.play();
+            stopGame();
+
+            setTimeout(() => {
+                this.defeat_sound.pause();
+            }, 5000);
+        }
+
+        if (this.character.healthpoints > 0 && this.endbossHP.healthpoints == 0) {
+            document.getElementById('winScreen').classList.remove('d-none');
+            game_sound.pause();
+            this.victory_sound.volume = 0.1;
+            this.victory_sound.play();
+            stopGame();
+            setTimeout(() => {
+                this.defeat_sound.pause();
+            }, 15000);
+        }
+    }
 
 
     collectCoins() {
-        setInterval(() => {
+
+        setStoppableInterval(() => {
             this.level.collectables.forEach((collectable) => {
                 if (this.character.x - collectable.x >= 1 && this.character.x - collectable.x <= 15 && this.character.y + this.character.height - collectable.y >= 0 && this.character.y - collectable.y <= 10) {
                     this.level.collectables.splice(collectable, 1);
@@ -110,6 +137,7 @@ class World {
                 }
             })
         }, 1000 / 60);
+
     }
 
     /**
@@ -243,7 +271,7 @@ class World {
         }
     }
 
-// Endboss-------------------
+    // Endboss-------------------
 
 
     checkCollisionsWithEndboss() {
@@ -281,96 +309,96 @@ class World {
     }
     // Endboss-------------------
 
-/**
- * clearRect -> cleares the canvas, so the elements did not stack on the map and get generated multiple time.
- * translate -> camera_x is bind at animate() in character.class.js. So everytime when the character moves right. everything generated moves for the 
- * same value into the other direction on the X-axis. Till line 76
- * The generated elements after that are on a fixed position in the canvas. e.g. the healthbar.
- * requestAnimationFrame -> function repeats after everything is generated above. Over and over again(depends on the computer power).
- */
-draw() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.translate(this.camera_x, 0)
-    this.addObjectsToMap(this.level.backgrounds);
-    this.addObjectsToMap(this.level.clouds);
-    this.addObjectsToMap(this.level.birds);
-    this.addToWorld(this.character);
-    this.addObjectsToMap(this.level.collectables);
-    this.addObjectsToMap(this.level.manapotions);
-    this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.level.walkingEnemies);
-    this.addObjectsToMap(this.level.endboss);
-    this.addObjectsToMap(this.throwableObjects);
-    /*this.level.enemies.forEach(enemy => {  //fast writing method for the for-loop
-        this.addToWorld(enemy) // 
-    });*/
-    this.addObjectsToMap(this.level.grounds);
-    this.ctx.translate(-this.camera_x, 0)
+    /**
+     * clearRect -> cleares the canvas, so the elements did not stack on the map and get generated multiple time.
+     * translate -> camera_x is bind at animate() in character.class.js. So everytime when the character moves right. everything generated moves for the 
+     * same value into the other direction on the X-axis. Till line 76
+     * The generated elements after that are on a fixed position in the canvas. e.g. the healthbar.
+     * requestAnimationFrame -> function repeats after everything is generated above. Over and over again(depends on the computer power).
+     */
+    draw() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.translate(this.camera_x, 0)
+        this.addObjectsToMap(this.level.backgrounds);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.birds);
+        this.addToWorld(this.character);
+        this.addObjectsToMap(this.level.collectables);
+        this.addObjectsToMap(this.level.manapotions);
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.walkingEnemies);
+        this.addObjectsToMap(this.level.endboss);
+        this.addObjectsToMap(this.throwableObjects);
+        /*this.level.enemies.forEach(enemy => {  //fast writing method for the for-loop
+            this.addToWorld(enemy) // 
+        });*/
+        this.addObjectsToMap(this.level.grounds);
+        this.ctx.translate(-this.camera_x, 0)
 
-    //-- Fixed elements on the canvas - Start -- //
-    this.healthbar.renderStatusbars(this.ctx);
-    this.manabar.renderStatusbars(this.ctx);
-    this.addToWorld(this.statusbarFrameHP);
-    this.addToWorld(this.statusbarFrameMana);
-    this.addToWorld(this.avatarFrame);
-    this.addToWorld(this.avatarIcon);
-    this.addToWorld(this.coinImage);
-    this.coinCounter.renderCoinCounter(this.ctx);
-    this.coinCounter.renderXFromCounter(this.ctx);
+        //-- Fixed elements on the canvas - Start -- //
+        this.healthbar.renderStatusbars(this.ctx);
+        this.manabar.renderStatusbars(this.ctx);
+        this.addToWorld(this.statusbarFrameHP);
+        this.addToWorld(this.statusbarFrameMana);
+        this.addToWorld(this.avatarFrame);
+        this.addToWorld(this.avatarIcon);
+        this.addToWorld(this.coinImage);
+        this.coinCounter.renderCoinCounter(this.ctx);
+        this.coinCounter.renderXFromCounter(this.ctx);
 
-    if (this.endboss.firstContact) {
-        this.endbossHP.renderStatusbars(this.ctx);
-        this.addToWorld(this.endbossAvatarFrame);
-        this.addToWorld(this.endbossAvatarIcon);
-        this.addToWorld(this.endbossHPFrame);
+        if (this.endboss.firstContact) {
+            this.endbossHP.renderStatusbars(this.ctx);
+            this.addToWorld(this.endbossAvatarFrame);
+            this.addToWorld(this.endbossAvatarIcon);
+            this.addToWorld(this.endbossHPFrame);
+        }
+
+        //-- Fixed elements on the canvas - End -- //
+
+
+        let self = this;
+        requestAnimationFrame(function () {
+            self.draw();
+        });
     }
 
-    //-- Fixed elements on the canvas - End -- //
+
+    addObjectsToMap(Objects) {
+        Objects.forEach(object =>
+            this.addToWorld(object));
+    };
 
 
-    let self = this;
-    requestAnimationFrame(function () {
-        self.draw();
-    });
-}
+    /**
+     * This functions draws elements on the canvas.
+     * 
+     * @param {array} movabelThing - get the value of character,bird,enemy,statusbar...
+     * 
+     * draw -> is described in drawable.objects.class.js. 
+     * drawFrame -> frame for developing
+     *  if turnArround is set on true , the images get mirrored with translate
+     *  after turnArround was set on true reset the mirrored image. So the next image
+     * will showend right. If restore would be not used, the image would change between mirrored and not.
+     * 
+     */
+    addToWorld(movabelThing) {
 
+        if (movabelThing.turnArround) {
+            this.ctx.save();  // save the current image
+            this.ctx.translate(130, 0); // Mirrors the image
+            this.ctx.scale(-1, 1);// Save the size from the image
+            movabelThing.x = movabelThing.x * -1; // Save the place on the X-Axis
+        }
 
-addObjectsToMap(Objects) {
-    Objects.forEach(object =>
-        this.addToWorld(object));
-};
+        movabelThing.draw(this.ctx);
+        /*movabelThing.drawFrame(this.ctx);*/
 
+        if (movabelThing.turnArround) { // Falls ein Bild verändert wurde, deshalb vorhin save
+            movabelThing.x = movabelThing.x * -1;
+            this.ctx.restore();   // Ursprung wieder herstellen, Bilder wieder normal anzeigen
 
-/**
- * This functions draws elements on the canvas.
- * 
- * @param {array} movabelThing - get the value of character,bird,enemy,statusbar...
- * 
- * draw -> is described in drawable.objects.class.js. 
- * drawFrame -> frame for developing
- *  if turnArround is set on true , the images get mirrored with translate
- *  after turnArround was set on true reset the mirrored image. So the next image
- * will showend right. If restore would be not used, the image would change between mirrored and not.
- * 
- */
-addToWorld(movabelThing) {
-
-    if (movabelThing.turnArround) {
-        this.ctx.save();  // save the current image
-        this.ctx.translate(130, 0); // Mirrors the image
-        this.ctx.scale(-1, 1);// Save the size from the image
-        movabelThing.x = movabelThing.x * -1; // Save the place on the X-Axis
+        }
     }
-
-    movabelThing.draw(this.ctx);
-    /*movabelThing.drawFrame(this.ctx);*/
-
-    if (movabelThing.turnArround) { // Falls ein Bild verändert wurde, deshalb vorhin save
-        movabelThing.x = movabelThing.x * -1;
-        this.ctx.restore();   // Ursprung wieder herstellen, Bilder wieder normal anzeigen
-
-    }
-}
 
 
 }

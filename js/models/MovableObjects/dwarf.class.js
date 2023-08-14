@@ -99,7 +99,7 @@ speed = 1
 
         //--After contact--//
 
-        let conditionsToMove = setInterval(() => {
+        let conditionsToMove = setStoppableInterval(() => {
             if (world && level1.enemies[1].x - world.character.x <= 500 || this.firstContact) {
                 clearInterval(Idle);
                 this.firstContact = true;
@@ -108,23 +108,23 @@ speed = 1
 
         }, 1000 / 60);
 
-        let startMoving = setInterval(() => {
-            if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 50) {
+        let startMoving = setStoppableInterval(() => {
+            if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 30) {
                 this.moveLeft();
             }
 
         }, 1000 / 60);
 
 
-        let startMoving1 = setInterval(() => {
-            if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 50) {
+        let startMoving1 = setStoppableInterval(() => {
+            if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 30) {
                 this.playAnimation(this.WALKING_IMAGES);
                 this.moveLeft();
             }
         }, 180);
 
 
-        let attacks = setInterval(() => {
+        let attacks = setStoppableInterval(() => {
             if (world && this.x - world.character.x <= 120 && this.y - world.character.y <= 30) {
                 this.playAnimation(this.IMAGE_ATTACK);
 

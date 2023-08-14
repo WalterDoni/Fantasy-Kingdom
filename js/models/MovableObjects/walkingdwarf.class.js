@@ -64,7 +64,7 @@ class WalkingDwarf extends MovableObjects {
     animate() {
         
         //--Enemie1--//
-        let walk1 = setInterval(() => {
+        let walk1 = setStoppableInterval(() => {
             if (world && level1.walkingEnemies[1].x <= 2300|| this.walkRightInArea) {
                 level1.walkingEnemies[1].moveRight();
                 level1.walkingEnemies[1].walkRightInArea = true;
@@ -77,13 +77,13 @@ class WalkingDwarf extends MovableObjects {
             }
         }, 1000 / 60);
 
-        let walking1 = setInterval(() => {
+        let walking1 = setStoppableInterval(() => {
             if (this.walkLeftInArea || this.walkRightInArea) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (level1.walkingEnemies[1].isDead() && this.dead1 <= 1) {
                 clearInterval(walk1);
                 clearInterval(walking1);
@@ -109,7 +109,7 @@ class WalkingDwarf extends MovableObjects {
 
        //--Enemie3--//
  //--Enemie1--//
-        let walk3 = setInterval(() => {
+        let walk3 = setStoppableInterval(() => {
             if (world && level1.walkingEnemies[3].x <= 3400|| this.walkRightInArea1) {
                 level1.walkingEnemies[3].moveRight();
                 level1.walkingEnemies[3].walkRightInArea1 = true;
@@ -122,13 +122,13 @@ class WalkingDwarf extends MovableObjects {
             }
         }, 1000 / 60);
 
-        let walking3 = setInterval(() => {
+        let walking3 = setStoppableInterval(() => {
             if (this.walkLeftInArea1 || this.walkRightInArea1) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (level1.walkingEnemies[3].isDead() && this.dead3 <= 1) {
                 clearInterval(walk3);
                 clearInterval(walking3);
@@ -143,7 +143,7 @@ class WalkingDwarf extends MovableObjects {
         }, 140);
 
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (level1.walkingEnemies[3].isDead() || this.speedY3 > 0) {
                 level1.walkingEnemies[3].y -= this.speedY3;
                 this.speedY3 -= this.acceleration;
