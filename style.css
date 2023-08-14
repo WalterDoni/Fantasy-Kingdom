@@ -253,9 +253,37 @@ canvas {
 }
 
 
-
-
 /*--Smartphone--*/
+
+.mobileHud{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    z-index: 10;
+    bottom: 10px;
+    width: 100%;
+}
+
+.leftRightButtons{
+    margin-left: 40px;
+    padding-right:20px;
+    
+}
+
+.btn-left{
+
+    margin-right: 30px;
+}
+
+.actionButtons{
+    margin-right: 60px;
+}
+
+.actionButtons img {
+    padding-left:20px;
+}
+
 
 @media only screen and (max-width: 1024px) {
     canvas {
