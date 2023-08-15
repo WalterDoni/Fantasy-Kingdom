@@ -6,16 +6,27 @@ let allIntervals = [];
 game_sound = new Audio('audio/Titlemusic.mp3');
 let titleMusic = true;
 
+/**
+ * 
+ * @param {object} fn -> get the code of the function, from the created interval
+ * @param {number} time -> get the time in milliseconds, how often the interval should repeat
+ */
 function setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);
     allIntervals.push(id);
 }
 
+/**
+ * Create a new World.
+ */
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 };
 
+/**
+ * After pressing the button at the startscreen, the game will start. Or by pressing the restart button at the end of the Game.
+ */
 function startGame() {
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('startscreen').classList.add('d-none');
@@ -25,10 +36,34 @@ function startGame() {
     init();
 }
 
+
+/**
+ * After a win or lose conditions is reached, the game will stop, by clearing the necessary running intervals.
+ */
 function stopGame(){
     allIntervals.forEach(clearInterval);
 }
 
+
+/**
+  * @param {object} titleMusic -> If the variable is set on true, music will play, otherwise it will stop. This function can be activated by the button on top of the canvas.
+ */
+function pauseMusic() {
+    if (titleMusic) {
+        titleMusic = false;
+        document.getElementById('musicButton').innerHTML = `<img
+    src="img/9.Interface/Startscreen/soundOff.png">`;
+    } else {
+        titleMusic = true;
+        document.getElementById('musicButton').innerHTML = `<img
+    src="img/9.Interface/Startscreen/soundOn.png">`;
+
+    }
+}
+
+
+
+//---Functions for fullscreen---//
 
 function fullscreen() {
     let contentFullscreen = document.getElementById('content');
@@ -63,19 +98,6 @@ function exitFullscreen() {
     }
 }
 
-
-function pauseMusic() {
-    if (titleMusic) {
-        titleMusic = false;
-        document.getElementById('musicButton').innerHTML = `<img
-    src="img/9.Interface/Startscreen/soundOff.png">`;
-    } else {
-        titleMusic = true;
-        document.getElementById('musicButton').innerHTML = `<img
-    src="img/9.Interface/Startscreen/soundOn.png">`;
-
-    }
-}
 
 
 /**
