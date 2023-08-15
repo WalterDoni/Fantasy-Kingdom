@@ -121,13 +121,13 @@ class Character extends MovableObjects {
             if (this.conditionsToWalkRight()) {
                 this.moveRight();
                 this.handleTheIdleTimer();
-                //this.walking_sound.play()
+                this.walking_sound.play()
             }
 
             if (this.conditionsToWalkLeft()) {
                 this.moveLeft();
                 this.handleTheIdleTimer();
-                //this.walking_sound.play()
+                this.walking_sound.play()
             }
             // Charakter springt, setzt speedY auf 20 um dann nach und nach abzufallen (acceleration)
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {

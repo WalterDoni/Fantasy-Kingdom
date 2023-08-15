@@ -54,6 +54,13 @@ class Endboss extends MovableObjects {
         'img/3.Enemies/Boss/MagicAttack/Magic_lightning5.png',
     ]
 
+    moreAccurateCollision = {
+        top: 80,
+        right: 330,
+        bottom: 0,
+        left: 0,
+    }
+
     constructor(x, y) {
         super().loadImage('img/3.Enemies/Boss/Walk/Walk1.png');
         this.x = x;
@@ -85,21 +92,21 @@ class Endboss extends MovableObjects {
         }, 120);
 
         //---Before first contact with Boss--//
-        let bossIdle = setStoppableInterval(() => {
+        let bossIdle = setInterval(() => {
             this.turnArround = true;
             this.playAnimation(this.IDLE_IMAGES)
         }, 230);
 
 
 
-        let triggerMovement = setStoppableInterval(() => {
+        let triggerMovement = setInterval(() => {
             if (world && world.character.x > 4200 || this.firstContact) {
                 this.moveLeft();
                 this.firstContact = true;
             }
         }, 1000 / 40);
 
-        let triggerMovement1 = setStoppableInterval(() => {
+        let triggerMovement1 = setInterval(() => {
             if (world && world.character.x > 4200 || this.firstContact) {
                 this.playAnimation(this.WALKING_IMAGES)
                 clearInterval(bossIdle);

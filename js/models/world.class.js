@@ -266,7 +266,7 @@ class World {
 
 
     useAttacksFromCharacter() {
-        if (this.keyboard.T_KEYBOARD) {
+        if (this.keyboard.T_KEYBOARD && this.manabar.mana > 0) {
             let fireball = new ThrowableObjects(this.character.x + 50, this.character.y + 20);
             this.throwableObjects.push(fireball);
             this.character.fireAttack();
