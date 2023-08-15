@@ -3,13 +3,14 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let allIntervals = [];
-game_sound = new Audio('audio/Titlemusic.mp3');
+let game_sound = new Audio('audio/Titlemusic.mp3');
 let titleMusic = true;
 
 /**
  * 
  * @param {object} fn -> get the code of the function, from the created interval
  * @param {number} time -> get the time in milliseconds, how often the interval should repeat
+ *  @param {value} id -> push the value in the array "allIntervals". 
  */
 function setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);
@@ -38,7 +39,7 @@ function startGame() {
 
 
 /**
- * After a win or lose conditions is reached, the game will stop, by clearing the necessary running intervals.
+ * After a win or lose conditions is reached, the game will stop, by clearing every interval in array "allIntervals".
  */
 function stopGame(){
     allIntervals.forEach(clearInterval);
@@ -65,6 +66,9 @@ function pauseMusic() {
 
 //---Functions for fullscreen---//
 
+/**
+ * enter the fullscreen -> click on the button
+ */
 function fullscreen() {
     let contentFullscreen = document.getElementById('content');
     document.getElementById('fullscreenOn').classList.add('d-none');
@@ -72,6 +76,9 @@ function fullscreen() {
     enterFullscreen(contentFullscreen);
 }
 
+/**
+ * leave the fullscreen -> click on the button
+ */
 function leaveFullscreen() {
     let contentFullscreen = document.getElementById('content');
     document.getElementById('fullscreenOn').classList.remove('d-none');
@@ -79,6 +86,12 @@ function leaveFullscreen() {
     exitFullscreen(contentFullscreen);
 }
 
+
+/**
+ * @param {param} element -> check the version from the browser
+ * @param {function} requestFullscreen -> is a HTML5-API which the mpost browser supports
+ * if the browser support the function the fullscreen will be set.
+ */
 
 function enterFullscreen(element) {
     if (element.requestFullscreen) {
@@ -90,6 +103,9 @@ function enterFullscreen(element) {
     }
 }
 
+/**
+ * Leave the fullscreen back to normal widt and height.
+ */
 function exitFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();

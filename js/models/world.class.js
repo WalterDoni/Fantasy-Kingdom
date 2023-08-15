@@ -9,7 +9,7 @@ class World {
     turnArround = false;
     hit = 10;
     lastHit = 0;
-    titleMusic;
+   
     defeat_sound = new Audio('audio/defeat.mp3');
     victory_sound = new Audio('audio/victory.mp3')
 
@@ -34,22 +34,20 @@ class World {
     endbossAvatarIcon = new EndbossAvatarIcon();
 
 
-
-
-
-    constructor(canvas, keyboard) { // constructor wird immer zuerst aufgerufen!!
+    constructor(canvas, keyboard) {
 
         this.canvas = canvas;
-        this.keyboard = keyboard; // Wird über game.js initiert
-        this.ctx = canvas.getContext('2d'); /*Context=Lässt zu auf den Koordinaten etwas einzugeben*/
+        this.keyboard = keyboard;
+        this.ctx = canvas.getContext('2d'); /*ctx = Allows to draw something on the canvas*/
         this.setWorld();
         this.draw();
         this.run();
-        this.collectCoins();
+        this.collectCoinsOrManapotion();
 
     }
     /**
      * Bind the character to the world, it's necessary e.g. for the camera_x 
+     * Bind the throwableObject to the world, it's necessary e.g. for the collision 
      */
     setWorld() {
         this.character.world = this;
@@ -57,6 +55,9 @@ class World {
     }
 
 
+    /**
+     * In order to avoid running unnecessarily many intervals, all functions are placed in a single interval.
+     */
     run() {
 
         setStoppableInterval(() => {
@@ -77,17 +78,22 @@ class World {
     }
 
 
-
+    /**
+      * @param {object} titleMusic -> If the variable is set on true, music will play, otherwise it will stop. This function can be activated by the button on top of the canvas.
+     */
     playSound() {
         if (titleMusic) {
             game_sound.volume = 0.1;
             game_sound.play();
-        } else if (!titleMusic) {
+        }  if (!titleMusic) {
             game_sound.pause();
 
         }
     }
 
+    /**
+    * Show on off the two screens ( win- or losescreen), depends which conditions get reached at first.
+    */
     showWinOrDefeatScreen() {
         if (this.character.healthpoints == 0 && this.endbossHP.healthpoints > 0) {
             document.getElementById('defeatScreen').classList.remove('d-none');
@@ -113,8 +119,11 @@ class World {
         }
     }
 
-
-    collectCoins() {
+    /**
+    * @param {object} collectables -> If one of these collides with the character, add +1 to the coin-counter.
+    * * @param {object} manapotions -> If one of these collides with the character, fill 50% of the manabar.
+    */
+    collectCoinsOrManapotion() {
 
         setStoppableInterval(() => {
             this.level.collectables.forEach((collectable) => {
@@ -122,7 +131,6 @@ class World {
                     this.level.collectables.splice(collectable, 1);
                     this.coinCounter.updateCoinCounter();
                     this.coinCounter.renderCoinCounter();
-
                 }
             })
 
@@ -132,7 +140,6 @@ class World {
                     if (this.character.x - potion.x >= 1 && this.character.x - potion.x <= 15 && this.character.y + this.character.height - potion.y >= 0 && this.character.y - potion.y <= 10) {
                         this.level.manapotions.splice(potion, 1);
                         this.manabar.updateManapointsPlus();
-
                     }
                 }
             })
