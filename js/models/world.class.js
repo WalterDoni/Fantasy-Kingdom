@@ -114,7 +114,7 @@ class World {
             this.victory_sound.play();
             stopGame();
             setTimeout(() => {
-                this.defeat_sound.pause();
+                this.victory_sound.pause();
             }, 15000);
         }
     }

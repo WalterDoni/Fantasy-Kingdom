@@ -6,6 +6,7 @@ class MovableObjects extends DrawableObjects {
    speedY = 0;
    acceleration = 2.5;
    lastHit = 0;
+   groundPosition = 370;
 
    walkRightInArea = false;
    walkLeftInArea = false;
@@ -77,8 +78,29 @@ class MovableObjects extends DrawableObjects {
          if (this.isAboveGround() || this.speedY > 0) {
             this.y -= this.speedY;
             this.speedY -= this.acceleration;
+         } 
+          else if(this.x >= 910 && this.x <= 1200){
+            this.y = 270;
          }
-      }, 1000 / 25)
+         else if(this.x >= 2560 && this.x <= 2605 && this.y <= 250){
+            this.y = 240;
+         }
+         else if(this.x >= 2250 && this.x <= 2555 && this.y <= 150){
+            this.y = 140;
+         }
+         else if(this.x >= 2750 && this.x <= 3350){
+            this.y = 70;
+         }
+         else if(this.x >= 3360 && this.x <= 3705){
+            this.y = 170;
+         }
+         else if(this.x >= 3710 && this.x <= 3900){
+            this.y = 270;
+         }
+            else{
+            this.y = this.groundPosition;
+         }
+      }, 1000 / 35)
    }
 
    isAboveGround() {
