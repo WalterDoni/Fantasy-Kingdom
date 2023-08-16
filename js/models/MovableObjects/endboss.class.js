@@ -36,12 +36,8 @@ class Endboss extends MovableObjects {
         'img/3.Enemies/Boss/Idle/Idle2.png',
         'img/3.Enemies/Boss/Idle/Idle3.png',
     ]
-    DEAD_IMAGES = [
-        'img/3.Enemies/Boss/Death/Death0.png',
-        'img/3.Enemies/Boss/Death/Death1.png',
-        'img/3.Enemies/Boss/Death/Death2.png',
-        'img/3.Enemies/Boss/Death/Death3.png',
-        'img/3.Enemies/Boss/Death/Death4.png',
+    DEAD_IMAGE = [
+        
         'img/3.Enemies/Boss/Death/Death5.png',
 
     ]
@@ -68,7 +64,7 @@ class Endboss extends MovableObjects {
         this.loadImages(this.WALKING_IMAGES);
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.HURT_IMAGES);
-        this.loadImages(this.DEAD_IMAGES);
+        this.loadImages(this.DEAD_IMAGE);
         this.loadImages(this.IDLE_IMAGES);
         this.loadImages(this.MAGIC_ATTACK_IMAGE);
         this.animate();
@@ -76,15 +72,15 @@ class Endboss extends MovableObjects {
 
 
     animate() {
-        setStoppableInterval(() => {
-            if (this.isDead() && this.dead <= 1) {
+        setInterval(() => {
+            if (this.isDead()) {
                 clearInterval(rightWalkInArea);
                 clearInterval(lefttWalkInArea);
                 clearInterval(walkInArea);
-                this.playAnimation(this.DEAD_IMAGES);
-                this.dead += 1; 
+                this.loadImage(this.DEAD_IMAGE);
+                
 
-            } else if (this.healthpoints == 80 ) {
+            } else if (this.isColliding(world.character)) {
                 this.playAnimation(this.HURT_IMAGES);
 
             }
@@ -118,7 +114,7 @@ class Endboss extends MovableObjects {
 
         //---After first contact with Boss--//
 
-        let rightWalkInArea = setStoppableInterval(() => {
+        let rightWalkInArea = setInterval(() => {
             if (this.x <= 4000 || this.walkRightInArea) {
                 clearInterval(triggerMovement);
                 clearInterval(triggerMovement1);
@@ -128,12 +124,12 @@ class Endboss extends MovableObjects {
             }
         }, 1000 / 60);
 
-        let walkInArea = setStoppableInterval(() => {
+        let walkInArea = setInterval(() => {
             if (this.walkLeftInArea || this.walkRightInArea)
                 this.playAnimation(this.WALKING_IMAGES);
         }, 180);
 
-        let lefttWalkInArea = setStoppableInterval(() => {
+        let lefttWalkInArea = setInterval(() => {
             if (this.x >= 5050 || this.walkLeftInArea) {
                 this.moveLeft();
                 this.walkRightInArea = false;

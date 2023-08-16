@@ -13,7 +13,7 @@ class Cloud extends MovableObjects{
 
     animate(){
 
-        setStoppableInterval(() => {
+        setInterval(() => {
         this.x -= this.speed;
     }, 1000 / 30); // 60 FPS
      

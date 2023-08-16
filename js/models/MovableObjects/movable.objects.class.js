@@ -20,6 +20,7 @@ class MovableObjects extends DrawableObjects {
    healthpoints = 100;
    timerToStopAnimations = 0;
    world;
+   
    moreAccurateCollision = {
       top: 0,
       right: 0,
@@ -100,7 +101,7 @@ class MovableObjects extends DrawableObjects {
             else{
             this.y = this.groundPosition;
          }
-      }, 1000 / 35)
+      }, 1000 / 25)
    }
 
    isAboveGround() {

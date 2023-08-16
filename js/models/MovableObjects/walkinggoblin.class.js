@@ -41,10 +41,8 @@ class WalkingGoblin extends MovableObjects {
 
     ]
 
-    DEAD_IMAGES = [
-        'img/3.Enemies/Goblin/Death/death1.png',
-        'img/3.Enemies/Goblin/Death/death2.png',
-        'img/3.Enemies/Goblin/Death/death3.png',
+    DEAD_IMAGE = [
+       
         'img/3.Enemies/Goblin/Death/death4.png',
     ]
 
@@ -64,15 +62,15 @@ class WalkingGoblin extends MovableObjects {
         this.loadImages(this.WALKING_IMAGES);
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.HURT_IMAGES);
-        this.loadImages(this.DEAD_IMAGES);
+        this.loadImages(this.DEAD_IMAGE);
         this.animate();
     }
 
     animate() {
 
         //--Enemie0--//
-        let walk0 = setStoppableInterval(() => {
-            if (world && level1.walkingEnemies[0].x <= 975 || this.walkRightInArea) {
+        let walk0 = setInterval(() => {
+            if (world && level1.walkingEnemies[0].x <= 975 || this.walkRightInArea ) {
                 level1.walkingEnemies[0].moveRight();
                 level1.walkingEnemies[0].walkRightInArea = true;
                 level1.walkingEnemies[0].walkLeftInArea = false;
@@ -84,17 +82,17 @@ class WalkingGoblin extends MovableObjects {
             }
         }, 1000 / 60);
 
-        let walking0 = setStoppableInterval(() => {
+        let walking0 = setInterval(() => {
             if (this.walkLeftInArea || this.walkRightInArea) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             if (level1.walkingEnemies[0].isDead() && this.dead0 <= 1) {
                 clearInterval(walk0);
                 clearInterval(walking0);
-                level1.walkingEnemies[0].playAnimation(this.DEAD_IMAGES);
+                level1.walkingEnemies[0].loadImage(this.DEAD_IMAGE);
                 this.dead0 += 1;
                 this.speedY0 = 7;
 
@@ -105,7 +103,7 @@ class WalkingGoblin extends MovableObjects {
         }, 140);
 
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             if (level1.walkingEnemies[0].isDead() || this.speedY0 > 0) {
                 level1.walkingEnemies[0].y -= this.speedY0;
                 this.speedY0 -= this.acceleration;
@@ -114,7 +112,7 @@ class WalkingGoblin extends MovableObjects {
 
 
         //--Enemie2--//
-        let walk2 = setStoppableInterval(() => {
+        let walk2 = setInterval(() => {
             if (world && level1.walkingEnemies[2].x <= 2800 || this.walkRightInArea1) {
                 level1.walkingEnemies[2].moveRight();
                 level1.walkingEnemies[2].walkRightInArea1 = true;
@@ -127,17 +125,17 @@ class WalkingGoblin extends MovableObjects {
             }
         }, 1000 / 60);
 
-        let walking2 = setStoppableInterval(() => {
+        let walking2 = setInterval(() => {
             if (this.walkLeftInArea1 || this.walkRightInArea1) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             if (level1.walkingEnemies[2].isDead() && this.dead2 <= 1) {
                 clearInterval(walk2);
                 clearInterval(walking2);
-                level1.walkingEnemies[2].playAnimation(this.DEAD_IMAGES);
+                level1.walkingEnemies[2].loadImage(this.DEAD_IMAGE);
                 this.dead2 += 1;
                 this.speedY2 = 7;
 
@@ -148,7 +146,7 @@ class WalkingGoblin extends MovableObjects {
         }, 140);
 
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             if (level1.walkingEnemies[2].isDead() || this.speedY2 > 0) {
                 level1.walkingEnemies[2].y -= this.speedY2;
                 this.speedY2 -= this.acceleration;
@@ -158,8 +156,8 @@ class WalkingGoblin extends MovableObjects {
 
 
         //--Enemie4--//
-
-        let walk4 = setStoppableInterval(() => {
+       
+        let walk4 = setInterval(() => {
             if (world && level1.walkingEnemies[4].x <= 3720 || this.walkRightInArea2) {
                 level1.walkingEnemies[4].moveRight();
                 level1.walkingEnemies[4].walkRightInArea2 = true;
@@ -172,16 +170,16 @@ class WalkingGoblin extends MovableObjects {
             }
         }, 1000 / 60);
 
-       let walking4 = setStoppableInterval(() => {
+       let walking4 = setInterval(() => {
             if (this.walkLeftInArea2 || this.walkRightInArea2) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
-        setStoppableInterval(() => {
+        setInterval(() => {
             if (level1.walkingEnemies[4].isDead() && this.dead4 <= 1) {
                 clearInterval(walk4);
                 clearInterval(walking4);
-                level1.walkingEnemies[4].playAnimation(this.DEAD_IMAGES);
+                level1.walkingEnemies[4].loadImage(this.DEAD_IMAGE);
                 this.dead4 += 1;
                 this.speedY4 = 7;
 
@@ -192,21 +190,12 @@ class WalkingGoblin extends MovableObjects {
         }, 140);
 
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             if (level1.walkingEnemies[4].isDead() || this.speedY4 > 0) {
                 level1.walkingEnemies[4].y -= this.speedY4;
                 this.speedY4 -= this.acceleration;
             }
         }, 1000 / 25)
-
-
-
-        setStoppableInterval(() => {
-            if (this.walkLeftInArea || this.walkRightInArea || this.walkLeftInArea1 || this.walkRightInArea1 || this.walkLeftInArea2 || this.walkRightInArea2) {
-                this.playAnimation(this.WALKING_IMAGES);
-            }
-        }, 180);
-
 
 
     }

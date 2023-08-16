@@ -8,12 +8,12 @@ class World {
     camera_x = 0;
     turnArround = false;
     hit = 10;
-    lastHit = 0;
-   
+    removeFireballFromCanvas = 0;
+
     defeat_sound = new Audio('audio/defeat.mp3');
     victory_sound = new Audio('audio/victory.mp3')
 
-
+    titleMusic;
 
     //--Character--//
     character = new Character();
@@ -60,7 +60,7 @@ class World {
      */
     run() {
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             this.checkCollisions();
             this.useAttacksFromCharacter();
             this.hitEnemy();
@@ -85,8 +85,10 @@ class World {
         if (titleMusic) {
             game_sound.volume = 0.1;
             game_sound.play();
-        }  if (!titleMusic) {
+
+        } if (!titleMusic) {
             game_sound.pause();
+
 
         }
     }
@@ -125,7 +127,7 @@ class World {
     */
     collectCoinsOrManapotion() {
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             this.level.collectables.forEach((collectable) => {
                 if (this.character.x - collectable.x >= 1 && this.character.x - collectable.x <= 15 && this.character.y + this.character.height - collectable.y >= 0 && this.character.y - collectable.y <= 10) {
                     this.level.collectables.splice(collectable, 1);
@@ -266,12 +268,22 @@ class World {
 
 
     useAttacksFromCharacter() {
+
         if (this.keyboard.T_KEYBOARD && this.manabar.mana > 0) {
             let fireball = new ThrowableObjects(this.character.x + 50, this.character.y + 20);
             this.throwableObjects.push(fireball);
             this.character.fireAttack();
             this.manabar.updateManapointsMinus();
+            this.removeFireballFromCanvas = new Date().getTime()
+
+            setTimeout(() => {
+                if (this.removeFireballFromCanvas <= new Date().getTime()) {
+                    // Führe den Code aus, nachdem 1,2 Sekunden vergangen sind
+                    this.throwableObjects.splice(fireball, 1);
+                }
+            }, 1200); 
         }
+
         if (this.keyboard.F_KEYBOARD) {
             this.character.swordAttack();
 
@@ -297,11 +309,13 @@ class World {
         this.level.endboss.forEach((boss) => {
 
             if (this.character.isColliding(boss) && this.character.isAboveGround() && this.character.speedY < 0) {
+
                 this.damageTheEndboss(boss);
                 this.endbossHP.updateHealthpoints();
                 this.character.jump();
 
             } if (this.character.isCollidingWhileSwordAttack(boss) && this.keyboard.F_KEYBOARD) {
+
                 this.damageTheEndboss(boss);
                 this.endbossHP.updateHealthpoints();
             }
@@ -314,6 +328,7 @@ class World {
             boss.healthpoints = 0;
         }
     }
+
     // Endboss-------------------
 
     /**

@@ -32,7 +32,7 @@ class ManaCrystal extends MovableObjects {
     animate() {
         this.moveLeft();
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             this.playAnimation(this.IMAGES)
         }, 150)
 

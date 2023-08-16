@@ -32,11 +32,7 @@ class WalkingDwarf extends MovableObjects {
         'img/3.Enemies/Dwarf/Hurt/Hurt2.png',
     ]
 
-    DEAD_IMAGES = [
-        'img/3.Enemies/Dwarf/Death/Death1.png',
-        'img/3.Enemies/Dwarf/Death/Death2.png',
-        'img/3.Enemies/Dwarf/Death/Death3.png',
-        'img/3.Enemies/Dwarf/Death/Death4.png',
+    DEAD_IMAGE = [
         'img/3.Enemies/Dwarf/Death/Death5.png',
 
     ]
@@ -57,14 +53,14 @@ class WalkingDwarf extends MovableObjects {
         this.loadImages(this.WALKING_IMAGES);
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.HURT_IMAGES);
-        this.loadImages(this.DEAD_IMAGES);
+        this.loadImages(this.DEAD_IMAGE);
         this.animate();
     }
 
     animate() {
         
         //--Enemie1--//
-        let walk1 = setStoppableInterval(() => {
+        let walk1 = setInterval(() => {
             if (world && level1.walkingEnemies[1].x <= 2300|| this.walkRightInArea) {
                 level1.walkingEnemies[1].moveRight();
                 level1.walkingEnemies[1].walkRightInArea = true;
@@ -77,17 +73,17 @@ class WalkingDwarf extends MovableObjects {
             }
         }, 1000 / 60);
 
-        let walking1 = setStoppableInterval(() => {
+        let walking1 = setInterval(() => {
             if (this.walkLeftInArea || this.walkRightInArea) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             if (level1.walkingEnemies[1].isDead() && this.dead1 <= 1) {
                 clearInterval(walk1);
                 clearInterval(walking1);
-                level1.walkingEnemies[1].playAnimation(this.DEAD_IMAGES);
+                level1.walkingEnemies[1].loadImage(this.DEAD_IMAGE);
                 this.dead1 += 1;
                 this.speedY1 = 7;
 
@@ -109,7 +105,7 @@ class WalkingDwarf extends MovableObjects {
 
        //--Enemie3--//
  //--Enemie1--//
-        let walk3 = setStoppableInterval(() => {
+        let walk3 = setInterval(() => {
             if (world && level1.walkingEnemies[3].x <= 3400|| this.walkRightInArea1) {
                 level1.walkingEnemies[3].moveRight();
                 level1.walkingEnemies[3].walkRightInArea1 = true;
@@ -122,17 +118,17 @@ class WalkingDwarf extends MovableObjects {
             }
         }, 1000 / 60);
 
-        let walking3 = setStoppableInterval(() => {
+        let walking3 = setInterval(() => {
             if (this.walkLeftInArea1 || this.walkRightInArea1) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             if (level1.walkingEnemies[3].isDead() && this.dead3 <= 1) {
                 clearInterval(walk3);
                 clearInterval(walking3);
-                level1.walkingEnemies[3].playAnimation(this.DEAD_IMAGES);
+                level1.walkingEnemies[3].loadImage(this.DEAD_IMAGE);
                 this.dead3 += 1;
                 this.speedY3 = 7;
 
@@ -143,7 +139,7 @@ class WalkingDwarf extends MovableObjects {
         }, 140);
 
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             if (level1.walkingEnemies[3].isDead() || this.speedY3 > 0) {
                 level1.walkingEnemies[3].y -= this.speedY3;
                 this.speedY3 -= this.acceleration;

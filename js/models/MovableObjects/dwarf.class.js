@@ -27,11 +27,7 @@ speed = 1
         'img/3.Enemies/Dwarf/Hurt/Hurt2.png',
     ]
 
-    DEAD_IMAGES = [
-        'img/3.Enemies/Dwarf/Death/Death1.png',
-        'img/3.Enemies/Dwarf/Death/Death2.png',
-        'img/3.Enemies/Dwarf/Death/Death3.png',
-        'img/3.Enemies/Dwarf/Death/Death4.png',
+    DEAD_IMAGE = [
         'img/3.Enemies/Dwarf/Death/Death5.png',
 
     ]
@@ -56,7 +52,7 @@ speed = 1
         this.loadImages(this.WALKING_IMAGES);
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.HURT_IMAGES);
-        this.loadImages(this.DEAD_IMAGES);
+        this.loadImages(this.DEAD_IMAGE);
         this.loadImages(this.IDLE_IMAGES);
         this.animate();
     }
@@ -71,7 +67,7 @@ speed = 1
                 clearInterval(startMoving);
                 clearInterval(startMoving1);
                 clearInterval(attacks);
-                this.playAnimation(this.DEAD_IMAGES);
+                this.loadImage(this.DEAD_IMAGE);
                 this.dead += 1;  
                 this.speedY = 10;
 
@@ -99,7 +95,7 @@ speed = 1
 
         //--After contact--//
 
-        let conditionsToMove = setStoppableInterval(() => {
+        let conditionsToMove = setInterval(() => {
             if (world && level1.enemies[1].x - world.character.x <= 500 || this.firstContact) {
                 clearInterval(Idle);
                 this.firstContact = true;
@@ -108,7 +104,7 @@ speed = 1
 
         }, 1000 / 60);
 
-        let startMoving = setStoppableInterval(() => {
+        let startMoving = setInterval(() => {
             if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 30) {
                 this.moveLeft();
             }
@@ -116,7 +112,7 @@ speed = 1
         }, 1000 / 60);
 
 
-        let startMoving1 = setStoppableInterval(() => {
+        let startMoving1 = setInterval(() => {
             if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 30) {
                 this.playAnimation(this.WALKING_IMAGES);
                 this.moveLeft();
@@ -124,7 +120,7 @@ speed = 1
         }, 180);
 
 
-        let attacks = setStoppableInterval(() => {
+        let attacks = setInterval(() => {
             if (world && this.x - world.character.x <= 120 && this.y - world.character.y <= 30) {
                 this.playAnimation(this.IMAGE_ATTACK);
 

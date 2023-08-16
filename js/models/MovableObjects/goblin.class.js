@@ -32,10 +32,7 @@ class Goblin extends MovableObjects {
 
     ]
 
-    DEAD_IMAGES = [
-        'img/3.Enemies/Goblin/Death/death1.png',
-        'img/3.Enemies/Goblin/Death/death2.png',
-        'img/3.Enemies/Goblin/Death/death3.png',
+    DEAD_IMAGE = [
         'img/3.Enemies/Goblin/Death/death4.png',
     ]
 
@@ -60,7 +57,7 @@ class Goblin extends MovableObjects {
         this.loadImages(this.WALKING_IMAGES);
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.HURT_IMAGES);
-        this.loadImages(this.DEAD_IMAGES);
+        this.loadImages(this.DEAD_IMAGE);
         this.loadImages(this.IDLE_IMAGES);
         this.animate();
     }
@@ -74,7 +71,7 @@ class Goblin extends MovableObjects {
                 clearInterval(startMoving);
                 clearInterval(startMoving1);
                 clearInterval(attacks);
-                this.playAnimation(this.DEAD_IMAGES);
+                this.loadImage(this.DEAD_IMAGE);
                 this.dead += 1;  
                 this.speedY = 10;
 
@@ -103,7 +100,7 @@ class Goblin extends MovableObjects {
         //--After contact--//
 
     
-        let conditionsToMove = setStoppableInterval(() => {
+        let conditionsToMove = setInterval(() => {
             if (world && level1.enemies[1].x - world.character.x <= 500 || this.firstContact) {
                 clearInterval(Idle);
                 this.firstContact = true;
@@ -112,7 +109,7 @@ class Goblin extends MovableObjects {
 
         }, 1000 / 60);
 
-        let startMoving = setStoppableInterval(() => {
+        let startMoving = setInterval(() => {
             if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 30) {
                 this.moveLeft();
             }
@@ -120,7 +117,7 @@ class Goblin extends MovableObjects {
         }, 1000 / 60);
 
 
-        let startMoving1 = setStoppableInterval(() => {
+        let startMoving1 = setInterval(() => {
             if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 30) {
                 this.playAnimation(this.WALKING_IMAGES);
                 this.moveLeft();
@@ -128,7 +125,7 @@ class Goblin extends MovableObjects {
         }, 180);
 
 
-        let attacks = setStoppableInterval(() => {
+        let attacks = setInterval(() => {
             if (world && this.x - world.character.x <= 120 && this.y - world.character.y <= 80) {
                 this.playAnimation(this.IMAGE_ATTACK);
 

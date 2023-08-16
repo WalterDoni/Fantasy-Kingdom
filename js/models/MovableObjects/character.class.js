@@ -114,20 +114,23 @@ class Character extends MovableObjects {
 
     animate() {
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             //this.walking_sound.pause()
 
             // Charakter bewegt sich nach rechts oder links
             if (this.conditionsToWalkRight()) {
                 this.moveRight();
                 this.handleTheIdleTimer();
+                this.walking_sound.volume = 0.2;
                 this.walking_sound.play()
             }
 
             if (this.conditionsToWalkLeft()) {
                 this.moveLeft();
                 this.handleTheIdleTimer();
-                this.walking_sound.play()
+                this.walking_sound.volume = 0.2;
+                this.walking_sound.play();
+                
             }
             // Charakter springt, setzt speedY auf 20 um dann nach und nach abzufallen (acceleration)
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
@@ -144,14 +147,14 @@ class Character extends MovableObjects {
 
         }, 1000 / 60);
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             if (this.timeWithoutDoingSomething >= 3500) {
                 this.playAnimation(this.IDLE_IMAGE);
             }
         }, 150);
 
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.DEAD_IMAGES);
             } else if (this.isHurt()) {

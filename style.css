@@ -324,3 +324,20 @@ canvas {
     src: url('./font/bungee-shade-v11-latin-regular.woff2') format('woff2');
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
+@media (max-width: 1024px){
+    .howToPlayKeybindings{
+        width: 800px;
+    }
+
+    .startImage{
+        width: 800px;
+        height: 500px;
+    }
+}
+
+@media (max-width: 800px){
+    .howToPlayKeybindings{
+        display: none;
+    }
+}

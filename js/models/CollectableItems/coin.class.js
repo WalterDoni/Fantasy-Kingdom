@@ -7,7 +7,7 @@ class Coin extends MovableObjects {
     moreAccurateCollision = {
         top: 0,
         right: 0,
-        bottom: 0,
+        bottom: -10,
         left: 0,
     }
     IMAGES = [
@@ -35,7 +35,7 @@ class Coin extends MovableObjects {
     animate() {
         this.moveLeft();
 
-        setStoppableInterval(() => {
+        setInterval(() => {
             this.playAnimation(this.IMAGES)
         }, 150)
 
