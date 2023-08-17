@@ -23,6 +23,7 @@ function setStoppableInterval(fn, time) {
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    loadMobileControlEvents();
 };
 
 /**
@@ -115,7 +116,7 @@ function exitFullscreen() {
 }
 
 
-function rotatePhoneShow(){
+function rotatePhoneShow() {
 
     if (window.innerWidth > 650) {
         document.getElementById('rotatePhone').classList.add('d-none');
@@ -181,3 +182,48 @@ window.addEventListener("keyup", (event) => {
     }
 
 });
+
+function loadMobileControlEvents() {
+    document.getElementById('btn-right').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = true;
+    });
+    document.getElementById('btn-right').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    });
+    document.getElementById('btn-left').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
+    });
+    document.getElementById('btn-left').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
+    });
+    document.getElementById('btn-up').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = true;
+    });
+    document.getElementById('btn-up').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = false;
+    });
+    document.getElementById('btn-attack').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.F_KEYBOARD = true;
+    });
+    document.getElementById('btn-attack').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.F_KEYBOARD = false;
+    });
+    document.getElementById('btn-magic').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.T_KEYBOARD = true;
+    });
+    document.getElementById('btn-magic').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.T_KEYBOARD = false;
+    });
+
+
+}
