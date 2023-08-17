@@ -41,7 +41,7 @@ function startGame() {
 /**
  * After a win or lose conditions is reached, the game will stop, by clearing every interval in array "allIntervals".
  */
-function stopGame(){
+function stopGame() {
     allIntervals.forEach(clearInterval);
 }
 
@@ -115,6 +115,16 @@ function exitFullscreen() {
 }
 
 
+function rotatePhoneShow(){
+
+    if (window.innerWidth > 650) {
+        document.getElementById('rotatePhone').classList.add('d-none');
+    } else {
+        document.getElementById('rotatePhone').classList.remove('d-none');
+    }
+}
+
+window.addEventListener('resize', rotatePhoneShow);
 
 /**
  * Set the variable from keyboard.class.js to true, when button is clicked 

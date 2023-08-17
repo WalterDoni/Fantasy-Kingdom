@@ -55,58 +55,62 @@
     <title>Fantasy-Kingdom</title>
 </head>
 
-<body >
+<body>
 
     <div class="content" id="content">
 
-        
-    <div class="soundAndFullscreen">
-        <button onclick="pauseMusic()" class="startscreenSound" id="musicButton"><img
-                src="img/9.Interface/Startscreen/soundOn.png"></button>
-        <button onclick="fullscreen()" class="startScreenFullscreen" id="fullscreenOn"><img
-                src="img/9.Interface/Startscreen/fullscreen.png"></button>
-        <button onclick="leaveFullscreen()" class="startScreenFullscreen d-none" id="fullscreenOff"><img
-                src="img/9.Interface/Startscreen/fullscreen-exit.png"></button>
+
+        <div class="soundAndFullscreen">
+            <button onclick="pauseMusic()" class="startscreenSound" id="musicButton"><img
+                    src="img/9.Interface/Startscreen/soundOn.png"></button>
+            <button onclick="fullscreen()" class="startScreenFullscreen" id="fullscreenOn"><img
+                    src="img/9.Interface/Startscreen/fullscreen.png"></button>
+            <button onclick="leaveFullscreen()" class="startScreenFullscreen d-none" id="fullscreenOff"><img
+                    src="img/9.Interface/Startscreen/fullscreen-exit.png"></button>
         </div>
 
         <div id="startscreen" class="startscreen">
             <h1 class="title">Fantasy-Kingdom</h1>
             <img class="startImageChar" src="img/9.Interface/Startscreen/characters.png">
             <img class="startImage" src="img/9.Interface/Startscreen/bg.png">
-            <button onclick="startGame()" class="startscreenStart"><img src="img/9.Interface/Startscreen/forward_button.png"></button>
+            <button onclick="startGame()" class="startscreenStart"><img
+                    src="img/9.Interface/Startscreen/forward_button.png"></button>
         </div>
 
         <div class="winScreen d-none" id="winScreen">
-            <img  class="imageWin" src="img/9.Interface/VictoryAndDefeat/knight+tape.png" alt="">
-            <img class ="winScreenRestart" src="img/9.Interface/VictoryAndDefeat/button_yellow.png" alt="">
+            <img class="imageWin" src="img/9.Interface/VictoryAndDefeat/knight+tape.png" alt="">
+            <img class="winScreenRestart" src="img/9.Interface/VictoryAndDefeat/button_yellow.png" alt="">
             <p class="victoryLine">VICTORY!</p>
             <p onclick="startGame()" class="restartLineWin">Restart?</p>
         </div>
 
         <div class="defeatScreen d-none" id="defeatScreen">
-            <img  class="imageDefeat"src="img/9.Interface/VictoryAndDefeat/knight_loose.png" alt="">
-            <img class="imageDefeatPaperForDefeatText"src="img/9.Interface/VictoryAndDefeat/defeat.png" alt="">
-            <img class ="defeatScreenRestart" src="img/9.Interface/VictoryAndDefeat/button_yellow.png" alt="">
+            <img class="imageDefeat" src="img/9.Interface/VictoryAndDefeat/knight_loose.png" alt="">
+            <img class="imageDefeatPaperForDefeatText" src="img/9.Interface/VictoryAndDefeat/defeat.png" alt="">
+            <img class="defeatScreenRestart" src="img/9.Interface/VictoryAndDefeat/button_yellow.png" alt="">
             <p class="defeatLine">DEFEAT!</p>
             <p onclick="startGame()" class="restartLineDefeat">Restart?</p>
         </div>
-        
+
 
         <div class="mobileHud">
             <div class="leftRightButtons">
-            <span><img class="btn-left" id="btn-left" src="img/9.Interface/MobileButtons/left.png" alt=""></span>
-            <img class="btn-right" id="btn-right" src="img/9.Interface/MobileButtons/right.png" alt="">
+                <span><img class="btn-left" id="btn-left" src="img/9.Interface/MobileButtons/left.png" alt=""></span>
+                <img class="btn-right" id="btn-right" src="img/9.Interface/MobileButtons/right.png" alt="">
             </div>
             <div class="actionButtons">
-            <img class="btn-up" id="btn-up" src="img/9.Interface/MobileButtons/up.png" alt="">
-            <img class="btn-attack" id="btn-attack" src="img/9.Interface/MobileButtons/attack.png" alt="">
-            <img class="btn-magic" id="btn-magic" src="img/9.Interface/MobileButtons/magic.png" alt="">
+                <img class="btn-up" id="btn-up" src="img/9.Interface/MobileButtons/up.png" alt="">
+                <img class="btn-attack" id="btn-attack" src="img/9.Interface/MobileButtons/attack.png" alt="">
+                <img class="btn-magic" id="btn-magic" src="img/9.Interface/MobileButtons/magic.png" alt="">
             </div>
         </div>
         <canvas class="d-none" id="canvas" width="1024" height="576"></canvas>
 
     </div>
-
+    <div class="rotatePhone d-none" id="rotatePhone">
+        <img src="img/rotate.jpg" alt="">
+        <span>Please,rotate your Phone.......You really need the space to save the world!</span>
+    </div>
     <div class="howToPlayKeybindings">
         <div><img src="img/9.Interface/Startscreen/arrowLeft.png" alt=""> or A <span>:Left</span></div>
         <div><img src="img/9.Interface/Startscreen/arrowRight.png" alt=""> or D <span>:Right</span></div>

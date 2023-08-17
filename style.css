@@ -34,10 +34,10 @@ canvas {
 }
 
 
-.soundAndFullscreen{
+.soundAndFullscreen {
     position: absolute;
-    top:20px;
-    
+    top: 20px;
+
 }
 
 .startscreen {
@@ -72,24 +72,25 @@ canvas {
 }
 
 .startScreenFullscreen,
-.startscreenSound{
+.startscreenSound {
     background-color: orange;
     border-radius: 100%;
     height: 50px;
     margin-bottom: 10px;
-    margin-left:30px; 
+    margin-left: 30px;
 }
+
 .startScreenFullscreen img,
-.startscreenSound img{
-    padding:5px;
+.startscreenSound img {
+    padding: 5px;
     width: 30px;
     height: 30px;
 }
 
 
-.startscreenStart{
+.startscreenStart {
     position: absolute;
-    bottom:75px;
+    bottom: 75px;
     animation: btn-puls 1s ease-in-out infinite;
 }
 
@@ -97,8 +98,8 @@ canvas {
     width: 70px;
 }
 
-.startScreenFullscreen:hover ,
-.startscreenSound:hover ,
+.startScreenFullscreen:hover,
+.startscreenSound:hover,
 .startscreenStart:hover {
     transform: scale(1.1);
     transition: 250ms ease-in-out;
@@ -106,32 +107,32 @@ canvas {
 }
 
 
-.winScreen{
+.winScreen {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.4);
     width: 100%;
     height: 100%;
 }
 
-.imageWin{
+.imageWin {
     position: absolute;
     left: 265px;
     top: 115px;
-   
+
 }
 
-.winScreenRestart{
+.winScreenRestart {
     position: absolute;
-    bottom:83px;
+    bottom: 83px;
     left: 423px;
     width: 170px;
 }
 
-.winScreenRestart:hover{
+.winScreenRestart:hover {
     cursor: pointer;
 }
 
-.victoryLine{
+.victoryLine {
     font-family: 'Courier New', Courier, monospace !important;
     font-weight: bold;
     font-size: 40px;
@@ -141,42 +142,42 @@ canvas {
     color: rgb(0, 56, 238);
 }
 
-.restartLineWin{
+.restartLineWin {
     font-family: 'Courier New', Courier, monospace !important;
     font-weight: bold;
     font-size: 30px;
     position: absolute;
-    bottom:65px;
+    bottom: 65px;
     left: 439px;
     color: rgb(0, 56, 238);
 }
 
-.restartLineWin:hover{
+.restartLineWin:hover {
     cursor: pointer;
 }
 
-.defeatScreen{
+.defeatScreen {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.4);
     width: 100%;
     height: 100%;
- 
+
 }
 
-.imageDefeat{
+.imageDefeat {
     position: absolute;
     left: 430px;
     top: 120px;
     width: 135px;
 }
 
-.imageDefeatPaperForDefeatText{
+.imageDefeatPaperForDefeatText {
     position: absolute;
     top: 310px;
-    left:400px
+    left: 400px
 }
 
-.defeatLine{
+.defeatLine {
     font-family: 'Courier New', Courier, monospace !important;
     font-weight: bold;
     font-size: 40px;
@@ -186,37 +187,37 @@ canvas {
     color: rgb(0, 56, 238);
 }
 
-.restartLineDefeat{
+.restartLineDefeat {
     font-family: 'Courier New', Courier, monospace !important;
     font-weight: bold;
     font-size: 30px;
     position: absolute;
-    bottom:65px;
+    bottom: 65px;
     left: 439px;
     color: rgb(0, 56, 238);
 }
 
-.restartLineDefeat:hover{
+.restartLineDefeat:hover {
     cursor: pointer;
 }
 
 
-.defeatScreenRestart{
+.defeatScreenRestart {
     position: absolute;
     bottom: 88px;
     left: 423px;
     width: 170px;
 }
 
-.defeatScreenRestart:hover{
+.defeatScreenRestart:hover {
     cursor: pointer;
 }
 
 .d-none {
-    display: none;
+    display: none!important;
 }
 
-.howToPlayKeybindings{
+.howToPlayKeybindings {
     font-family: 'Courier New', Courier, monospace !important;
     font-weight: bold;
     display: flex;
@@ -225,13 +226,14 @@ canvas {
     color: white;
     background-color: rgba(0, 0, 0, 0.4);
     box-shadow: 0px 0px 6px 6px rgba(160, 10, 10, 0.7);
-    
+
 }
 
-.spaceKeybinding{
-    margin-left:20px;
+.spaceKeybinding {
+    margin-left: 20px;
 }
-.howToPlayKeybindings div{
+
+.howToPlayKeybindings div {
     padding: 10px 20px 10px 20px
 }
 
@@ -240,13 +242,52 @@ canvas {
 }
 
 
-@keyframes animate-button{
+.rotatePhone {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.rotatePhone span {
+    font-family: 'Courier New', Courier, monospace !important;
+    font-weight: bold;
+    color: white;
+}
+
+.rotatePhone img {
+    width: 200px;
+    animation: rotatePhone-animation 2s linear infinite;
+    filter: invert(100%) sepia(0%) saturate(7488%) hue-rotate(167deg) brightness(103%) contrast(106%);
+}
+
+@keyframes rotatePhone-animation{
+    0% {
+        transform: rotate(60deg);
+    }
+    50% {
+        transform: rotate(-60deg);
+    }
+    100% {
+        transform: rotate(60deg);
+    }
+}
+
+@keyframes animate-button {
     0% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.05);
     }
+
     100% {
         transform: scale(1);
     }
@@ -255,33 +296,33 @@ canvas {
 
 /*--Smartphone--*/
 
-.mobileHud{
+.mobileHud {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: absolute;
-    z-index: 10;
-    bottom: 10px;
+
+    bottom: -15px;
     width: 100%;
 }
 
-.leftRightButtons{
+.leftRightButtons {
     margin-left: 40px;
-    padding-right:20px;
-    
+    padding-right: 20px;
+
 }
 
-.btn-left{
+.btn-left {
 
     margin-right: 30px;
 }
 
-.actionButtons{
+.actionButtons {
     margin-right: 60px;
 }
 
 .actionButtons img {
-    padding-left:20px;
+    padding-left: 20px;
 }
 
 
@@ -325,19 +366,53 @@ canvas {
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-@media (max-width: 1024px){
-    .howToPlayKeybindings{
+@media (max-width: 1024px) {
+    .howToPlayKeybindings {
         width: 800px;
     }
 
-    .startImage{
+    .startImage {
         width: 800px;
         height: 500px;
     }
+
+    .title {
+        font-size: 40px;
+        top: 30px;
+    }
+
+    .startscreenStart {
+        bottom: 60px;
+    }
 }
 
-@media (max-width: 800px){
-    .howToPlayKeybindings{
+@media (max-width: 800px) {
+    .howToPlayKeybindings {
         display: none;
     }
+
+    .howToPlayKeybindings {
+        width: 650px;
+    }
+
+    .startImage {
+        width: 650px;
+        height: 450px;
+    }
+
+    .title {
+        font-size: 35px;
+        top: 25px;
+    }
+
+    .startscreenStart {
+        bottom: 35px;
+    }
+
+    @media(max-width:750px){
+        .leftRightButtons{
+            margin-left: 10px;
+        }
+    }
+
 }
