@@ -144,8 +144,18 @@ class WalkingDwarf extends MovableObjects {
                 level1.walkingEnemies[3].y -= this.speedY3;
                 this.speedY3 -= this.acceleration;
             }
-        }, 1000 / 25)
-
+        }, 1000 / 25);
+        
+        setInterval (() => {
+        
+            if(world && world.character.healthpoints == 0 || world.endbossHP == 0){
+                clearInterval(walk1);
+                clearInterval(walking1);
+                clearInterval(walk3);
+                clearInterval(walking3);
+             
+            }
+            });
     }
 
 }

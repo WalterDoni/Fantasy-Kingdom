@@ -30,15 +30,18 @@ function init() {
  * After pressing the button at the startscreen, the game will start. Or by pressing the restart button at the end of the Game.
  */
 function startGame() {
+    
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('startscreen').classList.add('d-none');
     document.getElementById('winScreen').classList.add('d-none');
     document.getElementById('defeatScreen').classList.add('d-none');
-    initLevel();
+    initLevel(); 
     init();
 }
 
-
+function restartGame(){
+    location.reload();
+}
 /**
  * After a win or lose conditions is reached, the game will stop, by clearing every interval in array "allIntervals".
  */

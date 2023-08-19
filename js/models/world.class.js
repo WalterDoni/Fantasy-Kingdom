@@ -43,7 +43,7 @@ class World {
         this.draw();
         this.run();
         this.collectCoinsOrManapotion();
-
+     
     }
     /**
      * Bind the character to the world, it's necessary e.g. for the camera_x 
@@ -60,7 +60,7 @@ class World {
      */
     run() {
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.checkCollisions();
             this.useAttacksFromCharacter();
             this.hitEnemy();
@@ -72,6 +72,7 @@ class World {
             this.hitEndboss();
             this.playSound();
             this.showWinOrDefeatScreen();
+           
 
         }, 150);
 
@@ -88,10 +89,11 @@ class World {
 
         } if (!titleMusic) {
             game_sound.pause();
-
-
+            game_sound.currentTime = 0;
         }
     }
+    
+
 
     /**
     * Show on off the two screens ( win- or losescreen), depends which conditions get reached at first.
@@ -102,6 +104,7 @@ class World {
             game_sound.pause();
             this.defeat_sound.volume = 0.5;
             this.defeat_sound.play();
+            game_sound.currentTime = 0;
             stopGame();
 
             setTimeout(() => {

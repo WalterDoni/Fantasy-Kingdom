@@ -133,6 +133,16 @@ class Goblin extends MovableObjects {
 
         }, 140)
       
+        
+        setInterval (() => {
+        
+        if(world && world.character.healthpoints == 0 || world.endbossHP == 0){
+            clearInterval(conditionsToMove);
+            clearInterval(startMoving);
+            clearInterval(startMoving1);
+            clearInterval(attacks);
+        }
+        });
 
     }
 

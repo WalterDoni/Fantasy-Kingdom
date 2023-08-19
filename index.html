@@ -81,7 +81,7 @@
             <img class="imageWin" src="img/9.Interface/VictoryAndDefeat/knight+tape.png" alt="">
             <img class="winScreenRestart" src="img/9.Interface/VictoryAndDefeat/button_yellow.png" alt="">
             <p class="victoryLine">VICTORY!</p>
-            <p onclick="startGame()" class="restartLineWin">Restart?</p>
+            <p onclick="restartGame()" class="restartLineWin">Restart?</p>
         </div>
 
         <div class="defeatScreen d-none" id="defeatScreen">
@@ -89,19 +89,19 @@
             <img class="imageDefeatPaperForDefeatText" src="img/9.Interface/VictoryAndDefeat/defeat.png" alt="">
             <img class="defeatScreenRestart" src="img/9.Interface/VictoryAndDefeat/button_yellow.png" alt="">
             <p class="defeatLine">DEFEAT!</p>
-            <p onclick="startGame()" class="restartLineDefeat">Restart?</p>
+            <p onclick="restartGame()" class="restartLineDefeat">Restart?</p>
         </div>
 
 
         <div class="mobileHud">
             <div class="leftRightButtons">
-                <span><img class="btn-left" id="btn-left" src="img/9.Interface/MobileButtons/left.png" alt=""></span>
-                <img class="btn-right" id="btn-right" src="img/9.Interface/MobileButtons/right.png" alt="">
+                <span id="btn-left"><img class="btn-left" src="img/9.Interface/MobileButtons/left.png" alt=""></span>
+                <span id="btn-right"><img class="btn-right" src="img/9.Interface/MobileButtons/right.png" alt=""></span>
             </div>
             <div class="actionButtons">
-                <img class="btn-up" id="btn-up" src="img/9.Interface/MobileButtons/up.png" alt="">
-                <img class="btn-attack" id="btn-attack" src="img/9.Interface/MobileButtons/attack.png" alt="">
-                <img class="btn-magic" id="btn-magic" src="img/9.Interface/MobileButtons/magic.png" alt="">
+                <span id="btn-up"><img class="btn-up" src="img/9.Interface/MobileButtons/up.png" alt=""></span>
+                <span id="btn-attack"><img class="btn-attack" src="img/9.Interface/MobileButtons/attack.png" alt=""></span>
+                <span id="btn-magic"><img class="btn-magic" src="img/9.Interface/MobileButtons/magic.png" alt=""></span>
             </div>
         </div>
         <canvas class="d-none" id="canvas" width="1024" height="576"></canvas>

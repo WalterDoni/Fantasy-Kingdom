@@ -77,6 +77,9 @@ class Endboss extends MovableObjects {
                 clearInterval(rightWalkInArea);
                 clearInterval(lefttWalkInArea);
                 clearInterval(walkInArea);
+                clearInterval(bossIdle);
+                clearInterval(walkInArea);
+                clearInterval(walkInArea);
                 this.loadImage(this.DEAD_IMAGE);
                 
 

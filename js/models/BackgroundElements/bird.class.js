@@ -29,11 +29,11 @@ class Bird extends MovableObjects {
     };
 
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
 
             this.x -= this.speed;
         }, 1000 / 60); // 60 FPS
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.playAnimation(this.IMAGES)
         }, 180);
     }

@@ -197,7 +197,17 @@ class WalkingGoblin extends MovableObjects {
             }
         }, 1000 / 25)
 
-
+        setInterval (() => {
+        
+            if(world && world.character.healthpoints == 0 || world.endbossHP == 0){
+                clearInterval(walk0);
+                clearInterval(walking0);
+                clearInterval(walk2);
+                clearInterval(walking2);
+                clearInterval(walk4);
+                clearInterval(walking4);
+            }
+            });
     }
 
 
