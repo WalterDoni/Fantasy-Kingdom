@@ -55,23 +55,14 @@ class Character extends MovableObjects {
 
     ]
 
-    EXTRA_ATTACK = [
+    IMAGE_ATTACK = [
         'img/1.PlayableChars/Knight/Attack/attack1.png',
         'img/1.PlayableChars/Knight/Attack/attack2.png',
         'img/1.PlayableChars/Knight/Attack/attack3.png',
         'img/1.PlayableChars/Knight/Attack/attack4.png',
     ]
 
-    IMAGE_ATTACK = [
-        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra1.png',
-        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra2.png',
-        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra3.png',
-        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra4.png',
-        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra5.png',
-        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra6.png',
-        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra7.png',
-        'img/1.PlayableChars/Knight/Extra_Attack/attack_extra8.png',
-    ]
+
 
     IDLE_IMAGE = [
         'img/1.PlayableChars/Knight/Idle/idle1.png',
@@ -101,7 +92,6 @@ class Character extends MovableObjects {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.DEAD_IMAGES);
         this.loadImages(this.HURT_IMAGES);
-        this.loadImages(this.EXTRA_ATTACK);
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.IDLE_IMAGE);
         this.applyGravity();
@@ -176,7 +166,7 @@ class Character extends MovableObjects {
 
         if (this.timerToStopAnimations <= 100 && !this.attackInterval) {
             this.attackInterval = setInterval(() => {
-                this.playAnimation(this.EXTRA_ATTACK);
+                this.playAnimation(this.IMAGE_ATTACK);
                 this.timerToStopAnimations += 28;
 
                 if (this.timerToStopAnimations > 100) {
@@ -200,7 +190,7 @@ class Character extends MovableObjects {
         if (this.timerToStopAnimations <= 100 && !this.attackInterval) {
             this.attackInterval = setInterval(() => {
                 this.playAnimation(this.IMAGE_ATTACK);
-                this.timerToStopAnimations += 13;
+                this.timerToStopAnimations += 28;
 
                 if (this.timerToStopAnimations > 100) {
                     clearInterval(this.attackInterval);
@@ -209,7 +199,7 @@ class Character extends MovableObjects {
                     this.currentImage = 0;
                     this.loadImage('img/1.PlayableChars/Knight/knight.png')
                 }
-            }, 110);
+            }, 140);
         }
     }
 

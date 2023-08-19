@@ -43,7 +43,7 @@ class World {
         this.draw();
         this.run();
         this.collectCoinsOrManapotion();
-     
+
     }
     /**
      * Bind the character to the world, it's necessary e.g. for the camera_x 
@@ -72,7 +72,7 @@ class World {
             this.hitEndboss();
             this.playSound();
             this.showWinOrDefeatScreen();
-           
+
 
         }, 150);
 
@@ -92,7 +92,7 @@ class World {
             game_sound.currentTime = 0;
         }
     }
-    
+
 
 
     /**
@@ -284,7 +284,7 @@ class World {
                     // Führe den Code aus, nachdem 1,2 Sekunden vergangen sind
                     this.throwableObjects.splice(fireball, 1);
                 }
-            }, 1200); 
+            }, 1200);
         }
 
         if (this.keyboard.F_KEYBOARD) {

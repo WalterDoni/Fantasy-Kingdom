@@ -126,7 +126,7 @@ class Goblin extends MovableObjects {
 
 
         let attacks = setInterval(() => {
-            if (world && this.x - world.character.x <= 120 && this.y - world.character.y <= 80) {
+            if (world && this.x - world.character.x <= 120 && this.y - world.character.y <= 80 && this.x > world.character.x) {
                 this.playAnimation(this.IMAGE_ATTACK);
 
             }

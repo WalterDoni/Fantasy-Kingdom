@@ -148,7 +148,7 @@ class WalkingDwarf extends MovableObjects {
         
         setInterval (() => {
         
-            if(world && world.character.healthpoints == 0 || world.endbossHP == 0){
+            if(world && world.character.healthpoints == 0 || world.endboss.isDead()){
                 clearInterval(walk1);
                 clearInterval(walking1);
                 clearInterval(walk3);

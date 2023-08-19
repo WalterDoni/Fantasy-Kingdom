@@ -121,7 +121,7 @@ speed = 1
 
 
         let attacks = setInterval(() => {
-            if (world && this.x - world.character.x <= 120 && this.y - world.character.y <= 30) {
+            if (world && this.x - world.character.x <= 120 && this.y - world.character.y <= 30 && this.x > world.character.x) {
                 this.playAnimation(this.IMAGE_ATTACK);
 
             }
