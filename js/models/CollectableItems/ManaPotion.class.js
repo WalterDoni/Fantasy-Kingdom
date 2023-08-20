@@ -20,7 +20,8 @@ class ManaCrystal extends MovableObjects {
 
 
     ]
-
+   
+  
     constructor(x, y) {
         super().loadImage('img/5.CollectableItems/crystal.png');
         this.x = x;

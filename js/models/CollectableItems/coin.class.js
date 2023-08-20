@@ -5,10 +5,10 @@ class Coin extends MovableObjects {
     speed = 0;
 
     moreAccurateCollision = {
-        top: 0,
-        right: 0,
+        top: 10,
+        right: 15,
         bottom: -10,
-        left: 0,
+        left: 15,
     }
     IMAGES = [
 

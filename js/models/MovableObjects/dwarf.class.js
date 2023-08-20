@@ -39,9 +39,9 @@ speed = 1
     ]
     
     moreAccurateCollision = {
-        top: 10,
+        top: 15,
         right: 85,
-        bottom: 20,
+        bottom: 120,
         left: 60,
      }
 

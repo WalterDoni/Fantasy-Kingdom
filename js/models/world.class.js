@@ -13,7 +13,7 @@ class World {
     defeat_sound = new Audio('audio/defeat.mp3');
     victory_sound = new Audio('audio/victory.mp3')
 
-    titleMusic;
+    playMusic;
 
     //--Character--//
     character = new Character();
@@ -80,14 +80,15 @@ class World {
 
 
     /**
-      * @param {object} titleMusic -> If the variable is set on true, music will play, otherwise it will stop. This function can be activated by the button on top of the canvas.
+      * @param {object} playMusic -> If the variable is set on true, music will play, otherwise it will stop. This function can be activated by the button on top of the canvas.
      */
     playSound() {
-        if (titleMusic) {
+        if (playMusic) {
             game_sound.volume = 0.1;
             game_sound.play();
+          
 
-        } if (!titleMusic) {
+        } if (!playMusic) {
             game_sound.pause();
             game_sound.currentTime = 0;
         }
@@ -135,7 +136,7 @@ class World {
                 if (this.character.x - collectable.x >= 1 && this.character.x - collectable.x <= 15 && this.character.y + this.character.height - collectable.y >= 0 && this.character.y - collectable.y <= 10) {
                     this.level.collectables.splice(collectable, 1);
                     this.coinCounter.updateCoinCounter();
-                    this.coinCounter.renderCoinCounter();
+                    this.coinCounter.renderCoinCounter(this.ctx);
                 }
             })
 

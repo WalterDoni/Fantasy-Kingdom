@@ -44,9 +44,9 @@ class Goblin extends MovableObjects {
     ]
 
     moreAccurateCollision = {
-        top: 20,
+        top: 25,
         right: 70,
-        bottom: 20,
+        bottom: 120,
         left: 40,
     }
 

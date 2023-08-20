@@ -4,7 +4,7 @@ let world;
 let keyboard = new Keyboard();
 let allIntervals = [];
 let game_sound = new Audio('audio/Titlemusic.mp3');
-let titleMusic = true;
+let playMusic = true;
 
 /**
  * 
@@ -51,15 +51,15 @@ function stopGame() {
 
 
 /**
-  * @param {object} titleMusic -> If the variable is set on true, music will play, otherwise it will stop. This function can be activated by the button on top of the canvas.
+  * @param {object} playMusic -> If the variable is set on true, music will play, otherwise it will stop. This function can be activated by the button on top of the canvas.
  */
 function pauseMusic() {
-    if (titleMusic) {
-        titleMusic = false;
+    if (playMusic) {
+        playMusic = false;
         document.getElementById('musicButton').innerHTML = `<img
     src="img/9.Interface/Startscreen/soundOff.png">`;
     } else {
-        titleMusic = true;
+        playMusic = true;
         document.getElementById('musicButton').innerHTML = `<img
     src="img/9.Interface/Startscreen/soundOn.png">`;
 
@@ -147,8 +147,8 @@ window.addEventListener("keydown", (event) => {
         keyboard.LEFT = true;
     }
 
-    if (key === " ") {
-        keyboard.SPACE = true;
+    if (key === "ArrowUp" || key === "w" || key === "W") {
+        keyboard.UP = true;
     }
 
     if (key === "t" || key === "T") {
@@ -173,8 +173,8 @@ window.addEventListener("keyup", (event) => {
         keyboard.LEFT = false;
     }
 
-    if (key === " ") {
-        keyboard.SPACE = false;
+    if (key === "ArrowUp" || key === "w" || key === "W") {
+        keyboard.UP = false;
     }
     if (key === "t" || key === "T") {
         keyboard.T_KEYBOARD = false;
@@ -205,11 +205,11 @@ function loadMobileControlEvents() {
     });
     document.getElementById('btn-up').addEventListener('touchstart', (e) => {
         e.preventDefault();
-        keyboard.SPACE = true;
+        keyboard.UP = true;
     });
     document.getElementById('btn-up').addEventListener('touchend', (e) => {
         e.preventDefault();
-        keyboard.SPACE = false;
+        keyboard.UP = false;
     });
     document.getElementById('btn-attack').addEventListener('touchstart', (e) => {
         e.preventDefault();

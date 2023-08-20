@@ -105,7 +105,7 @@ class Character extends MovableObjects {
     animate() {
 
         setStoppableInterval(() => {
-            //this.walking_sound.pause()
+            
 
             // Charakter bewegt sich nach rechts oder links
             if (this.conditionsToWalkRight()) {
@@ -123,7 +123,7 @@ class Character extends MovableObjects {
                 
             }
             // Charakter springt, setzt speedY auf 20 um dann nach und nach abzufallen (acceleration)
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            if (this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
                 this.handleTheIdleTimer();
                
