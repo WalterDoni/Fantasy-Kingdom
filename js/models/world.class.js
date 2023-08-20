@@ -86,11 +86,13 @@ class World {
         if (playMusic) {
             game_sound.volume = 0.1;
             game_sound.play();
+            this.character.unmuteCharacterSounds();
           
 
         } if (!playMusic) {
             game_sound.pause();
             game_sound.currentTime = 0;
+            this.character.muteCharacterSounds();
         }
     }
 

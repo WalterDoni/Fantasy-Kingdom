@@ -4,6 +4,13 @@ class Character extends MovableObjects {
     speed = 5;
 
     walking_sound = new Audio('audio/Walking.mp3');
+    hurt_sound = new Audio('audio/hurt.mp3');
+    jump_sound = new Audio('audio/jump.mp3');
+    normalAttack_sound = new Audio('audio/swordAttack.mp3');
+    specialAttack_sound = new Audio('audio/fireball.mp3');
+
+
+
     timeWithoutDoingSomething = 0;
 
     animation = false;
@@ -105,35 +112,36 @@ class Character extends MovableObjects {
     animate() {
 
         setStoppableInterval(() => {
-            
+
 
             // Charakter bewegt sich nach rechts oder links
             if (this.conditionsToWalkRight()) {
                 this.moveRight();
                 this.handleTheIdleTimer();
-                this.walking_sound.volume = 0.2;
-                this.walking_sound.play()
+                this.walking_sound.volume = 0.5;
+                this.walking_sound.play();
             }
 
             if (this.conditionsToWalkLeft()) {
                 this.moveLeft();
                 this.handleTheIdleTimer();
-                this.walking_sound.volume = 0.2;
+                this.walking_sound.volume = 0.5;
                 this.walking_sound.play();
-                
             }
+
             // Charakter springt, setzt speedY auf 20 um dann nach und nach abzufallen (acceleration)
             if (this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
                 this.handleTheIdleTimer();
-               
             }
 
             if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT) {
                 this.timeWithoutDoingSomething += 20;
 
             }
+
             this.world.camera_x = -this.x + 100; // +100 versetzt die Kamera, somit klebt der Charakter nicht so sehr am linken Rand
+
 
         }, 1000 / 60);
 
@@ -149,9 +157,12 @@ class Character extends MovableObjects {
                 this.playAnimation(this.DEAD_IMAGES);
             } else if (this.isHurt()) {
                 this.playAnimation(this.HURT_IMAGES);
+                this.hurt_sound.play();
             }
             else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
+                this.jump_sound.volume = 0.1;
+                this.jump_sound.play();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.WALKING_IMAGES)
             }
@@ -167,6 +178,8 @@ class Character extends MovableObjects {
         if (this.timerToStopAnimations <= 100 && !this.attackInterval) {
             this.attackInterval = setInterval(() => {
                 this.playAnimation(this.IMAGE_ATTACK);
+                this.specialAttack_sound.volume = 0.1;
+                this.specialAttack_sound.play();
                 this.timerToStopAnimations += 28;
 
                 if (this.timerToStopAnimations > 100) {
@@ -175,7 +188,7 @@ class Character extends MovableObjects {
                     this.timerToStopAnimations = 0;
                     this.currentImage = 0;
                     this.loadImage('img/1.PlayableChars/Knight/knight.png');
-                    
+
 
                 }
             }, 140);
@@ -190,6 +203,7 @@ class Character extends MovableObjects {
         if (this.timerToStopAnimations <= 100 && !this.attackInterval) {
             this.attackInterval = setInterval(() => {
                 this.playAnimation(this.IMAGE_ATTACK);
+                this.normalAttack_sound.play();
                 this.timerToStopAnimations += 28;
 
                 if (this.timerToStopAnimations > 100) {
@@ -203,7 +217,25 @@ class Character extends MovableObjects {
         }
     }
 
-    
+
+    muteCharacterSounds() {
+
+        this.walking_sound.muted = true;
+        this.hurt_sound.muted = true;
+        this.jump_sound.muted = true;
+        this.normalAttack_sound.muted = true;
+        this.specialAttack_sound.muted = true;
+    }
+
+    unmuteCharacterSounds() {
+
+        this.walking_sound.muted = false;
+        this.hurt_sound.muted = false;
+        this.jump_sound.muted = false;
+        this.normalAttack_sound.muted = false;
+        this.specialAttack_sound.muted = false;
+
+    }
 
 
     IdleWhileDoNothing() {
