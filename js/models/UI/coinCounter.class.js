@@ -8,7 +8,9 @@ class CoinCounter extends DrawableObjects {
 
     }
 
-
+   /**
+    * after a coin is collected, redraw the number on the canvas
+    */
     renderCoinCounter(ctx) {
         ctx.font = "24px Arial";
         ctx.fillStyle = "black";

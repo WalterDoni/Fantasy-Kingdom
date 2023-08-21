@@ -22,7 +22,9 @@ class Manabar extends DrawableObjects {
     ctx.strokeRect(this.x, this.y, this.maxWidth, this.height);
   }
   
-
+  /**
+  * Update when conditions are reached(use fireAttack)
+  */
   updateManapointsMinus() {
 
     if (this.manabarMax >= 1) {
@@ -31,7 +33,9 @@ class Manabar extends DrawableObjects {
     }
   }
   
-
+  /**
+  * Update when conditions are reached(collect Manapotion)
+  */
   updateManapointsPlus(){
 
     if(this.manabarMax < 200){

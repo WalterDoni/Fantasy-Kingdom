@@ -80,14 +80,14 @@ class World {
 
 
     /**
-      * @param {object} playMusic -> If the variable is set on true, music will play, otherwise it will stop. This function can be activated by the button on top of the canvas.
+      * @param {variable} playMusic -> If the variable is set on true, music will play, otherwise it will stop. This function can be activated by the button on top of the canvas.
      */
     playSound() {
         if (playMusic) {
             game_sound.volume = 0.1;
             game_sound.play();
             this.character.unmuteCharacterSounds();
-          
+
 
         } if (!playMusic) {
             game_sound.pause();
@@ -197,17 +197,6 @@ class World {
             });
         });
 
-        this.level.endboss.forEach((boss) => {
-            if (boss.isDead()) { return }
-            this.throwableObjects.forEach((fireball) => {
-                if (fireball.isColliding(boss)) {
-                    this.damageTheHittedEnemy(boss);
-                    this.throwableObjects.splice(fireball, 1);
-
-
-                }
-            });
-        });
     }
 
 
@@ -315,16 +304,22 @@ class World {
         this.level.endboss.forEach((boss) => {
 
             if (this.character.isColliding(boss) && this.character.isAboveGround() && this.character.speedY < 0) {
-
                 this.damageTheEndboss(boss);
                 this.endbossHP.updateHealthpoints();
                 this.character.jump();
 
             } if (this.character.isCollidingWhileSwordAttack(boss) && this.keyboard.F_KEYBOARD) {
-
                 this.damageTheEndboss(boss);
                 this.endbossHP.updateHealthpoints();
             }
+            this.throwableObjects.forEach((fireball) => {
+                if (fireball.isColliding(boss)) {
+                    this.damageTheEndboss(boss);
+                    this.throwableObjects.splice(fireball, 1);
+                    this.endbossHP.updateHealthpoints();
+                }
+            });
+
         });
     }
 

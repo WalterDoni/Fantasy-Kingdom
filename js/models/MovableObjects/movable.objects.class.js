@@ -6,7 +6,7 @@ class MovableObjects extends DrawableObjects {
    speedY = 0;
    acceleration = 2.5;
    lastHit = 0;
-   groundPosition = 370;
+ 
 
    walkRightInArea = false;
    walkLeftInArea = false;
@@ -92,14 +92,14 @@ class MovableObjects extends DrawableObjects {
          else if (this.x >= 2750 && this.x <= 3350) {
             this.y = 70;
          }
-         else if (this.x >= 3360 && this.x <= 3705) {
+         else if (this.x >= 3350 && this.x <= 3705) {
             this.y = 170;
          }
          else if (this.x >= 3710 && this.x <= 3900) {
             this.y = 270;
          }
          else {
-            this.y = this.groundPosition;
+            this.y = 370 ;
          }
       }, 1000 / 25)
    }
@@ -113,7 +113,7 @@ class MovableObjects extends DrawableObjects {
          return this.y < 140;
       } if (this.world.character.x >= 2750 && this.world.character.x <= 3350) {
          return this.y < 70;
-      } if (this.world.character.x >= 3360 && this.world.character.x <= 3705) {
+      } if (this.world.character.x >= 3355 && this.world.character.x <= 3705) {
          return this.y < 170;
       } if (this.world.character.x >= 3710 && this.world.character.x <= 3900) {
          return this.y < 270;

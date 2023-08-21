@@ -16,6 +16,9 @@ class Healthbar extends DrawableObjects {
 
   }
 
+  /**
+  * Draw the healthbar from the character on the canvas and give some style,color and width
+  */
   renderStatusbars(ctx) {
     ctx.lineWidth = 2;
     ctx.strokeStyle = '#333';
@@ -24,7 +27,9 @@ class Healthbar extends DrawableObjects {
     ctx.strokeRect(this.x, this.y, this.maxWidth, this.height);
   }
 
-
+  /**
+  * Update when conditions are reached ( character get a hit)
+  */
   updateHealthpoints() {
 
     if (this.healthbarMax >= 1) {
