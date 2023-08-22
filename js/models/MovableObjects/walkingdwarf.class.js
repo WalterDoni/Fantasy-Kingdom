@@ -104,7 +104,7 @@ class WalkingDwarf extends MovableObjects {
   
 
        //--Enemie3--//
- //--Enemie1--//
+
         let walk3 = setInterval(() => {
             if (world && level1.walkingEnemies[3].x <= 3400|| this.walkRightInArea1) {
                 level1.walkingEnemies[3].moveRight();

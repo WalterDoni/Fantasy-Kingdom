@@ -2,6 +2,13 @@ class Endboss extends MovableObjects {
     height = 395;
     width = 350;
     speed = 3;
+    Idle = null;
+    conditionsToMove = null;
+    startMoving = null;
+    startMovingAnimation = null;
+    walkInArea = null;
+    lefttWalkInArea = null;
+    rightWalkInArea = null;
 
 
     WALKING_IMAGES = [
@@ -37,7 +44,7 @@ class Endboss extends MovableObjects {
         'img/3.Enemies/Boss/Idle/Idle3.png',
     ]
     DEAD_IMAGE = [
-        
+
         'img/3.Enemies/Boss/Death/Death5.png',
 
     ]
@@ -72,67 +79,68 @@ class Endboss extends MovableObjects {
 
 
     animate() {
-        setInterval(() => {
-            if (this.isDead()) {
-                clearInterval(rightWalkInArea);
-                clearInterval(lefttWalkInArea);
-                clearInterval(walkInArea);
-                clearInterval(bossIdle);
-                clearInterval(triggerMovement);
-                clearInterval(triggerMovement1);
-                this.loadImage(this.DEAD_IMAGE);
-                
 
-            } else if (this.isColliding(world.character)) {
-                this.playAnimation(this.HURT_IMAGES);
+        this.idleAnimation();
+        this.hurtOrDead();
+        this.conditionToMove();
+        this.movements();
+        this.walkInArena();
 
-            }
+    }
 
-        }, 120);
+    conditionToMove() {
 
-        //---Before first contact with Boss--//
-        let bossIdle = setInterval(() => {
-            this.turnArround = true;
-            this.playAnimation(this.IDLE_IMAGES)
-        }, 230);
-
-
-
-        let triggerMovement = setInterval(() => {
+        this.conditionsToMove = setInterval(() => {
             if (world && world.character.x > 4200 || this.firstContact) {
-                this.moveLeft();
+                clearInterval(this.Idle);
                 this.firstContact = true;
             }
         }, 1000 / 40);
 
-        let triggerMovement1 = setInterval(() => {
+    }
+
+    idleAnimation() {
+
+        this.Idle = setInterval(() => {
+            this.turnArround = true;
+            this.playAnimation(this.IDLE_IMAGES)
+        }, 230);
+
+    }
+
+    movements() {
+
+        this.startMoving = setInterval(() => {
+            if (world && world.character.x > 4200 || this.firstContact) {
+                this.moveLeft();
+            }
+        }, 1000 / 40);
+
+        this.startMovingAnimation = setInterval(() => {
             if (world && world.character.x > 4200 || this.firstContact) {
                 this.playAnimation(this.WALKING_IMAGES)
-                clearInterval(bossIdle);
-                this.firstContact = true;
             }
         }, 180);
+    }
 
+    walkInArena() {
 
-
-        //---After first contact with Boss--//
-
-        let rightWalkInArea = setInterval(() => {
+        this.rightWalkInArea = setInterval(() => {
             if (this.x <= 4000 || this.walkRightInArea) {
-                clearInterval(triggerMovement);
-                clearInterval(triggerMovement1);
+                clearInterval(this.startMoving);
+                clearInterval(this.startMovingAnimation);
                 this.moveRight();
                 this.walkRightInArea = true;
                 this.walkLeftInArea = false;
             }
         }, 1000 / 60);
 
-        let walkInArea = setInterval(() => {
+        this.walkInArea = setInterval(() => {
             if (this.walkLeftInArea || this.walkRightInArea)
                 this.playAnimation(this.WALKING_IMAGES);
         }, 180);
 
-        let lefttWalkInArea = setInterval(() => {
+        this.lefttWalkInArea = setInterval(() => {
             if (this.x >= 5050 || this.walkLeftInArea) {
                 this.moveLeft();
                 this.walkRightInArea = false;
@@ -140,12 +148,25 @@ class Endboss extends MovableObjects {
 
             }
         }, 1000 / 60);
-
-
-
-
     }
 
+    hurtOrDead() {
+        setInterval(() => {
+            if (world.endbossHP.healthpoints == 0) {
+                clearInterval(this.Idle);
+                clearInterval(this.conditionsToMove);
+                clearInterval(this.startMoving);
+                clearInterval(this.startMovingAnimation);
+                clearInterval(this.walkInArea);
+                clearInterval(this.lefttWalkInArea);
+                clearInterval(this.rightWalkInArea);
+                this.loadImage(this.DEAD_IMAGE);
 
+            } else if (this.isColliding(world.character)) {
+                this.playAnimation(this.HURT_IMAGES);
+
+            }
+        }, 120);
+    }
 
 }

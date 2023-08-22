@@ -72,8 +72,6 @@ class World {
             this.hitEndboss();
             this.playSound();
             this.showWinOrDefeatScreen();
-
-
         }, 150);
 
     }
@@ -103,11 +101,7 @@ class World {
     */
     showWinOrDefeatScreen() {
         if (this.character.healthpoints == 0 && this.endbossHP.healthpoints > 0) {
-            document.getElementById('defeatScreen').classList.remove('d-none');
-            game_sound.pause();
-            this.defeat_sound.volume = 0.5;
-            this.defeat_sound.play();
-            game_sound.currentTime = 0;
+            this.defeatScreen();
             stopGame();
 
             setTimeout(() => {
@@ -116,10 +110,7 @@ class World {
         }
 
         if (this.character.healthpoints > 0 && this.endbossHP.healthpoints == 0) {
-            document.getElementById('winScreen').classList.remove('d-none');
-            game_sound.pause();
-            this.victory_sound.volume = 0.1;
-            this.victory_sound.play();
+            this.winScreen();
             stopGame();
             setTimeout(() => {
                 this.victory_sound.pause();
@@ -127,6 +118,20 @@ class World {
         }
     }
 
+    defeatScreen() {
+        document.getElementById('defeatScreen').classList.remove('d-none');
+        game_sound.pause();
+        this.defeat_sound.volume = 0.5;
+        this.defeat_sound.play();
+        game_sound.currentTime = 0;
+    }
+
+    winScreen() {
+        document.getElementById('winScreen').classList.remove('d-none');
+        game_sound.pause();
+        this.victory_sound.volume = 0.1;
+        this.victory_sound.play();
+    }
     /**
     * @param {object} collectables -> If one of these collides with the character, add +1 to the coin-counter.
     * * @param {object} manapotions -> If one of these collides with the character, fill 50% of the manabar.
@@ -134,25 +139,23 @@ class World {
     collectCoinsOrManapotion() {
 
         setInterval(() => {
-            this.level.collectables.forEach((collectable) => {
+            this.level.collectables.forEach((collectable, index) => {
                 if (this.character.x - collectable.x >= 1 && this.character.x - collectable.x <= 15 && this.character.y + this.character.height - collectable.y >= 0 && this.character.y - collectable.y <= 10) {
-                    this.level.collectables.splice(collectable, 1);
+                    this.level.collectables.splice(index, 1);
                     this.coinCounter.updateCoinCounter();
                     this.coinCounter.renderCoinCounter(this.ctx);
                 }
             })
 
-            this.level.manapotions.forEach((potion) => {
-
+            this.level.manapotions.forEach((potion, index) => {
                 if (this.manabar.manabarMax < 200) {
                     if (this.character.x - potion.x >= 1 && this.character.x - potion.x <= 15 && this.character.y + this.character.height - potion.y >= 0 && this.character.y - potion.y <= 10) {
-                        this.level.manapotions.splice(potion, 1);
+                        this.level.manapotions.splice(index, 1);
                         this.manabar.updateManapointsPlus();
                     }
                 }
             })
         }, 1000 / 60);
-
     }
 
     /**
@@ -173,32 +176,34 @@ class World {
 
 
     checkIfThrowableObjectHitsEnemie() {
+        this.throwOnEnemie();
+        this.throwOnWalkingEnemie();
+
+    }
+
+    throwOnEnemie() {
         this.level.enemies.forEach((enemy) => {
             if (enemy.isDead()) { return }
             this.throwableObjects.forEach((fireball) => {
                 if (fireball.isColliding(enemy)) {
                     this.damageTheHittedEnemy(enemy);
                     this.throwableObjects.splice(fireball, 1);
-
-
                 }
             });
         });
+    }
 
+    throwOnWalkingEnemie() {
         this.level.walkingEnemies.forEach((enemy) => {
             if (enemy.isDead()) { return }
             this.throwableObjects.forEach((fireball) => {
                 if (fireball.isColliding(enemy)) {
                     this.damageTheHittedEnemy(enemy);
                     this.throwableObjects.splice(fireball, 1);
-
-
                 }
             });
         });
-
     }
-
 
     hitEnemy() {
         this.level.enemies.forEach((enemy) => {
@@ -304,25 +309,25 @@ class World {
         this.level.endboss.forEach((boss) => {
 
             if (this.character.isColliding(boss) && this.character.isAboveGround() && this.character.speedY < 0) {
-                this.damageTheEndboss(boss);
-                this.endbossHP.updateHealthpoints();
+                this.bossHit(boss);
                 this.character.jump();
 
             } if (this.character.isCollidingWhileSwordAttack(boss) && this.keyboard.F_KEYBOARD) {
-                this.damageTheEndboss(boss);
-                this.endbossHP.updateHealthpoints();
+                this.bossHit(boss);
             }
             this.throwableObjects.forEach((fireball) => {
                 if (fireball.isColliding(boss)) {
-                    this.damageTheEndboss(boss);
+                    this.bossHit(boss);
                     this.throwableObjects.splice(fireball, 1);
-                    this.endbossHP.updateHealthpoints();
                 }
             });
-
         });
     }
 
+    bossHit(boss) {
+        this.damageTheEndboss(boss);
+        this.endbossHP.updateHealthpoints();
+    }
     damageTheEndboss(boss) {
         boss.healthpoints -= 20;
         if (boss.healthpoints < 0) {

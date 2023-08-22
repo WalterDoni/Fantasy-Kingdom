@@ -92,7 +92,7 @@ class MovableObjects extends DrawableObjects {
          else if (this.x >= 2750 && this.x <= 3350) {
             this.y = 70;
          }
-         else if (this.x >= 3350 && this.x <= 3705) {
+         else if (this.x >= 3345 && this.x <= 3705) {
             this.y = 170;
          }
          else if (this.x >= 3710 && this.x <= 3900) {
@@ -113,7 +113,7 @@ class MovableObjects extends DrawableObjects {
          return this.y < 140;
       } if (this.world.character.x >= 2750 && this.world.character.x <= 3350) {
          return this.y < 70;
-      } if (this.world.character.x >= 3355 && this.world.character.x <= 3705) {
+      } if (this.world.character.x >= 3345 && this.world.character.x <= 3705) {
          return this.y < 170;
       } if (this.world.character.x >= 3710 && this.world.character.x <= 3900) {
          return this.y < 270;

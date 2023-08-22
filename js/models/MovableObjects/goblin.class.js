@@ -1,7 +1,10 @@
 class Goblin extends MovableObjects {
     speed = 0.2;
-
-
+    Idle = null;
+    conditionsToMove = null;
+    startMoving = null;
+    startMovingAnimation = null;
+    attacksInterval = null;
 
     WALKING_IMAGES = [
 
@@ -60,23 +63,85 @@ class Goblin extends MovableObjects {
         this.loadImages(this.DEAD_IMAGE);
         this.loadImages(this.IDLE_IMAGES);
         this.animate();
+        this.stopAnimations();
+
     }
 
     animate() {
-        //--Before contact--//
-        let Idle = setInterval(() => {
+
+        this.idleAnimation();
+        this.hurtOrDead();
+        this.conditionToMove();
+        this.movements();
+        this.attackAnimation();
+    }
+
+    idleAnimation() {
+
+        this.Idle = setInterval(() => {
             this.turnArround = true;
             this.playAnimation(this.IDLE_IMAGES);
         }, 230);
+    }
 
-        //--After contact--//
+    conditionToMove() {
+
+        this.conditionsToMove = setInterval(() => {
+            if (world && level1.enemies[1].x - world.character.x <= 500 || this.firstContact) {
+                clearInterval(this.Idle);
+                this.firstContact = true;
+            }
+        }, 1000 / 60);
+
+    }
+
+    movements() {
+
+        this.startMoving = setInterval(() => {
+            if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 30) {
+                this.moveLeft();
+            }
+        }, 1000 / 60);
+
+
+        this.startMovingAnimation = setInterval(() => {
+            if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 30) {
+                this.playAnimation(this.WALKING_IMAGES);
+                this.moveLeft();
+            }
+        }, 180);
+    }
+
+    attackAnimation() {
+
+        this.attacks = setInterval(() => {
+            if (world && this.x - world.character.x <= 120 && this.y - world.character.y <= 80 && this.x > world.character.x) {
+                this.playAnimation(this.IMAGE_ATTACK);
+            }
+        }, 140)
+    }
+
+    stopAnimations() {
+
+        setInterval(() => {
+
+            if (world && world.character.healthpoints == 0 || world.endbossHP == 0) {
+                clearInterval(this.conditionsToMove);
+                clearInterval(this.startMoving);
+                clearInterval(this.startMovingAnimation);
+                clearInterval(this.attacks);
+            }
+        }, 100)
+    }
+
+    hurtOrDead() {
 
         setInterval(() => {
             if (this.isDead() && this.dead <= 1) {
-                clearInterval(conditionsToMove);
-                clearInterval(startMoving);
-                clearInterval(startMovingAnimation);
-                clearInterval(attacks);
+                clearInterval(this.conditionsToMove);
+                clearInterval(this.startMoving);
+                clearInterval(this.startMovingAnimation);
+                clearInterval(this.attacks);
                 this.loadImage(this.DEAD_IMAGE);
                 this.dead += 1;
                 this.speedY = 10;
@@ -85,7 +150,7 @@ class Goblin extends MovableObjects {
                 this.playAnimation(this.HURT_IMAGES);
                 this.hurt += 15;
             }
-            
+
         }, 140);
 
 
@@ -95,48 +160,6 @@ class Goblin extends MovableObjects {
                 this.speedY -= this.acceleration;
             }
         }, 1000 / 25)
-
-
-
-
-        let conditionsToMove = setInterval(() => {
-            if (world && level1.enemies[1].x - world.character.x <= 500 || this.firstContact) {
-                clearInterval(Idle);
-                this.firstContact = true;
-            }
-        }, 1000 / 60);
-
-        let startMoving = setInterval(() => {
-            if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 30) {
-                this.moveLeft();
-            }
-        }, 1000 / 60);
-
-
-        let startMovingAnimation = setInterval(() => {
-            if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 30) {
-                this.playAnimation(this.WALKING_IMAGES);
-                this.moveLeft();
-            }
-        }, 180);
-
-
-        let attacks = setInterval(() => {
-            if (world && this.x - world.character.x <= 120 && this.y - world.character.y <= 80 && this.x > world.character.x) {
-                this.playAnimation(this.IMAGE_ATTACK);
-            }
-        }, 140)
-
-
-        setInterval(() => {
-
-            if (world && world.character.healthpoints == 0 || world.endbossHP == 0) {
-                clearInterval(conditionsToMove);
-                clearInterval(startMoving);
-                clearInterval(startMovingAnimation);
-                clearInterval(attacks);
-            }
-        });
 
     }
 

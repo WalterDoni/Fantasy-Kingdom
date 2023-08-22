@@ -1,5 +1,5 @@
 class Character extends MovableObjects {
-    x = 40;
+    x = 4100;
     y = 370;
     speed = 5;
 
@@ -8,8 +8,6 @@ class Character extends MovableObjects {
     jump_sound = new Audio('audio/jump.mp3');
     normalAttack_sound = new Audio('audio/swordAttack.mp3');
     specialAttack_sound = new Audio('audio/fireball.mp3');
-
-
 
     timeWithoutDoingSomething = 0;
 
@@ -268,6 +266,7 @@ class Character extends MovableObjects {
             this.handleTheIdleTimer();
             this.walking_sound.volume = 0.5;
             this.walking_sound.play();
+         
         }
 
         if (this.conditionsToWalkLeft()) {
