@@ -1,15 +1,26 @@
 class WalkingGoblin extends MovableObjects {
 
     speed = 0.5;
+
     dead0 = 0;
     speedY0 = 0;
     hurt0 = 0;
+
     dead2 = 0;
     speedY2 = 0;
     hurt2 = 0;
+
     dead4 = 0;
     speedY4 = 0;
     hurt4 = 0;
+
+    walk0 = null;
+    walking0 = null;
+    walk2 = null;
+    walking2 = null;
+    walk4 = null;
+    walking4 = null;
+
 
 
     WALKING_IMAGES = [
@@ -42,7 +53,7 @@ class WalkingGoblin extends MovableObjects {
     ]
 
     DEAD_IMAGE = [
-       
+
         'img/3.Enemies/Goblin/Death/death4.png',
     ]
 
@@ -64,13 +75,29 @@ class WalkingGoblin extends MovableObjects {
         this.loadImages(this.HURT_IMAGES);
         this.loadImages(this.DEAD_IMAGE);
         this.animate();
+        this.gameEnds();
     }
 
     animate() {
+        this.enemie0WalkingArea();
+        this.enemie0IsHurtOrDead();
+        this.enemie2WalkingArea();
+        this.enemie2IsHurtOrDead();
+        this.enemie4WalkingArea();
+        this.enemie4IsHurtOrDead();
+    
+    }
 
-        //--Enemie0--//
-        let walk0 = setInterval(() => {
-            if (world && level1.walkingEnemies[0].x <= 975 || this.walkRightInArea ) {
+     //--Enemie0--//
+
+     /**
+      * Enemy is walking left and right in an area.If a coordinate on the x-axes is reached, the enemy will start
+      * to walk into the other direction.
+      */
+    enemie0WalkingArea() {
+
+        this.walk0 = setInterval(() => {
+            if (world && level1.walkingEnemies[0].x <= 975 || this.walkRightInArea) {
                 level1.walkingEnemies[0].moveRight();
                 level1.walkingEnemies[0].walkRightInArea = true;
                 level1.walkingEnemies[0].walkLeftInArea = false;
@@ -82,16 +109,24 @@ class WalkingGoblin extends MovableObjects {
             }
         }, 1000 / 60);
 
-        let walking0 = setInterval(() => {
+        this.walking0 = setInterval(() => {
             if (this.walkLeftInArea || this.walkRightInArea) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
+    }
+
+    /**
+     * Depends of if the enemy is hurt or dead. When it is hurt ( e.g. character jumps on the head of the enemy) it will 
+     * play the "hurt" animation. Otherwise some interval will stop and the enemy die. At first it will get up in the air.
+     * After that it will add some gravity, so the enemy fall into the ground and disappear. 
+     */
+    enemie0IsHurtOrDead() {
 
         setInterval(() => {
             if (level1.walkingEnemies[0].isDead() && this.dead0 <= 1) {
-                clearInterval(walk0);
-                clearInterval(walking0);
+                clearInterval(this.walk0);
+                clearInterval(this.walking0);
                 level1.walkingEnemies[0].loadImage(this.DEAD_IMAGE);
                 this.dead0 += 1;
                 this.speedY0 = 7;
@@ -109,10 +144,12 @@ class WalkingGoblin extends MovableObjects {
                 this.speedY0 -= this.acceleration;
             }
         }, 1000 / 25)
+    }
+    //--Enemie2--//
 
+    enemie2WalkingArea() {
 
-        //--Enemie2--//
-        let walk2 = setInterval(() => {
+        this.walk2 = setInterval(() => {
             if (world && level1.walkingEnemies[2].x <= 2800 || this.walkRightInArea1) {
                 level1.walkingEnemies[2].moveRight();
                 level1.walkingEnemies[2].walkRightInArea1 = true;
@@ -125,16 +162,19 @@ class WalkingGoblin extends MovableObjects {
             }
         }, 1000 / 60);
 
-        let walking2 = setInterval(() => {
+        this.walking2 = setInterval(() => {
             if (this.walkLeftInArea1 || this.walkRightInArea1) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
+    }
+    
+    enemie2IsHurtOrDead() {
 
         setInterval(() => {
             if (level1.walkingEnemies[2].isDead() && this.dead2 <= 1) {
-                clearInterval(walk2);
-                clearInterval(walking2);
+                clearInterval(this.walk2);
+                clearInterval(this.walking2);
                 level1.walkingEnemies[2].loadImage(this.DEAD_IMAGE);
                 this.dead2 += 1;
                 this.speedY2 = 7;
@@ -145,7 +185,6 @@ class WalkingGoblin extends MovableObjects {
             }
         }, 140);
 
-
         setInterval(() => {
             if (level1.walkingEnemies[2].isDead() || this.speedY2 > 0) {
                 level1.walkingEnemies[2].y -= this.speedY2;
@@ -153,11 +192,12 @@ class WalkingGoblin extends MovableObjects {
             }
         }, 1000 / 25)
 
+    }
 
+    //--Enemie4--//
+    enemie4WalkingArea() {
 
-        //--Enemie4--//
-       
-        let walk4 = setInterval(() => {
+        this.walk4 = setInterval(() => {
             if (world && level1.walkingEnemies[4].x <= 3720 || this.walkRightInArea2) {
                 level1.walkingEnemies[4].moveRight();
                 level1.walkingEnemies[4].walkRightInArea2 = true;
@@ -170,15 +210,19 @@ class WalkingGoblin extends MovableObjects {
             }
         }, 1000 / 60);
 
-       let walking4 = setInterval(() => {
+        this.walking4 = setInterval(() => {
             if (this.walkLeftInArea2 || this.walkRightInArea2) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
+    }
+
+    enemie4IsHurtOrDead() {
+
         setInterval(() => {
             if (level1.walkingEnemies[4].isDead() && this.dead4 <= 1) {
-                clearInterval(walk4);
-                clearInterval(walking4);
+                clearInterval(this.walk4);
+                clearInterval(this.walking4);
                 level1.walkingEnemies[4].loadImage(this.DEAD_IMAGE);
                 this.dead4 += 1;
                 this.speedY4 = 7;
@@ -196,21 +240,23 @@ class WalkingGoblin extends MovableObjects {
                 this.speedY4 -= this.acceleration;
             }
         }, 1000 / 25)
-
-        setInterval (() => {
-        
-            if(world && world.character.healthpoints == 0 || world.endbossHP == 0){
-                clearInterval(walk0);
-                clearInterval(walking0);
-                clearInterval(walk2);
-                clearInterval(walking2);
-                clearInterval(walk4);
-                clearInterval(walking4);
-            }
-            });
     }
+    
+    /**
+     * Intervals will stop, when the game has end. No matter if the Player lost or won. 
+     */
+    gameEnds() {
+        setInterval(() => {
 
-
-
+            if (world && world.character.healthpoints == 0 || world.endbossHP == 0) {
+                clearInterval(this.walk0);
+                clearInterval(this.walking0);
+                clearInterval(this.walk2);
+                clearInterval(this.walking2);
+                clearInterval(this.walk4);
+                clearInterval(this.walking4);
+            }
+        }, 100);
+    }
 
 }

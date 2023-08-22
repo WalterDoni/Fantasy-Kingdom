@@ -2,10 +2,9 @@ class Endboss extends MovableObjects {
     height = 395;
     width = 350;
     speed = 3;
-    Idle = null;
-    conditionsToMove = null;
-    startMoving = null;
-    startMovingAnimation = null;
+
+ 
+
     walkInArea = null;
     lefttWalkInArea = null;
     rightWalkInArea = null;

@@ -10,6 +10,7 @@ class World {
     hit = 10;
     removeFireballFromCanvas = 0;
 
+    game_sound = new Audio('audio/titlemusic.mp3');
     defeat_sound = new Audio('audio/defeat.mp3');
     victory_sound = new Audio('audio/victory.mp3')
 
@@ -82,14 +83,14 @@ class World {
      */
     playSound() {
         if (playMusic) {
-            game_sound.volume = 0.1;
-            game_sound.play();
+            this.game_sound.volume = 0.1;
+            this.game_sound.play();
             this.character.unmuteCharacterSounds();
 
 
         } if (!playMusic) {
-            game_sound.pause();
-            game_sound.currentTime = 0;
+            this.game_sound.pause();
+            this.game_sound.currentTime = 0;
             this.character.muteCharacterSounds();
         }
     }
@@ -120,15 +121,15 @@ class World {
 
     defeatScreen() {
         document.getElementById('defeatScreen').classList.remove('d-none');
-        game_sound.pause();
+        this.game_sound.pause();
         this.defeat_sound.volume = 0.5;
         this.defeat_sound.play();
-        game_sound.currentTime = 0;
+        this.game_sound.currentTime = 0;
     }
 
     winScreen() {
         document.getElementById('winScreen').classList.remove('d-none');
-        game_sound.pause();
+        this.game_sound.pause();
         this.victory_sound.volume = 0.1;
         this.victory_sound.play();
     }

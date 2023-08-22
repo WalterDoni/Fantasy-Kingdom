@@ -1,10 +1,7 @@
 class Dwarf extends MovableObjects {
 
     speed = 1
-    Idle = null;
-    conditionsToMove = null;
-    startMoving = null;
-    startMovingAnimation = null;
+
     attacksInterval = null;
 
     WALKING_IMAGES = [
@@ -59,7 +56,7 @@ class Dwarf extends MovableObjects {
         this.loadImages(this.DEAD_IMAGE);
         this.loadImages(this.IDLE_IMAGES);
         this.animate();
-        this.stopAnimations();
+        this.gameEnds();
 
     }
 
@@ -116,19 +113,6 @@ class Dwarf extends MovableObjects {
         }, 140)
     }
 
-    stopAnimations() {
-
-        setInterval(() => {
-
-            if (world && world.character.healthpoints == 0 || world.endbossHP == 0) {
-                clearInterval(this.conditionsToMove);
-                clearInterval(this.startMoving);
-                clearInterval(this.startMovingAnimation);
-                clearInterval(this.attacks);
-            }
-        }, 100)
-    }
-
     hurtOrDead() {
         setInterval(() => {
             if (this.isDead() && this.dead <= 1) {
@@ -156,7 +140,21 @@ class Dwarf extends MovableObjects {
         }, 1000 / 25)
 
     }
+    
+    /**
+     * Intervals will stop, when the game has end. No matter if the Player lost or won. 
+     */
+    gameEnds() {
 
+        setInterval(() => {
 
+            if (world && world.character.healthpoints == 0 || world.endbossHP == 0) {
+                clearInterval(this.conditionsToMove);
+                clearInterval(this.startMoving);
+                clearInterval(this.startMovingAnimation);
+                clearInterval(this.attacks);
+            }
+        }, 100)
+    }
 }
 

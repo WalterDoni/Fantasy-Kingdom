@@ -3,7 +3,7 @@ class Character extends MovableObjects {
     y = 370;
     speed = 5;
 
-    walking_sound = new Audio('audio/Walking.mp3');
+    walking_sound = new Audio('audio/walking.mp3');
     hurt_sound = new Audio('audio/hurt.mp3');
     jump_sound = new Audio('audio/jump.mp3');
     normalAttack_sound = new Audio('audio/swordAttack.mp3');
@@ -206,17 +206,6 @@ class Character extends MovableObjects {
         this.specialAttack_sound.muted = false;
 
     }
-
-
-    /** 
-     * While standing still and do nothing, the counter will get up till a value from 200. After it reach this value, the idle animation will start to play.
-    */
-    /*IdleWhileDoNothing() {
-        this.timeWithoutDoingSomething += 1
-        if (this.timeWithoutDoingSomething >= 200) {
-            this.playAnimation(this.IDLE_IMAGE);
-        }
-    }*/
 
 
     /** 

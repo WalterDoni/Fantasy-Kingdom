@@ -6,13 +6,17 @@ class MovableObjects extends DrawableObjects {
    speedY = 0;
    acceleration = 2.5;
    lastHit = 0;
- 
 
    walkRightInArea = false;
    walkLeftInArea = false;
    walkRightInArea1 = false;
    walkLeftInArea1 = false;
    firstContact = false;
+
+   Idle = null;
+   conditionsToMove = null;
+   startMoving = null;
+   startMovingAnimation = null;
 
    hurt = 0;
    dead = 0;

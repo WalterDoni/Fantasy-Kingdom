@@ -1,12 +1,20 @@
 class WalkingDwarf extends MovableObjects {
 
     speed = 0.5;
+
     dead1 = 0;
     speedY1 = 0;
     hurt1 = 0;
+
     dead3 = 0;
     speedY3 = 0;
     hurt3 = 0;
+
+    walk1 = null;
+    walking1 = null;
+
+    walk3 = null;
+    walking3 = null;
 
     WALKING_IMAGES = [
 
@@ -37,7 +45,7 @@ class WalkingDwarf extends MovableObjects {
 
     ]
 
-   
+
 
     moreAccurateCollision = {
         top: 10,
@@ -55,13 +63,27 @@ class WalkingDwarf extends MovableObjects {
         this.loadImages(this.HURT_IMAGES);
         this.loadImages(this.DEAD_IMAGE);
         this.animate();
+        this.gameEnds();
     }
 
     animate() {
-        
-        //--Enemie1--//
-        let walk1 = setInterval(() => {
-            if (world && level1.walkingEnemies[1].x <= 2300|| this.walkRightInArea) {
+
+     this.enemie1WalkingArea();
+     this.enemie1IsHurtOrDead();
+     this.enemie3WalkingArea();
+     this.enemie3IsHurtOrDead();
+
+    }
+    
+    //--Enemie1--//
+     /**
+      * Enemy is walking left and right in an area.If a coordinate on the x-axes is reached, the enemy will start
+      * to walk into the other direction.
+      */
+    enemie1WalkingArea() {
+
+        this.walk1 = setInterval(() => {
+            if (world && level1.walkingEnemies[1].x <= 2300 || this.walkRightInArea) {
                 level1.walkingEnemies[1].moveRight();
                 level1.walkingEnemies[1].walkRightInArea = true;
                 level1.walkingEnemies[1].walkLeftInArea = false;
@@ -73,16 +95,24 @@ class WalkingDwarf extends MovableObjects {
             }
         }, 1000 / 60);
 
-        let walking1 = setInterval(() => {
+        this.walking1 = setInterval(() => {
             if (this.walkLeftInArea || this.walkRightInArea) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
+    }
+    
+    /**
+     * Depends of if the enemy is hurt or dead. When it is hurt ( e.g. character jumps on the head of the enemy) it will 
+     * play the "hurt" animation. Otherwise some interval will stop and the enemy die. At first it will get up in the air.
+     * After that it will add some gravity, so the enemy fall into the ground and disappear. 
+     */
+    enemie1IsHurtOrDead() {
 
         setInterval(() => {
             if (level1.walkingEnemies[1].isDead() && this.dead1 <= 1) {
-                clearInterval(walk1);
-                clearInterval(walking1);
+                clearInterval(this.walk1);
+                clearInterval(this.walking1);
                 level1.walkingEnemies[1].loadImage(this.DEAD_IMAGE);
                 this.dead1 += 1;
                 this.speedY1 = 7;
@@ -100,13 +130,12 @@ class WalkingDwarf extends MovableObjects {
                 this.speedY1 -= this.acceleration;
             }
         }, 1000 / 25)
+    }
+    //--Enemie3--//
+    enemie3WalkingArea() {
 
-  
-
-       //--Enemie3--//
-
-        let walk3 = setInterval(() => {
-            if (world && level1.walkingEnemies[3].x <= 3400|| this.walkRightInArea1) {
+        this.walk3 = setInterval(() => {
+            if (world && level1.walkingEnemies[3].x <= 3400 || this.walkRightInArea1) {
                 level1.walkingEnemies[3].moveRight();
                 level1.walkingEnemies[3].walkRightInArea1 = true;
                 level1.walkingEnemies[3].walkLeftInArea1 = false;
@@ -118,16 +147,19 @@ class WalkingDwarf extends MovableObjects {
             }
         }, 1000 / 60);
 
-        let walking3 = setInterval(() => {
+        this.walking3 = setInterval(() => {
             if (this.walkLeftInArea1 || this.walkRightInArea1) {
                 this.playAnimation(this.WALKING_IMAGES);
             }
         }, 180);
+    }
+
+    enemie3IsHurtOrDead() {
 
         setInterval(() => {
             if (level1.walkingEnemies[3].isDead() && this.dead3 <= 1) {
-                clearInterval(walk3);
-                clearInterval(walking3);
+                clearInterval(this.walk3);
+                clearInterval(this.walking3);
                 level1.walkingEnemies[3].loadImage(this.DEAD_IMAGE);
                 this.dead3 += 1;
                 this.speedY3 = 7;
@@ -145,17 +177,22 @@ class WalkingDwarf extends MovableObjects {
                 this.speedY3 -= this.acceleration;
             }
         }, 1000 / 25);
-        
-        setInterval (() => {
-        
-            if(world && world.character.healthpoints == 0 || world.endboss.isDead()){
-                clearInterval(walk1);
-                clearInterval(walking1);
-                clearInterval(walk3);
-                clearInterval(walking3);
-             
+    }
+    
+    /**
+     * Intervals will stop, when the game has end. No matter if the Player lost or won. 
+     */
+    gameEnds() {
+        setInterval(() => {
+
+            if (world && world.character.healthpoints == 0 || world.endboss.isDead()) {
+                clearInterval(this.walk1);
+                clearInterval(this.walking1);
+                clearInterval(this.walk3);
+                clearInterval(this.walking3);
+
             }
-            });
+        }, 100);
     }
 
 }

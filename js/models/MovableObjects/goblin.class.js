@@ -1,9 +1,8 @@
 class Goblin extends MovableObjects {
     speed = 0.2;
-    Idle = null;
-    conditionsToMove = null;
-    startMoving = null;
-    startMovingAnimation = null;
+
+
+
     attacksInterval = null;
 
     WALKING_IMAGES = [
@@ -63,7 +62,7 @@ class Goblin extends MovableObjects {
         this.loadImages(this.DEAD_IMAGE);
         this.loadImages(this.IDLE_IMAGES);
         this.animate();
-        this.stopAnimations();
+        this.gameEnds();
 
     }
 
@@ -121,19 +120,13 @@ class Goblin extends MovableObjects {
         }, 140)
     }
 
-    stopAnimations() {
 
-        setInterval(() => {
-
-            if (world && world.character.healthpoints == 0 || world.endbossHP == 0) {
-                clearInterval(this.conditionsToMove);
-                clearInterval(this.startMoving);
-                clearInterval(this.startMovingAnimation);
-                clearInterval(this.attacks);
-            }
-        }, 100)
-    }
-
+    
+    /**
+     * Depends of if the enemy is hurt or dead. When it is hurt ( e.g. character jumps on the head of the enemy) it will 
+     * play the "hurt" animation. Otherwise some interval will stop and the enemy die. At first it will get up in the air.
+     * After that it will add some gravity, so the enemy fall into the ground and disappear. 
+     */
     hurtOrDead() {
 
         setInterval(() => {
@@ -162,6 +155,21 @@ class Goblin extends MovableObjects {
         }, 1000 / 25)
 
     }
+    
+    /**
+     * Intervals will stop, when the game has end. No matter if the Player lost or won. 
+     */
+    gameEnds() {
 
+        setInterval(() => {
+
+            if (world && world.character.healthpoints == 0 || world.endbossHP == 0) {
+                clearInterval(this.conditionsToMove);
+                clearInterval(this.startMoving);
+                clearInterval(this.startMovingAnimation);
+                clearInterval(this.attacks);
+            }
+        }, 100)
+    }
 
 }
