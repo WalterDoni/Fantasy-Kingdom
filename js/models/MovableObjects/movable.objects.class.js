@@ -34,6 +34,7 @@ class MovableObjects extends DrawableObjects {
 
 
    //Berechnet die Eckpukte 
+   
    isColliding(obj) {
       return this.x + this.width - this.moreAccurateCollision.right > obj.x + obj.moreAccurateCollision.left && // Rechter Punkt der X-Achhse > linker Punkt x von Objekt
          this.y + this.height - this.moreAccurateCollision.bottom > obj.y + obj.moreAccurateCollision.top &&  // Unterer Punkt der Y-Achse > Oberer Punkt y von Objekt
@@ -56,7 +57,7 @@ class MovableObjects extends DrawableObjects {
       if (this.healthpoints < 0) {
          this.healthpoints = 0;
       } else {
-         this.lastHit = new Date().getTime(); //Aktuelle Zeit in Millisekunden seit 01.01.1970
+         this.lastHit = new Date().getTime(); 
       }
 
    }
@@ -67,8 +68,8 @@ class MovableObjects extends DrawableObjects {
    }
 
    isHurt() {
-      let timepassed = new Date().getTime() - this.lastHit; // Differenz in Millisekunden
-      timepassed = timepassed / 1000; // Differenz in Sekunden
+      let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
+      timepassed = timepassed / 1000; // Difference in s
       return timepassed < 1;  // wenn man innerhalb der letzten Sekunden getroffen wurde, gibt die Funktion true zurück
    }
 

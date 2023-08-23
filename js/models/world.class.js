@@ -133,6 +133,7 @@ class World {
         this.victory_sound.volume = 0.1;
         this.victory_sound.play();
     }
+
     /**
     * @param {object} collectables -> If one of these collides with the character, add +1 to the coin-counter.
     * * @param {object} manapotions -> If one of these collides with the character, fill 50% of the manabar.
@@ -175,13 +176,27 @@ class World {
         });
     }
 
+    checkCollisionsWalkingEnemies() {
+        this.level.walkingEnemies.forEach((enemy) => {
+
+            if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
+                this.character.hit();
+                this.healthbar.updateHealthpoints();
+            }
+
+        });
+    }
+
 
     checkIfThrowableObjectHitsEnemie() {
         this.throwOnEnemie();
         this.throwOnWalkingEnemie();
 
     }
-
+    
+    /**
+     * For every enemy in the array enemies, when it gets hit by a throwable object, it will take damgage. After that the thrown element get removed from the canvas.
+     */
     throwOnEnemie() {
         this.level.enemies.forEach((enemy) => {
             if (enemy.isDead()) { return }
@@ -193,7 +208,8 @@ class World {
             });
         });
     }
-
+    
+  
     throwOnWalkingEnemie() {
         this.level.walkingEnemies.forEach((enemy) => {
             if (enemy.isDead()) { return }
@@ -205,7 +221,10 @@ class World {
             });
         });
     }
-
+    
+    /**
+     *  @param {array} enemies -> Checks if one of the both conditions get reached. If yes, the healthpoints get reduced by 50%. 
+     */
     hitEnemy() {
         this.level.enemies.forEach((enemy) => {
 
@@ -224,9 +243,6 @@ class World {
     }
 
 
-
-
-    //-WalkingEnemies--//
     hitEnemyWalkingEnemies() {
         this.level.walkingEnemies.forEach((enemy) => {
 
@@ -239,20 +255,6 @@ class World {
             }
         });
     }
-
-
-
-    checkCollisionsWalkingEnemies() {
-        this.level.walkingEnemies.forEach((enemy) => {
-
-            if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
-                this.character.hit();
-                this.healthbar.updateHealthpoints();
-            }
-
-        });
-    }
-
 
     //-WalkingEnemies--//
 
@@ -267,7 +269,14 @@ class World {
 
 
 
-
+    /**
+     * The character can use two different attacks. One is a casting fireball and the other is "normal" attack with the sword.
+     * If the button T is pressed, the variable is set on true. Also when the value of the manabar is more then one. A new element for the array (trhowableObjects)
+     * get generated and pushed inside. 
+     * After 1,2 seconds the setTimeout will remove the generated element from the canvas.
+     * 
+     * The other conditions is a simple animation which will played, when the variable is true.
+     */
     useAttacksFromCharacter() {
 
         if (this.keyboard.T_KEYBOARD && this.manabar.mana > 0) {

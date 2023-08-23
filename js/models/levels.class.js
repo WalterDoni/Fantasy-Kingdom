@@ -37,14 +37,13 @@ class Levels {
     }
 
 
-   //Funktionen für Bodenelemente 
+  //Functions to draw the elements on the canvas
 
     createFloorLevel1Part1() {
-        let startX = -50; // Startwert für die x-Koordinate
-        let numberOfMiddleGrounds = 20; // Anzahl der neuen MiddleGround-Instanzen
+        let startX = -50;
 
         for (let i = 0; i < numberOfMiddleGrounds; i++) {
-            let x = startX + i * 50; // Berechne die x-Koordinate basierend auf dem Index i
+            let x = startX + i * 50; // Calculate the x-coordinate based on the index i
             let ground = new MiddleGround(x, 530);
             this.grounds.push(ground);
         }

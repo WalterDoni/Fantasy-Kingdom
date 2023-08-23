@@ -71,6 +71,7 @@ class Dwarf extends MovableObjects {
     }
 
     idleAnimation() {
+        
         //--Before contact--//
         this.Idle = setInterval(() => {
             this.turnArround = true;

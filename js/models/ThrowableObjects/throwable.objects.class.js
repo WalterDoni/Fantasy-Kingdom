@@ -30,7 +30,6 @@ class ThrowableObjects extends MovableObjects {
     throw() {
 
 
-
         if (this.timerToStopAnimations <= 100 && !this.attackInterval && !world.character.turnArround) {
             this.attackInterval = setInterval(() => {
                 this.x += 30;
