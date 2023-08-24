@@ -8,7 +8,7 @@ class DrawableObjects {
 
     // loadImage('img/...png')
     loadImage(path) {
-        this.img = new Image(); // vorgegebene Funktion => selbe wie document.getEle...src= Quelle
+        this.img = new Image(); // predetermined function => same as document.getEle...src= Quelle
         this.img.src = path;
     }
 
@@ -22,8 +22,6 @@ class DrawableObjects {
         } catch(e){
             console.warn('Error loading image', e);
             console.log('Could not load imag', this.img.src);
-            //Catch wird nur ausgeführt sobald ein Fehler auftritt. Der entstandene
-            //Fehler wird so in der Console genau angezeigt.
         }
     }
 
@@ -35,13 +33,14 @@ class DrawableObjects {
     loadImages(array) {
         array.forEach(path => {
             let img = new Image();
-            img.src = path;              // sonst nur in jeweils geschweiten Klammern
-            this.imageCache[path] = img; // this. greift auf Globale Variablen zu.
+            img.src = path;           
+            this.imageCache[path] = img; 
         });
     }
 
     
-   drawFrame(ctx) { // Zeichne den Rahmen um instanceof Klassen
+    // Draw the frame arround Objects, for developing
+   /*drawFrame(ctx) { 
         if (this instanceof Character || this instanceof Goblin || this instanceof Dwarf || this instanceof Endboss || this instanceof Coin || this instanceof WalkingDwarf || this instanceof WalkingDwarf) {
             ctx.beginPath();
             ctx.lineWidth = '3';
@@ -49,6 +48,6 @@ class DrawableObjects {
             ctx.rect(this.x + 20, this.y + 50, this.width - 80, this.height -70 );
             ctx.stroke();
         }
-    }
+    }*/
 
 }
