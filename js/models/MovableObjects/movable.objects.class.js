@@ -114,7 +114,7 @@ class MovableObjects extends DrawableObjects {
          return this.y < 270;
       } if (this.world.character.x >= 2560 && this.world.character.x <= 2605) {
          return this.y < 240;
-      } if (this.world.character.x >= 2250 && this.world.character.x <= 2555 && this.y <= 150) {
+      } if (this.world.character.x >= 2250 && this.world.character.x <= 2555 && this.y <= 140) {
          return this.y < 140;
       } if (this.world.character.x >= 2750 && this.world.character.x <= 3350) {
          return this.y < 70;

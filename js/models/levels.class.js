@@ -37,10 +37,11 @@ class Levels {
     }
 
 
-  //Functions to draw the elements on the canvas
+  //Functions to generate a number of elements for the mapdesign.
 
     createFloorLevel1Part1() {
         let startX = -50;
+        let numberOfMiddleGrounds = 20;
 
         for (let i = 0; i < numberOfMiddleGrounds; i++) {
             let x = startX + i * 50; // Calculate the x-coordinate based on the index i

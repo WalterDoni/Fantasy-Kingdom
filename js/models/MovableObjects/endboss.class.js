@@ -150,6 +150,8 @@ class Endboss extends MovableObjects {
     }
 
     hurtOrDead() {
+        let hp = 80;
+
         setInterval(() => {
             if (world.endbossHP.healthpoints == 0) {
                 clearInterval(this.Idle);
@@ -161,11 +163,12 @@ class Endboss extends MovableObjects {
                 clearInterval(this.rightWalkInArea);
                 this.loadImage(this.DEAD_IMAGE);
 
-            } else if (this.isColliding(world.character)) {
+            } else if (world.endbossHP.healthpoints == hp) {
                 this.playAnimation(this.HURT_IMAGES);
+                hp -= 20;
 
             }
-        }, 120);
+        }, 100);
     }
 
 }
