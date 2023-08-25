@@ -43,7 +43,7 @@ class MovableObjects extends DrawableObjects {
    }    // moreAccurateCollision --> Zieht Werte ab oder addiert Werte um die Collision genauer zu machen
 
    isCollidingWhileSwordAttack(obj) {
-      return this.x + this.width + 15 > obj.x + obj.moreAccurateCollision.left && // Rechter Punkt der X-Achhse > linker Punkt x von Objekt
+      return this.x + this.width + 25 > obj.x + obj.moreAccurateCollision.left && // Rechter Punkt der X-Achhse > linker Punkt x von Objekt
          this.y + this.height - this.moreAccurateCollision.bottom > obj.y + obj.moreAccurateCollision.top &&  // Unterer Punkt der Y-Achse > Oberer Punkt y von Objekt
          this.x - 10 < obj.x + obj.width - obj.moreAccurateCollision.right &&  // Linker Punkt der X-Achse < rechter Punkt x von Objekt
          this.y + this.moreAccurateCollision.top < obj.y + obj.height - obj.moreAccurateCollision.bottom   // Oberer Punkt der Y-Achse < unterer Punkt Y von Objekt
@@ -88,13 +88,13 @@ class MovableObjects extends DrawableObjects {
          else if (this.x >= 910 && this.x <= 1200) {
             this.y = 270;
          }
-         else if (this.x >= 2560 && this.x <= 2605 && this.y <= 250) {
+         else if (this.x >= 2550 && this.x <= 2680 && this.y <= 250) {
             this.y = 240;
          }
-         else if (this.x >= 2250 && this.x <= 2555 && this.y <= 150) {
+         else if (this.x >= 2200 && this.x <= 2555 && this.y <= 150) {
             this.y = 140;
          }
-         else if (this.x >= 2750 && this.x <= 3350) {
+         else if (this.x >= 2740 && this.x <= 3350) {
             this.y = 70;
          }
          else if (this.x >= 3345 && this.x <= 3705) {
@@ -110,17 +110,17 @@ class MovableObjects extends DrawableObjects {
    }
 
    isAboveGround() {
-      if (this.world.character.x >= 910 && this.world.character.x <= 1200) {
+      if (this.x >= 910 && this.x <= 1200) {
          return this.y < 270;
-      } if (this.world.character.x >= 2560 && this.world.character.x <= 2605) {
+      } if (this.x >= 2560 && this.x <= 2680) {
          return this.y < 240;
-      } if (this.world.character.x >= 2250 && this.world.character.x <= 2555 && this.y <= 140) {
+      } if (this.x >= 2200 && this.x <= 2555 && this.y <= 140) {
          return this.y < 140;
-      } if (this.world.character.x >= 2750 && this.world.character.x <= 3350) {
+      } if (this.x >= 2740 && this.x <= 3365 && this.y <= 140) {
          return this.y < 70;
-      } if (this.world.character.x >= 3345 && this.world.character.x <= 3705) {
+      } if (this.x >= 3360 && this.x <= 3705) {
          return this.y < 170;
-      } if (this.world.character.x >= 3710 && this.world.character.x <= 3900) {
+      } if (this.x >= 3710 && this.x <= 3900 ) {
          return this.y < 270;
       } else {
          return this.y < 365;

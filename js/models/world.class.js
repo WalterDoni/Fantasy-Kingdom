@@ -120,18 +120,28 @@ class World {
     }
 
     defeatScreen() {
-        document.getElementById('defeatScreen').classList.remove('d-none');
-        this.game_sound.pause();
-        this.defeat_sound.volume = 0.5;
-        this.defeat_sound.play();
-        this.game_sound.currentTime = 0;
+        if (playMusic) {
+            document.getElementById('defeatScreen').classList.remove('d-none');
+            this.game_sound.pause();
+            this.defeat_sound.volume = 0.5;
+            this.defeat_sound.play();
+            this.game_sound.currentTime = 0;
+        } if (!playMusic) {
+            document.getElementById('defeatScreen').classList.remove('d-none');
+        }
+
+
     }
 
     winScreen() {
-        document.getElementById('winScreen').classList.remove('d-none');
-        this.game_sound.pause();
-        this.victory_sound.volume = 0.1;
-        this.victory_sound.play();
+        if (playMusic) {
+            document.getElementById('winScreen').classList.remove('d-none');
+            this.game_sound.pause();
+            this.victory_sound.volume = 0.1;
+            this.victory_sound.play();
+        } if (!playMusic) {
+            document.getElementById('winScreen').classList.remove('d-none');
+        }
     }
 
     /**
@@ -193,7 +203,7 @@ class World {
         this.throwOnWalkingEnemie();
 
     }
-    
+
     /**
      * For every enemy in the array enemies, when it gets hit by a throwable object, it will take damgage. After that the thrown element get removed from the canvas.
      */
@@ -208,8 +218,8 @@ class World {
             });
         });
     }
-    
-  
+
+
     throwOnWalkingEnemie() {
         this.level.walkingEnemies.forEach((enemy) => {
             if (enemy.isDead()) { return }
@@ -221,7 +231,7 @@ class World {
             });
         });
     }
-    
+
     /**
      *  @param {array} enemies -> Checks if one of the both conditions get reached. If yes, the healthpoints get reduced by 50%. 
      */

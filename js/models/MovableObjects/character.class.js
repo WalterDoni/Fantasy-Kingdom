@@ -1,5 +1,5 @@
 class Character extends MovableObjects {
-    x = 4100;
+    x = 40;
     y = 370;
     speed = 5;
 
@@ -114,6 +114,7 @@ class Character extends MovableObjects {
             this.characterJump();
             this.idle();
             this.world.camera_x = -this.x + 100; // +100 versetzt die Kamera, somit klebt der Charakter nicht so sehr am linken Rand
+          
         }, 1000 / 60);
 
         setStoppableInterval(() => {
@@ -213,7 +214,7 @@ class Character extends MovableObjects {
     */
     idle() {
         if (!this.world.keyboard.LEFT && !this.world.keyboard.RIGHT) {
-            this.timeWithoutDoingSomething += 20;
+            this.timeWithoutDoingSomething += 50;
         }
     }
 
@@ -285,6 +286,7 @@ class Character extends MovableObjects {
         if (this.world.keyboard.UP && !this.isAboveGround()) {
             this.jump();
             this.handleTheIdleTimer();
+           
         }
     }
 
@@ -307,6 +309,7 @@ class Character extends MovableObjects {
             this.playAnimation(this.DEAD_IMAGES);
         } else if (this.isHurt()) {
             this.playAnimation(this.HURT_IMAGES);
+            this.hurt_sound.volume = 0.2;
             this.hurt_sound.play();
         }
     }

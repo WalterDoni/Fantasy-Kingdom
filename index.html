@@ -33,6 +33,7 @@
     <script src="./js/models/AllGroundElements/rightSideTopBuildUp.class.js"></script>
     <script src="./js/models/AllGroundElements/middleGround.class.js"></script>
     <script src='./js/models/AllGroundElements/skyBlockGroundRight.class.js'></script>
+    <script src='./js/models/AllGroundElements/skyBlockGroundLeft.class.js'></script>
     <script src='./js/models/AllGroundElements/skyleftBuildUpWithoutEnd.class.js'></script>
     <script src='./js/models/AllGroundElements/skyMiddleBuildUpWithoutEnd.class.js'></script>
     <script src='./js/models/AllGroundElements/skyMiddleFloorGround.class.js'></script>
@@ -62,6 +63,8 @@
 
 
         <div class="soundAndFullscreen">
+            <button onclick="howToPlay()" class="howToPlay" id="howToPlay"><img
+                src="img/9.Interface/Startscreen/questionmark.png"></button>
             <button onclick="pauseMusic()" class="startscreenSound" id="musicButton"><img
                     src="img/9.Interface/Startscreen/soundOn.png"></button>
             <button onclick="fullscreen()" class="startScreenFullscreen" id="fullscreenOn"><img
@@ -69,7 +72,9 @@
             <button onclick="leaveFullscreen()" class="startScreenFullscreen d-none" id="fullscreenOff"><img
                     src="img/9.Interface/Startscreen/fullscreen-exit.png"></button>
         </div>
-
+        
+        <div class="howToPlayTheGame d-none" id="howToPlayTheGame"></div>
+        
         <div id="startscreen" class="startscreen">
             <h1 class="title">Fantasy-Kingdom</h1>
             <img class="startImageChar" src="img/9.Interface/Startscreen/characters.png">
