@@ -70,58 +70,6 @@ function pauseMusic() {
 }
 
 
-
-//---Functions for fullscreen---//
-
-/**
- * enter the fullscreen -> click on the button
- */
-function fullscreen() {
-    let contentFullscreen = document.getElementById('content');
-    document.getElementById('fullscreenOn').classList.add('d-none');
-    document.getElementById('fullscreenOff').classList.remove('d-none');
-    enterFullscreen(contentFullscreen);
-}
-
-/**
- * leave the fullscreen -> click on the button
- */
-function leaveFullscreen() {
-    let contentFullscreen = document.getElementById('content');
-    document.getElementById('fullscreenOn').classList.remove('d-none');
-    document.getElementById('fullscreenOff').classList.add('d-none');
-    exitFullscreen(contentFullscreen);
-}
-
-
-/**
- * @param {param} element -> check the version from the browser
- * @param {function} requestFullscreen -> is a HTML5-API which the mpost browser supports
- * if the browser support the function the fullscreen will be set.
- */
-
-function enterFullscreen(element) {
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
-        element.msRequestFullscreen();
-    } else if (element.webkitRequestFullscreen) {  // iOS Safari
-        element.webkitRequestFullscreen();
-    }
-}
-
-/**
- * Leave the fullscreen back to normal widt and height.
- */
-function exitFullscreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-    }
-}
-
-
 function rotatePhoneShow() {
 
     if (window.innerWidth > 650) {
