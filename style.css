@@ -342,7 +342,7 @@ canvas {
 /*--Smartphone--*/
 
 .mobileHud {
-    display: none;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     position: absolute;
@@ -407,7 +407,7 @@ canvas {
     font-style: normal;
     font-weight: 400;
     src: url('./font/bungee-shade-v11-latin-regular.woff2') format('woff2');
-    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+
 }
 
 @media (max-width: 1024px) {
@@ -498,11 +498,14 @@ canvas {
         top: 69%;
        
     }
+}
+
+
+@media(min-width: 920px){
     .mobileHud {
         display: none;
     }
 }
-
 @media(max-width: 860px){
 
     .victoryLine{
