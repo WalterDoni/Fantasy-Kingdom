@@ -57,21 +57,23 @@
     <title>Fantasy-Kingdom</title>
 </head>
 
-<body>
+<body id="content">
 
-    <div class="content" id="content">
+    <div class="content">
 
 
         <div class="soundAndHotToPlay">
             <button onclick="howToPlay()" class="howToPlay" id="howToPlay"><img
-                src="img/9.Interface/Startscreen/questionmark.png"></button>
+                    src="img/9.Interface/Startscreen/questionmark.png"></button>
             <button onclick="pauseMusic()" class="startscreenSound" id="musicButton"><img
                     src="img/9.Interface/Startscreen/soundOn.png"></button>
-            
+            <button onclick="fullscreen()" class="startScreenFullscreen" id="enterFullscreen"><img src="img/entfullscreen.png"></button>
+            <button onclick="closeFullscreen()" class="startScreenFullscreen d-none" id="exFullscreen"><img src="img/exitfullscreen.png"></button>
+
         </div>
-        
+
         <div class="howToPlayTheGame d-none" id="howToPlayTheGame"></div>
-        
+
         <div id="startscreen" class="startscreen">
             <h1 class="title">Fantasy-Kingdom</h1>
             <img class="startImageChar" src="img/9.Interface/Startscreen/characters.png">
@@ -103,7 +105,8 @@
             </div>
             <div class="actionButtons">
                 <span id="btn-up"><img class="btn-up" src="img/9.Interface/MobileButtons/up.png" alt=""></span>
-                <span id="btn-attack"><img class="btn-attack" src="img/9.Interface/MobileButtons/attack.png" alt=""></span>
+                <span id="btn-attack"><img class="btn-attack" src="img/9.Interface/MobileButtons/attack.png"
+                        alt=""></span>
                 <span id="btn-magic"><img class="btn-magic" src="img/9.Interface/MobileButtons/magic.png" alt=""></span>
             </div>
         </div>
@@ -117,7 +120,7 @@
     <div class="howToPlayKeybindings">
         <div><img src="img/9.Interface/Startscreen/arrowLeft.png" alt=""> or A <span>:Left</span></div>
         <div><img src="img/9.Interface/Startscreen/arrowRight.png" alt=""> or D <span>:Right</span></div>
-       <div><img src="img/9.Interface/Startscreen/arrowUp.png" alt=""> or W <span>:Jump</span></div>
+        <div><img src="img/9.Interface/Startscreen/arrowUp.png" alt=""> or W <span>:Jump</span></div>
         <div><span>F</span><span>: Normal Attack</span></div>
         <div><span>T</span><span>: Special Attack</span></div>
     </div>

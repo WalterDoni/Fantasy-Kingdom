@@ -33,6 +33,10 @@ canvas {
     box-shadow: 0px 0px 6px 6px rgba(160, 10, 10, 0.7);
 }
 
+#content::backdrop {
+    background-color: rgba(255,255,255,0);
+}
+
 
 .soundAndHotToPlay {
     position: absolute;
@@ -362,7 +366,8 @@ canvas {
 }
 
 .actionButtons {
-    margin-right: 60px;
+    height: 80px;
+    margin-right: 40px;
 }
 
 .actionButtons img {

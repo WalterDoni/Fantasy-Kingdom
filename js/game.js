@@ -85,15 +85,15 @@ window.addEventListener('resize', rotatePhoneShow);
 
 
 
-function howToPlay(){
+function howToPlay() {
     let info = document.getElementById('howToPlayTheGame');
     let startscreen = document.getElementById('startscreen');
 
     startscreen.classList.add('d-none'),
-    info.classList.remove('d-none');
+        info.classList.remove('d-none');
 
-    info.innerHTML = 
-    ` <img class="startImage" src="img/9.Interface/Startscreen/bg.png">
+    info.innerHTML =
+        ` <img class="startImage" src="img/9.Interface/Startscreen/bg.png">
      <p class="textHowToPlay" > Welcome to my game!<br>
         There is'nt much to say about the rules. <br>
         
@@ -106,15 +106,15 @@ function howToPlay(){
         
         <button onclick="closeHowToPlay()" class="closeHowToPlay"> Close </button`;
 
-        
+
 }
 
-function closeHowToPlay(){
+function closeHowToPlay() {
     let info = document.getElementById('howToPlayTheGame');
     let startscreen = document.getElementById('startscreen');
 
     startscreen.classList.remove('d-none'),
-    info.classList.add('d-none');
+        info.classList.add('d-none');
 
 }
 
@@ -218,3 +218,41 @@ function loadMobileControlEvents() {
 
 
 }
+
+var elem = document.documentElement;
+
+function fullscreen() {
+    let fullscreenEnterButton = document.getElementById('enterFullscreen');
+    let fullscreenExitButton = document.getElementById('exFullscreen');
+    fullscreenEnterButton.classList.add('d-none');
+    fullscreenExitButton.classList.remove('d-none');
+    openFullscreen(elem);
+
+}
+
+function openFullscreen() {
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+    }
+}
+
+function closeFullscreen() {
+    let fullscreenEnterButton = document.getElementById('enterFullscreen');
+    let fullscreenExitButton = document.getElementById('exFullscreen');
+    fullscreenEnterButton.classList.remove('d-none');
+    fullscreenExitButton.classList.add('d-none');
+
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+      document.msExitFullscreen();
+    }
+  }
+
+
