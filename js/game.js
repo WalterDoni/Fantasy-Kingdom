@@ -70,20 +70,6 @@ function pauseMusic() {
 }
 
 
-function rotatePhoneShow() {
-
-    if (window.innerWidth > 650) {
-        document.getElementById('rotatePhone').classList.add('d-none');
-        document.getElementById('content').classList.remove('d-none');
-    } else {
-        document.getElementById('rotatePhone').classList.remove('d-none');
-        document.getElementById('content').classList.add('d-none');
-    }
-}
-
-window.addEventListener('resize', rotatePhoneShow);
-
-
 
 function howToPlay() {
     let info = document.getElementById('howToPlayTheGame');
