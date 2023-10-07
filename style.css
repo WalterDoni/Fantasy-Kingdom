@@ -355,7 +355,7 @@ canvas {
 }
 
 .leftRightButtons {
-    margin-left: 40px;
+    margin-left: 10px;
     padding-right: 20px;
 
 }
@@ -575,10 +575,7 @@ canvas {
 }
 
 @media(max-width:750px) {
-    .leftRightButtons {
-        margin-left: 10px;
-    }
-
+    
     .imageWin {
         width: 400px;
     }
