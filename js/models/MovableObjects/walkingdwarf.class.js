@@ -45,8 +45,6 @@ class WalkingDwarf extends MovableObjects {
 
     ]
 
-
-
     moreAccurateCollision = {
         top: 10,
         right: 85,
