@@ -32,25 +32,21 @@ class MovableObjects extends DrawableObjects {
       left: 0,
    }
 
-
    //Berechnet die Eckpukte 
    
    isColliding(obj) {
       return this.x + this.width - this.moreAccurateCollision.right > obj.x + obj.moreAccurateCollision.left && // Rechter Punkt der X-Achhse > linker Punkt x von Objekt
          this.y + this.height - this.moreAccurateCollision.bottom > obj.y + obj.moreAccurateCollision.top &&  // Unterer Punkt der Y-Achse > Oberer Punkt y von Objekt
          this.x + this.moreAccurateCollision.left < obj.x + obj.width - obj.moreAccurateCollision.right &&  // Linker Punkt der X-Achse < rechter Punkt x von Objekt
-         this.y + this.moreAccurateCollision.top < obj.y + obj.height - obj.moreAccurateCollision.bottom   // Oberer Punkt der Y-Achse < unterer Punkt Y von Objekt
+         this.y - this.moreAccurateCollision.top < obj.y + obj.height - obj.moreAccurateCollision.bottom   // Oberer Punkt der Y-Achse < unterer Punkt Y von Objekt
    }    // moreAccurateCollision --> Zieht Werte ab oder addiert Werte um die Collision genauer zu machen
 
    isCollidingWhileSwordAttack(obj) {
-      return this.x + this.width + 25 > obj.x + obj.moreAccurateCollision.left && // Rechter Punkt der X-Achhse > linker Punkt x von Objekt
-         this.y + this.height - this.moreAccurateCollision.bottom > obj.y + obj.moreAccurateCollision.top &&  // Unterer Punkt der Y-Achse > Oberer Punkt y von Objekt
-         this.x - 10 < obj.x + obj.width - obj.moreAccurateCollision.right &&  // Linker Punkt der X-Achse < rechter Punkt x von Objekt
-         this.y + this.moreAccurateCollision.top < obj.y + obj.height - obj.moreAccurateCollision.bottom   // Oberer Punkt der Y-Achse < unterer Punkt Y von Objekt
-   }    // moreAccurateCollision --> Zieht Werte ab oder addiert Werte um die Collision genauer zu machen
-
-
-
+      return this.x + this.width + 25 > obj.x + obj.moreAccurateCollision.left && 
+         this.y + this.height - this.moreAccurateCollision.bottom > obj.y + obj.moreAccurateCollision.top && 
+         this.x - 10 < obj.x + obj.width - obj.moreAccurateCollision.right &&  
+         this.y + this.moreAccurateCollision.top < obj.y + obj.height - obj.moreAccurateCollision.bottom  
+   }   
 
    hit() {
       this.healthpoints -= 10;
@@ -59,9 +55,7 @@ class MovableObjects extends DrawableObjects {
       } else {
          this.lastHit = new Date().getTime(); 
       }
-
    }
-
 
    isDead() {
       return this.healthpoints == 0;
@@ -72,10 +66,6 @@ class MovableObjects extends DrawableObjects {
       timepassed = timepassed / 1000; // Difference in s
       return timepassed < 1;  // wenn man innerhalb der letzten Sekunden getroffen wurde, gibt die Funktion true zurück
    }
-
-
-
-
 
    //Gravitation//
 
@@ -126,12 +116,8 @@ class MovableObjects extends DrawableObjects {
          return this.y < 365;
       }
    }
+
    //Gravitation//
-
-
-
-
-
 
    playAnimation(image) {
       let i = this.currentImage % image.length;// Modulo -> % / errechnet den Restwert // 0 % 6 = 0 , 1 % 6 = 1, 6 % 6 = 0 
@@ -148,7 +134,6 @@ class MovableObjects extends DrawableObjects {
    moveLeft() {
       this.x -= this.speed;
       this.turnArround = true;
-
    }
 
    jump() {

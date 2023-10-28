@@ -42,7 +42,6 @@ class Levels {
     createFloorLevel1Part1() {
         let startX = -50;
         let numberOfMiddleGrounds = 20;
-
         for (let i = 0; i < numberOfMiddleGrounds; i++) {
             let x = startX + i * 50; // Calculate the x-coordinate based on the index i
             let ground = new MiddleGround(x, 530);
@@ -54,32 +53,27 @@ class Levels {
     createFloorLevel1Part2() {
         let startX = 1280; 
         let numberOfMiddleGrounds = 30;
-
         for (let i = 0; i < numberOfMiddleGrounds; i++) {
             let x = startX + i * 50;
             let ground = new MiddleGround(x, 530);
             this.grounds.push(ground);
         }
-
     }
 
 
     createFloorLevel1Part3() {
         let startX = 3990; 
         let numberOfMiddleGrounds = 23; 
-
         for (let i = 0; i < numberOfMiddleGrounds; i++) {
             let x = startX + i * 50; 
             let ground = new MiddleGround(x, 530);
             this.grounds.push(ground);
         }
-
     }
 
     createFloorTowerLevel1Part1() {
         let startX = 2870;
         let Blocks = 10;
-
         for (let i = 0; i < Blocks; i++) {
             let x = startX + i * 50;
             let block = new MiddleGround(x, 230)
@@ -96,7 +90,6 @@ class Levels {
     createFloorTowerLevel1Part2() {
         let startX = 3460;
         let Blocks = 5;
-
         for (let i = 0; i < Blocks; i++) {
             let x = startX + i * 50;
             let block = new MiddleGround(x, 330)
@@ -104,7 +97,6 @@ class Levels {
             let block2 = new MiddleObjectBuildUp(x, 480);
             let block3 = new MiddleObjectBuildUp(x, 430);
             let block4 = new MiddleObjectBuildUp(x, 380);
-
             this.grounds.push(block, block1, block2, block3, block4);
         }
     }
@@ -112,11 +104,9 @@ class Levels {
     createLeftWall() {
         let startY = 530
         let Blocks = 9;
-
         for (let i = 0; i < Blocks; i++) {
             let y = startY - i * 50;
             let block = new RightSideBuildUpGround(-140, y)
-
             this.grounds.push(block);
         }
     }
@@ -124,10 +114,8 @@ class Levels {
     createRightWall() {
         let startY = 530;
         let Blocks = 12;
-
         for (let i = 0; i < Blocks; i++) {
             let y = startY - i * 50;
-
             let block = new LeftSideBuildUpGround(5180, y);
             let block1 = new MiddleObjectBuildUp(5230, y);
             let block2 = new MiddleObjectBuildUp(5280, y);
@@ -144,8 +132,6 @@ class Levels {
             let block13 = new MiddleObjectBuildUp(5830, y);
             let block14 = new MiddleObjectBuildUp(5880, y);
             let block15 = new MiddleObjectBuildUp(5930, y);
-
-
             this.grounds.push(block, block1, block2, block3, block4, block5, block6, block7, block8, block9, block10, block11, block12, block13, block14, block15);
         }
     }

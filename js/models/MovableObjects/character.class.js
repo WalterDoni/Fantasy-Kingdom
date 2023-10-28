@@ -85,8 +85,8 @@ class Character extends MovableObjects {
     ]
 
     moreAccurateCollision = {
-        top: 30,
-        right: 40,
+        top: 0,
+        right: 60,
         bottom: 30,
         left: 50,
     }
@@ -101,11 +101,7 @@ class Character extends MovableObjects {
         this.loadImages(this.IDLE_IMAGE);
         this.applyGravity();
         this.animate();
-
-
     }
-
-
 
     animate() {
 
@@ -114,19 +110,15 @@ class Character extends MovableObjects {
             this.characterJump();
             this.idle();
             this.world.camera_x = -this.x + 100; // +100 versetzt die Kamera, somit klebt der Charakter nicht so sehr am linken Rand
-          
         }, 1000 / 60);
-
         setStoppableInterval(() => {
             this.startTheIdleAnimation()
         }, 150);
-
         setStoppableInterval(() => {
             this.hurtOrDead();
             this.ifCharacterJump();
             this.playTheWalkingAnimation();
         }, 120);
-
     }
 
     /**
@@ -142,7 +134,6 @@ class Character extends MovableObjects {
      * Reset the @param {variable} timerToStopAnimations to 0
      */
     fireAttack() {
-
         if (this.timerToStopAnimations <= 100 && !this.attackInterval) {
             this.attackInterval = setInterval(() => {
                 this.playAnimation(this.IMAGE_ATTACK);
@@ -286,6 +277,7 @@ class Character extends MovableObjects {
         if (this.world.keyboard.UP && !this.isAboveGround()) {
             this.jump();
             this.handleTheIdleTimer();
+            
            
         }
     }
@@ -298,6 +290,7 @@ class Character extends MovableObjects {
             this.playAnimation(this.IMAGES_JUMPING);
             this.jump_sound.volume = 0.1;
             this.jump_sound.play();
+          
         }
     }
     

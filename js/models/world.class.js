@@ -46,6 +46,7 @@ class World {
         this.collectCoinsOrManapotion();
 
     }
+
     /**
      * Bind the character to the world, it's necessary e.g. for the camera_x 
      * Bind the throwableObject to the world, it's necessary e.g. for the collision 
@@ -55,12 +56,10 @@ class World {
         this.throwableObjects.world = this;
     }
 
-
     /**
      * In order to avoid running unnecessarily many intervals, all functions are placed in a single interval.
      */
     run() {
-
         setStoppableInterval(() => {
             this.checkCollisions();
             this.useAttacksFromCharacter();
@@ -74,9 +73,7 @@ class World {
             this.playSound();
             this.showWinOrDefeatScreen();
         }, 150);
-
     }
-
 
     /**
       * @param {variable} playMusic -> If the variable is set on true, music will play, otherwise it will stop. This function can be activated by the button on top of the canvas.
@@ -86,16 +83,12 @@ class World {
             this.game_sound.volume = 0.1;
             this.game_sound.play();
             this.character.unmuteCharacterSounds();
-
-
         } if (!playMusic) {
             this.game_sound.pause();
             this.game_sound.currentTime = 0;
             this.character.muteCharacterSounds();
         }
     }
-
-
 
     /**
     * Show on off the two screens ( win- or losescreen), depends which conditions get reached at first.
@@ -104,12 +97,10 @@ class World {
         if (this.character.healthpoints == 0 && this.endbossHP.healthpoints > 0) {
             this.defeatScreen();
             stopGame();
-
             setTimeout(() => {
                 this.defeat_sound.pause();
             }, 5000);
         }
-
         if (this.character.healthpoints > 0 && this.endbossHP.healthpoints == 0) {
             this.winScreen();
             stopGame();
@@ -129,8 +120,6 @@ class World {
         } if (!playMusic) {
             document.getElementById('defeatScreen').classList.remove('d-none');
         }
-
-
     }
 
     winScreen() {
@@ -158,7 +147,6 @@ class World {
                     this.coinCounter.renderCoinCounter(this.ctx);
                 }
             })
-
             this.level.manapotions.forEach((potion, index) => {
                 if (this.manabar.manabarMax < 200) {
                     if (this.character.x - potion.x >= 1 && this.character.x - potion.x <= 15 && this.character.y + this.character.height - potion.y >= 0 && this.character.y - potion.y <= 10) {
@@ -177,31 +165,25 @@ class World {
    */
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-
             if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
                 this.character.hit();
                 this.healthbar.updateHealthpoints();
             }
-
         });
     }
 
     checkCollisionsWalkingEnemies() {
         this.level.walkingEnemies.forEach((enemy) => {
-
             if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
                 this.character.hit();
                 this.healthbar.updateHealthpoints();
             }
-
         });
     }
-
 
     checkIfThrowableObjectHitsEnemie() {
         this.throwOnEnemie();
         this.throwOnWalkingEnemie();
-
     }
 
     /**
@@ -218,7 +200,6 @@ class World {
             });
         });
     }
-
 
     throwOnWalkingEnemie() {
         this.level.walkingEnemies.forEach((enemy) => {
@@ -237,29 +218,21 @@ class World {
      */
     hitEnemy() {
         this.level.enemies.forEach((enemy) => {
-
             if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 0) {
                 this.damageTheHittedEnemy(enemy);
                 this.character.jump();
-            }
-
-            if (this.character.isCollidingWhileSwordAttack(enemy) && this.keyboard.F_KEYBOARD) {
+            } if (this.character.isCollidingWhileSwordAttack(enemy) && this.keyboard.F_KEYBOARD) {
                 this.damageTheHittedEnemy(enemy);
             }
 
         });
-
-
     }
-
 
     hitEnemyWalkingEnemies() {
         this.level.walkingEnemies.forEach((enemy) => {
-
             if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 0) {
                 this.damageTheHittedEnemy(enemy);
                 this.character.jump();
-
             } if (this.character.isCollidingWhileSwordAttack(enemy) && this.keyboard.F_KEYBOARD) {
                 this.damageTheHittedEnemy(enemy);
             }
@@ -268,16 +241,12 @@ class World {
 
     //-WalkingEnemies--//
 
-
-
     damageTheHittedEnemy(enemy) {
         enemy.healthpoints -= 50;
         if (enemy.healthpoints < 0) {
             enemy.healthpoints = 0;
         }
     }
-
-
 
     /**
      * The character can use two different attacks. One is a casting fireball and the other is "normal" attack with the sword.
@@ -288,46 +257,36 @@ class World {
      * The other conditions is a simple animation which will played, when the variable is true.
      */
     useAttacksFromCharacter() {
-
         if (this.keyboard.T_KEYBOARD && this.manabar.mana > 0) {
             let fireball = new ThrowableObjects(this.character.x + 50, this.character.y + 20);
             this.throwableObjects.push(fireball);
             this.character.fireAttack();
             this.manabar.updateManapointsMinus();
             this.removeFireballFromCanvas = new Date().getTime()
-
             setTimeout(() => {
                 if (this.removeFireballFromCanvas <= new Date().getTime()) {
                     // Führe den Code aus, nachdem 1,2 Sekunden vergangen sind
                     this.throwableObjects.splice(fireball, 1);
                 }
             }, 1200);
-        }
-
-        if (this.keyboard.F_KEYBOARD) {
+        } if (this.keyboard.F_KEYBOARD) {
             this.character.swordAttack();
-
         }
     }
 
-    // Endboss-------------------
-
+    //-------------------Endboss-------------------//
 
     checkCollisionsWithEndboss() {
-
         this.level.endboss.forEach((boss) => {
-
             if (this.character.isColliding(boss) && !this.character.isAboveGround()) {
                 this.character.hit();
                 this.healthbar.updateHealthpoints();
             }
-
         });
     };
 
     hitEndboss() {
         this.level.endboss.forEach((boss) => {
-
             if (this.character.isColliding(boss) && this.character.isAboveGround() && this.character.speedY < 0) {
                 this.bossHit(boss);
                 this.character.jump();
@@ -378,9 +337,6 @@ class World {
         this.addObjectsToMap(this.level.walkingEnemies);
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects);
-        /*this.level.enemies.forEach(enemy => {  //fast writing method for the for-loop
-            this.addToWorld(enemy) // 
-        });*/
         this.addObjectsToMap(this.level.grounds);
         this.ctx.translate(-this.camera_x, 0)
 
@@ -394,29 +350,23 @@ class World {
         this.addToWorld(this.coinImage);
         this.coinCounter.renderCoinCounter(this.ctx);
         this.coinCounter.renderXFromCounter(this.ctx);
-
         if (this.endboss.firstContact) {
             this.endbossHP.renderStatusbars(this.ctx);
             this.addToWorld(this.endbossAvatarFrame);
             this.addToWorld(this.endbossAvatarIcon);
             this.addToWorld(this.endbossHPFrame);
         }
-
         //-- Fixed elements on the canvas - End -- //
-
-
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
         });
     }
 
-
     addObjectsToMap(Objects) {
         Objects.forEach(object =>
             this.addToWorld(object));
     };
-
 
     /**
      * This functions draws elements on the canvas.
@@ -438,16 +388,11 @@ class World {
             this.ctx.scale(-1, 1);// Save the size from the image
             movabelThing.x = movabelThing.x * -1; // Save the place on the X-Axis
         }
-
         movabelThing.draw(this.ctx);
         /*movabelThing.drawFrame(this.ctx);*/
-
         if (movabelThing.turnArround) { // Falls ein Bild verändert wurde, deshalb vorhin save
             movabelThing.x = movabelThing.x * -1;
             this.ctx.restore();   // Ursprung wieder herstellen, Bilder wieder normal anzeigen
-
         }
     }
-
-
 }

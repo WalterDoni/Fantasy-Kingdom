@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 
 <head>
     <meta charset="UTF-8">
@@ -58,8 +58,11 @@
 </head>
 
 <body id="content">
-
-    <div class="content">
+    <div class="info">
+        <span><img src="img/5.CollectableItems/crystal.png">->Fill up your missing mana</span>
+        <span><img src="img/5.CollectableItems/coin1.png">->Raise your score</span>
+    </div>
+    <div class="content" id="fullscreenContainer">
 
 
         <div class="soundAndHotToPlay">
@@ -67,8 +70,10 @@
                     src="img/9.Interface/Startscreen/questionmark.png"></button>
             <button onclick="pauseMusic()" class="startscreenSound" id="musicButton"><img
                     src="img/9.Interface/Startscreen/soundOn.png"></button>
-            <button onclick="fullscreen()" class="startScreenFullscreen" id="enterFullscreen"><img src="img/9.Interface/Startscreen/fullscreen.png"></button>
-            <button onclick="closeFullscreen()" class="startScreenFullscreen d-none" id="exFullscreen"><img src="img/9.Interface/Startscreen/fullscreen-exit.png"></button>
+            <button onclick="fullscreen()" class="startScreenFullscreen" id="enterFullscreen"><img
+                    src="img/9.Interface/Startscreen/fullscreen.png"></button>
+            <button onclick="closeFullscreen()" class="startScreenFullscreen d-none" id="exFullscreen"><img
+                    src="img/9.Interface/Startscreen/fullscreen-exit.png"></button>
 
         </div>
 
@@ -113,7 +118,7 @@
         <canvas class="d-none" id="canvas" width="1024" height="576"></canvas>
 
     </div>
-    <div class="rotatePhone" >
+    <div class="rotatePhone">
         <img src="img/rotate.jpg" alt="">
         <span>Please,rotate your Phone.......You really need the space to save the world!</span>
     </div>

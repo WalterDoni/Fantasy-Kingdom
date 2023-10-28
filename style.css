@@ -63,6 +63,23 @@ canvas {
     font-weight: bold;
 }
 
+.info{
+    font-family: 'Courier New', Courier, monospace !important;
+    font-weight: bold;
+    display: flex;
+    font-size: 25px;
+    max-width: 1024px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 6px 6px rgba(160, 10, 10, 0.7);
+}
+
+.info span{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px 10px 20px;
+}
+
 .closeHowToPlay{
     position: absolute;
     bottom: 10%;
@@ -416,8 +433,10 @@ canvas {
 }
 
 @media (max-width: 1024px) {
-    .howToPlayKeybindings {
+    .howToPlayKeybindings,
+    .info {
         width: 800px;
+        font-size: 22px;
     }
 
     .startImage {
@@ -451,7 +470,8 @@ canvas {
 
 @media(max-width: 920px) {
 
-    .howToPlayKeybindings {
+    .howToPlayKeybindings,
+    .info {
         display: none;
     }
     

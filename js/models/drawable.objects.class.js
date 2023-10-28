@@ -25,7 +25,6 @@ class DrawableObjects {
         }
     }
 
-
     /**
      * 
      * @param {Array} array -   //['img/image1.png', 'img/image2.png',........]
@@ -38,7 +37,6 @@ class DrawableObjects {
         });
     }
 
-    
     // Draw the frame arround Objects, for developing
    /*drawFrame(ctx) { 
         if (this instanceof Character || this instanceof Goblin || this instanceof Dwarf || this instanceof Endboss || this instanceof Coin || this instanceof WalkingDwarf || this instanceof WalkingDwarf) {
