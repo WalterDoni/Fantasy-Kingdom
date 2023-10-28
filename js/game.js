@@ -124,7 +124,6 @@ window.addEventListener("keydown", (event) => {
 
 });
 
-
 window.addEventListener("keyup", (event) => {
     const key = event.key;
 

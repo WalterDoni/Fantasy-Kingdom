@@ -67,7 +67,6 @@ class WalkingDwarf extends MovableObjects {
     }
 
     animate() {
-
      this.enemie1WalkingArea();
      this.enemie1IsHurtOrDead();
      this.enemie3WalkingArea();
@@ -81,20 +80,17 @@ class WalkingDwarf extends MovableObjects {
       * to walk into the other direction.
       */
     enemie1WalkingArea() {
-
         this.walk1 = setInterval(() => {
             if (world && level1.walkingEnemies[1].x <= 2300 || this.walkRightInArea) {
                 level1.walkingEnemies[1].moveRight();
                 level1.walkingEnemies[1].walkRightInArea = true;
                 level1.walkingEnemies[1].walkLeftInArea = false;
-
             } if (world && level1.walkingEnemies[1].x >= 2500 || this.walkLeftInArea) {
                 level1.walkingEnemies[1].moveLeft();
                 level1.walkingEnemies[1].walkRightInArea = false;
                 level1.walkingEnemies[1].walkLeftInArea = true;
             }
         }, 1000 / 60);
-
         this.walking1 = setInterval(() => {
             if (this.walkLeftInArea || this.walkRightInArea) {
                 this.playAnimation(this.WALKING_IMAGES);
@@ -108,7 +104,6 @@ class WalkingDwarf extends MovableObjects {
      * After that it will add some gravity, so the enemy fall into the ground and disappear. 
      */
     enemie1IsHurtOrDead() {
-
         setInterval(() => {
             if (level1.walkingEnemies[1].isDead() && this.dead1 <= 1) {
                 clearInterval(this.walk1);
@@ -116,7 +111,6 @@ class WalkingDwarf extends MovableObjects {
                 level1.walkingEnemies[1].loadImage(this.DEAD_IMAGE);
                 this.dead1 += 1;
                 this.speedY1 = 7;
-
             } else if (level1.walkingEnemies[1].healthpoints == 50 && this.hurt1 <= 50) {
                 level1.walkingEnemies[1].playAnimation(this.HURT_IMAGES);
                 this.hurt1 += 15;
@@ -133,13 +127,11 @@ class WalkingDwarf extends MovableObjects {
     }
     //--Enemie3--//
     enemie3WalkingArea() {
-
         this.walk3 = setInterval(() => {
             if (world && level1.walkingEnemies[3].x <= 3400 || this.walkRightInArea1) {
                 level1.walkingEnemies[3].moveRight();
                 level1.walkingEnemies[3].walkRightInArea1 = true;
                 level1.walkingEnemies[3].walkLeftInArea1 = false;
-
             } if (world && level1.walkingEnemies[3].x >= 3650 || this.walkLeftInArea1) {
                 level1.walkingEnemies[3].moveLeft();
                 level1.walkingEnemies[3].walkRightInArea1 = false;
@@ -155,7 +147,6 @@ class WalkingDwarf extends MovableObjects {
     }
 
     enemie3IsHurtOrDead() {
-
         setInterval(() => {
             if (level1.walkingEnemies[3].isDead() && this.dead3 <= 1) {
                 clearInterval(this.walk3);
@@ -163,7 +154,6 @@ class WalkingDwarf extends MovableObjects {
                 level1.walkingEnemies[3].loadImage(this.DEAD_IMAGE);
                 this.dead3 += 1;
                 this.speedY3 = 7;
-
             } else if (level1.walkingEnemies[3].healthpoints == 50 && this.hurt3 <= 50) {
                 level1.walkingEnemies[3].playAnimation(this.HURT_IMAGES);
                 this.hurt3 += 15;
@@ -184,13 +174,11 @@ class WalkingDwarf extends MovableObjects {
      */
     gameEnds() {
         setInterval(() => {
-
             if (world && world.character.healthpoints == 0 || world.endboss.isDead()) {
                 clearInterval(this.walk1);
                 clearInterval(this.walking1);
                 clearInterval(this.walk3);
                 clearInterval(this.walking3);
-
             }
         }, 100);
     }

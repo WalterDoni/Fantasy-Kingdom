@@ -34,7 +34,6 @@ class World {
     endbossAvatarFrame = new EndbossAvatarFrame();
     endbossAvatarIcon = new EndbossAvatarIcon();
 
-
     constructor(canvas, keyboard) {
 
         this.canvas = canvas;
@@ -44,7 +43,6 @@ class World {
         this.draw();
         this.run();
         this.collectCoinsOrManapotion();
-
     }
 
     /**
@@ -381,7 +379,6 @@ class World {
      * 
      */
     addToWorld(movabelThing) {
-
         if (movabelThing.turnArround) {
             this.ctx.save();  // save the current image
             this.ctx.translate(130, 0); // Mirrors the image

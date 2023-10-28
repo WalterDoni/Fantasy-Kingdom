@@ -1,12 +1,9 @@
 class Goblin extends MovableObjects {
     speed = 0.2;
 
-
-
     attacksInterval = null;
 
     WALKING_IMAGES = [
-
         'img/3.Enemies/Goblin/Walk/walk0.png',
         'img/3.Enemies/Goblin/Walk/walk1.png',
         'img/3.Enemies/Goblin/Walk/walk2.png',
@@ -14,7 +11,6 @@ class Goblin extends MovableObjects {
         'img/3.Enemies/Goblin/Walk/walk4.png',
         'img/3.Enemies/Goblin/Walk/walk5.png',
         'img/3.Enemies/Goblin/Walk/walk6.png',
-
     ]
 
     IMAGE_ATTACK = [
@@ -23,7 +19,6 @@ class Goblin extends MovableObjects {
         'img/3.Enemies/Goblin/Attack/attack3.png',
         'img/3.Enemies/Goblin/Attack/attack4.png',
         'img/3.Enemies/Goblin/Attack/attack5.png',
-
     ]
 
 
@@ -31,7 +26,6 @@ class Goblin extends MovableObjects {
         'img/3.Enemies/Goblin/Hurt/hurt1.png',
         'img/3.Enemies/Goblin/Hurt/hurt2.png',
         'img/3.Enemies/Goblin/Hurt/hurt3.png',
-
     ]
 
     DEAD_IMAGE = [
@@ -63,11 +57,9 @@ class Goblin extends MovableObjects {
         this.loadImages(this.IDLE_IMAGES);
         this.animate();
         this.gameEnds();
-
     }
 
     animate() {
-
         this.idleAnimation();
         this.hurtOrDead();
         this.conditionToMove();
@@ -76,7 +68,6 @@ class Goblin extends MovableObjects {
     }
 
     idleAnimation() {
-
         this.Idle = setInterval(() => {
             this.turnArround = true;
             this.playAnimation(this.IDLE_IMAGES);
@@ -84,25 +75,20 @@ class Goblin extends MovableObjects {
     }
 
     conditionToMove() {
-
         this.conditionsToMove = setInterval(() => {
             if (world && level1.enemies[1].x - world.character.x <= 500 || this.firstContact) {
                 clearInterval(this.Idle);
                 this.firstContact = true;
             }
         }, 1000 / 60);
-
     }
 
     movements() {
-
         this.startMoving = setInterval(() => {
             if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 30) {
                 this.moveLeft();
             }
         }, 1000 / 60);
-
-
         this.startMovingAnimation = setInterval(() => {
             if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 30) {
                 this.playAnimation(this.WALKING_IMAGES);
@@ -112,7 +98,6 @@ class Goblin extends MovableObjects {
     }
 
     attackAnimation() {
-
         this.attacks = setInterval(() => {
             if (world && this.x - world.character.x <= 120 && this.y - world.character.y <= 80 && this.x > world.character.x) {
                 this.playAnimation(this.IMAGE_ATTACK);

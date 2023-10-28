@@ -14,7 +14,6 @@ class Character extends MovableObjects {
     animation = false;
     attackInterval = null;
 
-
     WALKING_IMAGES = [
         'img/1.PlayableChars/Knight/Walk/walk1.png',
         'img/1.PlayableChars/Knight/Walk/walk2.png',
@@ -23,7 +22,6 @@ class Character extends MovableObjects {
         'img/1.PlayableChars/Knight/Walk/walk5.png',
         'img/1.PlayableChars/Knight/Walk/walk6.png',
     ]
-
 
     IMAGES_JUMPING = [
         'img/1.PlayableChars/Knight/Jump_high/jump1.png',
@@ -34,8 +32,6 @@ class Character extends MovableObjects {
         'img/1.PlayableChars/Knight/Jump_high/jump6.png',
         'img/1.PlayableChars/Knight/Jump_high/jump7.png',
         'img/1.PlayableChars/Knight/Walk/walk1.png',
-
-
     ]
 
     HURT_IMAGES = [
@@ -56,8 +52,6 @@ class Character extends MovableObjects {
         'img/1.PlayableChars/Knight/Death/death8.png',
         'img/1.PlayableChars/Knight/Death/death9.png',
         'img/1.PlayableChars/Knight/Death/death10.png'
-
-
     ]
 
     IMAGE_ATTACK = [
@@ -104,7 +98,6 @@ class Character extends MovableObjects {
     }
 
     animate() {
-
         setStoppableInterval(() => {
             this.moveleftOrRight();
             this.characterJump();
@@ -196,9 +189,7 @@ class Character extends MovableObjects {
         this.jump_sound.muted = false;
         this.normalAttack_sound.muted = false;
         this.specialAttack_sound.muted = false;
-
     }
-
 
     /** 
      * While standing still and do nothing, the counter will get up.
@@ -224,6 +215,7 @@ class Character extends MovableObjects {
             this.playAnimation(this.IDLE_IMAGE);
         }
     }
+
     /**
      * 
      * @returns some coordinates from the x-axes and y-axes. Depends on the positions, some movements are possible or not. For some the value from the y-axe must be changed(jumping on a higher floor), to continue to walk right or left
@@ -236,7 +228,6 @@ class Character extends MovableObjects {
         return this.world.keyboard.LEFT && this.x > -30 || this.x >= 910 && this.x <= 1200 && this.y > 360 || this.x >= 2740 && this.x <= 3370 && this.y > 100 || this.x >= 3380 && this.x <= 3720 && this.y > 200 || this.x >= 3730 && this.x <= 3900 && this.y > 300
     }
 
-
     /**
      * If the conditions are reached, the character will move in of the both directions. MoveRight adds a value to the x-coordinates, while moveLeft remove some. 
      * After handleTheIdleTimer, a audio file will play while walking. With the half of the volumegate.
@@ -247,7 +238,6 @@ class Character extends MovableObjects {
             this.handleTheIdleTimer();
             this.walking_sound.volume = 0.5;
             this.walking_sound.play();
-         
         }
 
         if (this.conditionsToWalkLeft()) {
@@ -276,9 +266,7 @@ class Character extends MovableObjects {
         // Charakter springt, setzt speedY auf 20 um dann nach und nach abzufallen (acceleration)
         if (this.world.keyboard.UP && !this.isAboveGround()) {
             this.jump();
-            this.handleTheIdleTimer();
-            
-           
+            this.handleTheIdleTimer();   
         }
     }
 
@@ -290,7 +278,6 @@ class Character extends MovableObjects {
             this.playAnimation(this.IMAGES_JUMPING);
             this.jump_sound.volume = 0.1;
             this.jump_sound.play();
-          
         }
     }
     

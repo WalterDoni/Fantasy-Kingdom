@@ -21,10 +21,7 @@ class WalkingGoblin extends MovableObjects {
     walk4 = null;
     walking4 = null;
 
-
-
     WALKING_IMAGES = [
-
         'img/3.Enemies/Goblin/Walk/walk0.png',
         'img/3.Enemies/Goblin/Walk/walk1.png',
         'img/3.Enemies/Goblin/Walk/walk2.png',
@@ -32,7 +29,6 @@ class WalkingGoblin extends MovableObjects {
         'img/3.Enemies/Goblin/Walk/walk4.png',
         'img/3.Enemies/Goblin/Walk/walk5.png',
         'img/3.Enemies/Goblin/Walk/walk6.png',
-
     ]
 
     IMAGE_ATTACK = [
@@ -41,7 +37,6 @@ class WalkingGoblin extends MovableObjects {
         'img/3.Enemies/Goblin/Attack/attack3.png',
         'img/3.Enemies/Goblin/Attack/attack4.png',
         'img/3.Enemies/Goblin/Attack/attack5.png',
-
     ]
 
 
@@ -49,11 +44,9 @@ class WalkingGoblin extends MovableObjects {
         'img/3.Enemies/Goblin/Hurt/hurt1.png',
         'img/3.Enemies/Goblin/Hurt/hurt2.png',
         'img/3.Enemies/Goblin/Hurt/hurt3.png',
-
     ]
 
     DEAD_IMAGE = [
-
         'img/3.Enemies/Goblin/Death/death4.png',
     ]
 
@@ -85,7 +78,6 @@ class WalkingGoblin extends MovableObjects {
         this.enemie2IsHurtOrDead();
         this.enemie4WalkingArea();
         this.enemie4IsHurtOrDead();
-    
     }
 
      //--Enemie0--//
@@ -95,20 +87,17 @@ class WalkingGoblin extends MovableObjects {
       * to walk into the other direction.
       */
     enemie0WalkingArea() {
-
         this.walk0 = setInterval(() => {
             if (world && level1.walkingEnemies[0].x <= 975 || this.walkRightInArea) {
                 level1.walkingEnemies[0].moveRight();
                 level1.walkingEnemies[0].walkRightInArea = true;
                 level1.walkingEnemies[0].walkLeftInArea = false;
-
             } if (world && level1.walkingEnemies[0].x >= 1150 || this.walkLeftInArea) {
                 level1.walkingEnemies[0].moveLeft();
                 level1.walkingEnemies[0].walkRightInArea = false;
                 level1.walkingEnemies[0].walkLeftInArea = true;
             }
         }, 1000 / 60);
-
         this.walking0 = setInterval(() => {
             if (this.walkLeftInArea || this.walkRightInArea) {
                 this.playAnimation(this.WALKING_IMAGES);
@@ -122,7 +111,6 @@ class WalkingGoblin extends MovableObjects {
      * After that it will add some gravity, so the enemy fall into the ground and disappear. 
      */
     enemie0IsHurtOrDead() {
-
         setInterval(() => {
             if (level1.walkingEnemies[0].isDead() && this.dead0 <= 1) {
                 clearInterval(this.walk0);
@@ -130,14 +118,11 @@ class WalkingGoblin extends MovableObjects {
                 level1.walkingEnemies[0].loadImage(this.DEAD_IMAGE);
                 this.dead0 += 1;
                 this.speedY0 = 7;
-
             } else if (level1.walkingEnemies[0].healthpoints == 50 && this.hurt0 <= 50) {
                 level1.walkingEnemies[0].playAnimation(this.HURT_IMAGES);
                 this.hurt0 += 15;
             }
         }, 140);
-
-
         setInterval(() => {
             if (level1.walkingEnemies[0].isDead() || this.speedY0 > 0) {
                 level1.walkingEnemies[0].y -= this.speedY0;
@@ -148,20 +133,17 @@ class WalkingGoblin extends MovableObjects {
     //--Enemie2--//
 
     enemie2WalkingArea() {
-
         this.walk2 = setInterval(() => {
             if (world && level1.walkingEnemies[2].x <= 2800 || this.walkRightInArea1) {
                 level1.walkingEnemies[2].moveRight();
                 level1.walkingEnemies[2].walkRightInArea1 = true;
                 level1.walkingEnemies[2].walkLeftInArea1 = false;
-
             } if (world && level1.walkingEnemies[2].x >= 3300 || this.walkLeftInArea1) {
                 level1.walkingEnemies[2].moveLeft();
                 level1.walkingEnemies[2].walkRightInArea1 = false;
                 level1.walkingEnemies[2].walkLeftInArea1 = true;
             }
         }, 1000 / 60);
-
         this.walking2 = setInterval(() => {
             if (this.walkLeftInArea1 || this.walkRightInArea1) {
                 this.playAnimation(this.WALKING_IMAGES);
@@ -170,7 +152,6 @@ class WalkingGoblin extends MovableObjects {
     }
     
     enemie2IsHurtOrDead() {
-
         setInterval(() => {
             if (level1.walkingEnemies[2].isDead() && this.dead2 <= 1) {
                 clearInterval(this.walk2);
@@ -178,38 +159,32 @@ class WalkingGoblin extends MovableObjects {
                 level1.walkingEnemies[2].loadImage(this.DEAD_IMAGE);
                 this.dead2 += 1;
                 this.speedY2 = 7;
-
             } else if (level1.walkingEnemies[2].healthpoints == 50 && this.hurt2 <= 50) {
                 level1.walkingEnemies[2].playAnimation(this.HURT_IMAGES);
                 this.hurt2 += 15;
             }
         }, 140);
-
         setInterval(() => {
             if (level1.walkingEnemies[2].isDead() || this.speedY2 > 0) {
                 level1.walkingEnemies[2].y -= this.speedY2;
                 this.speedY2 -= this.acceleration;
             }
         }, 1000 / 25)
-
     }
 
     //--Enemie4--//
     enemie4WalkingArea() {
-
         this.walk4 = setInterval(() => {
             if (world && level1.walkingEnemies[4].x <= 3720 || this.walkRightInArea2) {
                 level1.walkingEnemies[4].moveRight();
                 level1.walkingEnemies[4].walkRightInArea2 = true;
                 level1.walkingEnemies[4].walkLeftInArea2 = false;
-
             } if (world && level1.walkingEnemies[4].x >= 3850 || this.walkLeftInArea2) {
                 level1.walkingEnemies[4].moveLeft();
                 level1.walkingEnemies[4].walkRightInArea2 = false;
                 level1.walkingEnemies[4].walkLeftInArea2 = true;
             }
         }, 1000 / 60);
-
         this.walking4 = setInterval(() => {
             if (this.walkLeftInArea2 || this.walkRightInArea2) {
                 this.playAnimation(this.WALKING_IMAGES);
@@ -218,7 +193,6 @@ class WalkingGoblin extends MovableObjects {
     }
 
     enemie4IsHurtOrDead() {
-
         setInterval(() => {
             if (level1.walkingEnemies[4].isDead() && this.dead4 <= 1) {
                 clearInterval(this.walk4);
@@ -226,14 +200,11 @@ class WalkingGoblin extends MovableObjects {
                 level1.walkingEnemies[4].loadImage(this.DEAD_IMAGE);
                 this.dead4 += 1;
                 this.speedY4 = 7;
-
             } else if (level1.walkingEnemies[4].healthpoints == 50 && this.hurt4 <= 50) {
                 level1.walkingEnemies[4].playAnimation(this.HURT_IMAGES);
                 this.hurt4 += 15;
             }
         }, 140);
-
-
         setInterval(() => {
             if (level1.walkingEnemies[4].isDead() || this.speedY4 > 0) {
                 level1.walkingEnemies[4].y -= this.speedY4;
@@ -247,7 +218,6 @@ class WalkingGoblin extends MovableObjects {
      */
     gameEnds() {
         setInterval(() => {
-
             if (world && world.character.healthpoints == 0 || world.endbossHP == 0) {
                 clearInterval(this.walk0);
                 clearInterval(this.walking0);

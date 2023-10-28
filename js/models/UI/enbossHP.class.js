@@ -12,8 +12,6 @@ class EndbossHP extends DrawableObjects {
       super();
       this.x = 700;
       this.y = 60;
-  
-  
     }
     
     /**
@@ -37,5 +35,4 @@ class EndbossHP extends DrawableObjects {
         this.healthbarMax = (this.healthpoints / this.maxHealth) * this.maxWidth;
       }
     }
-  
   }

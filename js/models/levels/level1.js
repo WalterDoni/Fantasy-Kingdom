@@ -78,8 +78,6 @@ function initLevel(){
         new SkyMiddleFloorGround(2330, 300),
         new SkyBlockGroundLeft(2280, 300),
        
-
-
         new RightSideBuildUpGround(3370, 530),
         new RightSideBuildUpGround(3370, 480),
         new RightSideBuildUpGround(3370, 430),
@@ -114,8 +112,6 @@ function initLevel(){
 
         new LeftSideGround(3940, 530),
         new RightSideGround(5140, 530),
-
-
     ],
     [
         new Cloud(100, 50),
@@ -127,7 +123,6 @@ function initLevel(){
         new Cloud(4200, 70),
         new Cloud(4800, 40),
         new Cloud(5600, 50),
-
     ],
     [//// X , Y - Achse /////
         new Bird(150, 80),
@@ -153,7 +148,6 @@ function initLevel(){
         new Goblin(1700, 405),// 2
         new Goblin(1800, 405),// 3
         new Dwarf(2500, 400),// 4 
-
     ],
 
     [
@@ -162,7 +156,6 @@ function initLevel(){
         new WalkingGoblin(3300, 100),// 2 third floor enemie
         new WalkingDwarf(3650, 198),// 3 fourth floor enemie
         new WalkingGoblin(3850, 302),// 4 fifth floor enemie
-
     ],
 
 
@@ -184,12 +177,9 @@ function initLevel(){
         new Coin(3400, 250),
         new Coin(3500, 250),
         new Coin(3550, 250),
-
     ],
 
     [
-
-
         new ManaCrystal(400, 450),
         new ManaCrystal(1050, 350),
         new ManaCrystal(1600, 300),

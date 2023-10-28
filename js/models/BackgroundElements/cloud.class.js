@@ -3,7 +3,6 @@ class Cloud extends MovableObjects{
     width = 500;
     speed = 0.15;
     
-
     constructor(x, y){
         super().loadImage('img/4.Maps/forest/Background/Bright/coluds_small.png')
         this.y = y;
@@ -12,7 +11,6 @@ class Cloud extends MovableObjects{
     };
 
     animate(){
-
         setStoppableInterval(() => {
         this.x -= this.speed;
     }, 1000 / 30); // 60 FPS

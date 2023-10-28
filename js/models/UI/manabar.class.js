@@ -10,8 +10,6 @@ class Manabar extends DrawableObjects {
       this.maxWidth = this.width;
       this.mana =  this.maxMana;
       this.manabarMax = 200;
-      
-  
     }
   
     renderStatusbars(ctx){
@@ -26,7 +24,6 @@ class Manabar extends DrawableObjects {
   * Update when conditions are reached(use fireAttack)
   */
   updateManapointsMinus() {
-
     if (this.manabarMax >= 1) {
       this.mana -= 50;
       this.manabarMax = (this.mana / this.maxMana) * this.maxWidth;
@@ -37,11 +34,9 @@ class Manabar extends DrawableObjects {
   * Update when conditions are reached(collect Manapotion)
   */
   updateManapointsPlus(){
-
     if(this.manabarMax < 200){
       this.mana += 50;
       this.manabarMax = (this.mana / this.maxMana) * this.maxWidth;
     }
   }
-
   }

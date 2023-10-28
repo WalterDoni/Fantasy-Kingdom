@@ -12,8 +12,6 @@ class Healthbar extends DrawableObjects {
     super();
     this.x = 130;
     this.y = 40;
-
-
   }
 
   /**
@@ -31,7 +29,6 @@ class Healthbar extends DrawableObjects {
   * Update when conditions are reached ( character get a hit)
   */
   updateHealthpoints() {
-
     if (this.healthbarMax >= 1) {
       this.healthpoints -= 10;
       this.healthbarMax = (this.healthpoints / this.maxHealth) * this.maxWidth;

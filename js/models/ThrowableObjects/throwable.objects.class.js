@@ -12,7 +12,6 @@ class ThrowableObjects extends MovableObjects {
         'img/7.Effects/Fire/fire8.png',
         'img/7.Effects/Fire/fire9.png',
         'img/7.Effects/Fire/fire10.png',
-
     ]
 
     constructor(x, y) {
@@ -25,11 +24,7 @@ class ThrowableObjects extends MovableObjects {
         this.throw();
     }
 
-
-
     throw() {
-
-
         if (this.timerToStopAnimations <= 100 && !this.attackInterval && !world.character.turnArround) {
             this.attackInterval = setInterval(() => {
                 this.x += 30;
@@ -40,12 +35,9 @@ class ThrowableObjects extends MovableObjects {
                     clearInterval(this.attackInterval);
                     this.attackInterval = null;
                     this.timerToStopAnimations = 0;
-
-
                 }
             }, 110);
         }
-
         if (this.timerToStopAnimations <= 100 && !this.attackInterval && world.character.turnArround) {
             this.attackInterval = setInterval(() => {
                 this.turnArround = true;
@@ -57,7 +49,6 @@ class ThrowableObjects extends MovableObjects {
                     clearInterval(this.attackInterval);
                     this.attackInterval = null;
                     this.timerToStopAnimations = 0;
-
                 }
             }, 110);
         }

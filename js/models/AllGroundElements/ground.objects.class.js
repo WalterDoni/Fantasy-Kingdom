@@ -4,8 +4,5 @@ class GroundElements extends MovableObjects{
     y = 365;
     width = 50;
     height = 50;
-
     img;
-
-
 }

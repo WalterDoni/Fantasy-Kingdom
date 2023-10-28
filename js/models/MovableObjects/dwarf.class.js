@@ -22,7 +22,6 @@ class Dwarf extends MovableObjects {
         'img/3.Enemies/Dwarf/Attack/Attack5.png',
     ]
 
-
     HURT_IMAGES = [
         'img/3.Enemies/Dwarf/Hurt/Hurt1.png',
         'img/3.Enemies/Dwarf/Hurt/Hurt2.png',
@@ -30,7 +29,6 @@ class Dwarf extends MovableObjects {
 
     DEAD_IMAGE = [
         'img/3.Enemies/Dwarf/Death/Death5.png',
-
     ]
 
     IDLE_IMAGES = [
@@ -57,9 +55,7 @@ class Dwarf extends MovableObjects {
         this.loadImages(this.IDLE_IMAGES);
         this.animate();
         this.gameEnds();
-
     }
-
 
     animate() {
 
@@ -86,18 +82,14 @@ class Dwarf extends MovableObjects {
                 this.firstContact = true;
             }
         }, 1000 / 60);
-
     }
 
     movements() {
-
         this.startMoving = setInterval(() => {
             if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 30) {
                 this.moveLeft();
             }
         }, 1000 / 60);
-
-
         this.startMovingAnimation = setInterval(() => {
             if (this.firstContact && world && this.x - world.character.x >= 120 || this.firstContact && world && this.y - world.character.y >= 30) {
                 this.playAnimation(this.WALKING_IMAGES);
@@ -124,31 +116,24 @@ class Dwarf extends MovableObjects {
                 this.loadImage(this.DEAD_IMAGE);
                 this.dead += 1;
                 this.speedY = 10;
-
             } else if (this.healthpoints == 50 && this.hurt <= 50) {
                 this.playAnimation(this.HURT_IMAGES);
                 this.hurt += 15;
             }
-
         }, 140);
-
-
         setInterval(() => {
             if (this.isDead() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
         }, 1000 / 25)
-
     }
     
     /**
      * Intervals will stop, when the game has end. No matter if the Player lost or won. 
      */
     gameEnds() {
-
         setInterval(() => {
-
             if (world && world.character.healthpoints == 0 || world.endbossHP == 0) {
                 clearInterval(this.conditionsToMove);
                 clearInterval(this.startMoving);

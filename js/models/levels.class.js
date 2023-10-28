@@ -8,11 +8,6 @@ class Levels {
     collectables;
     manapotions;
 
- 
-    
-    
-
-
     constructor(backgrounds, grounds, clouds, birds, enemies, walkingEnemies, endboss, collectables,manapotions) {
         this.backgrounds = backgrounds;
         this.grounds = grounds;
@@ -24,8 +19,6 @@ class Levels {
         this.collectables = collectables;
         this.manapotions = manapotions;
      
-
-
         this.createFloorLevel1Part1();
         this.createFloorLevel1Part2();
         this.createFloorTowerLevel1Part1();
@@ -33,9 +26,7 @@ class Levels {
         this.createFloorLevel1Part3();
         this.createLeftWall();
         this.createRightWall();
-
     }
-
 
   //Functions to generate a number of elements for the mapdesign.
 
@@ -47,7 +38,6 @@ class Levels {
             let ground = new MiddleGround(x, 530);
             this.grounds.push(ground);
         }
-
     }
 
     createFloorLevel1Part2() {
@@ -59,7 +49,6 @@ class Levels {
             this.grounds.push(ground);
         }
     }
-
 
     createFloorLevel1Part3() {
         let startX = 3990; 

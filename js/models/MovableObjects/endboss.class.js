@@ -3,22 +3,17 @@ class Endboss extends MovableObjects {
     width = 350;
     speed = 3;
 
- 
-
     walkInArea = null;
     lefttWalkInArea = null;
     rightWalkInArea = null;
 
-
     WALKING_IMAGES = [
-
         'img/3.Enemies/Boss/Walk/Walk1.png',
         'img/3.Enemies/Boss/Walk/Walk2.png',
         'img/3.Enemies/Boss/Walk/Walk3.png',
         'img/3.Enemies/Boss/Walk/Walk4.png',
         'img/3.Enemies/Boss/Walk/Walk5.png',
         'img/3.Enemies/Boss/Walk/Walk6.png',
-
     ]
 
     IMAGE_ATTACK = [
@@ -29,7 +24,6 @@ class Endboss extends MovableObjects {
         'img/3.Enemies/Boss/Attack/Attack5.png',
         'img/3.Enemies/Boss/Attack/Attack6.png',
         'img/3.Enemies/Boss/Attack/Attack7.png',
-
     ]
 
     HURT_IMAGES = [
@@ -42,10 +36,9 @@ class Endboss extends MovableObjects {
         'img/3.Enemies/Boss/Idle/Idle2.png',
         'img/3.Enemies/Boss/Idle/Idle3.png',
     ]
+
     DEAD_IMAGE = [
-
         'img/3.Enemies/Boss/Death/Death5.png',
-
     ]
 
     MAGIC_ATTACK_IMAGE = [
@@ -78,43 +71,35 @@ class Endboss extends MovableObjects {
 
 
     animate() {
-
         this.idleAnimation();
         this.hurtOrDead();
         this.conditionToMove();
         this.movements();
         this.walkInArena();
-
     }
 
     conditionToMove() {
-
         this.conditionsToMove = setInterval(() => {
             if (world && world.character.x > 4200 || this.firstContact) {
                 clearInterval(this.Idle);
                 this.firstContact = true;
             }
         }, 1000 / 40);
-
     }
 
     idleAnimation() {
-
         this.Idle = setInterval(() => {
             this.turnArround = true;
             this.playAnimation(this.IDLE_IMAGES)
         }, 230);
-
     }
 
     movements() {
-
         this.startMoving = setInterval(() => {
             if (world && world.character.x > 4200 || this.firstContact) {
                 this.moveLeft();
             }
         }, 1000 / 40);
-
         this.startMovingAnimation = setInterval(() => {
             if (world && world.character.x > 4200 || this.firstContact) {
                 this.playAnimation(this.WALKING_IMAGES)
@@ -123,7 +108,6 @@ class Endboss extends MovableObjects {
     }
 
     walkInArena() {
-
         this.rightWalkInArea = setInterval(() => {
             if (this.x <= 4000 || this.walkRightInArea) {
                 clearInterval(this.startMoving);
@@ -133,25 +117,21 @@ class Endboss extends MovableObjects {
                 this.walkLeftInArea = false;
             }
         }, 1000 / 60);
-
         this.walkInArea = setInterval(() => {
             if (this.walkLeftInArea || this.walkRightInArea)
                 this.playAnimation(this.WALKING_IMAGES);
         }, 180);
-
         this.lefttWalkInArea = setInterval(() => {
             if (this.x >= 5050 || this.walkLeftInArea) {
                 this.moveLeft();
                 this.walkRightInArea = false;
                 this.walkLeftInArea = true;
-
             }
         }, 1000 / 60);
     }
 
     hurtOrDead() {
         let hp = 80;
-
         setInterval(() => {
             if (world.endbossHP.healthpoints == 0) {
                 clearInterval(this.Idle);
@@ -162,11 +142,9 @@ class Endboss extends MovableObjects {
                 clearInterval(this.lefttWalkInArea);
                 clearInterval(this.rightWalkInArea);
                 this.loadImage(this.DEAD_IMAGE);
-
             } else if (world.endbossHP.healthpoints == hp) {
                 this.playAnimation(this.HURT_IMAGES);
                 hp -= 20;
-
             }
         }, 100);
     }

@@ -14,7 +14,5 @@ class CoinImageUI extends MovableObjects {
     image() {
         this.loadImage(this.IMAGE)
     }
-
-
 }
 
