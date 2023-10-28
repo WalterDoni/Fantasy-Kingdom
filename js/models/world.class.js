@@ -34,6 +34,7 @@ class World {
     endbossAvatarFrame = new EndbossAvatarFrame();
     endbossAvatarIcon = new EndbossAvatarIcon();
 
+
     constructor(canvas, keyboard) {
 
         this.canvas = canvas;
@@ -43,6 +44,7 @@ class World {
         this.draw();
         this.run();
         this.collectCoinsOrManapotion();
+
     }
 
     /**
@@ -136,10 +138,9 @@ class World {
     * * @param {object} manapotions -> If one of these collides with the character, fill 50% of the manabar.
     */
     collectCoinsOrManapotion() {
-
         setInterval(() => {
             this.level.collectables.forEach((collectable, index) => {
-                if (this.character.x - collectable.x >= 1 && this.character.x - collectable.x <= 15 && this.character.y + this.character.height - collectable.y >= 0 && this.character.y - collectable.y <= 10) {
+                if (this.character.x - collectable.x  - 13 >= 1 && this.character.x - collectable.x  <= 25 && this.character.y + 200 - collectable.y >= 0 && this.character.y - collectable.y <= 15) {
                     this.level.collectables.splice(index, 1);
                     this.coinCounter.updateCoinCounter();
                     this.coinCounter.renderCoinCounter(this.ctx);
@@ -379,6 +380,7 @@ class World {
      * 
      */
     addToWorld(movabelThing) {
+
         if (movabelThing.turnArround) {
             this.ctx.save();  // save the current image
             this.ctx.translate(130, 0); // Mirrors the image

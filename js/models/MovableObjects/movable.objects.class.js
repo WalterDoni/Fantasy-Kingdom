@@ -35,7 +35,7 @@ class MovableObjects extends DrawableObjects {
    //Berechnet die Eckpukte 
    
    isColliding(obj) {
-      return this.x + this.width - this.moreAccurateCollision.right > obj.x + obj.moreAccurateCollision.left && // Rechter Punkt der X-Achhse > linker Punkt x von Objekt
+      return this.x + this.width - this.moreAccurateCollision.right > obj.x + obj.moreAccurateCollision.left  && // Rechter Punkt der X-Achhse > linker Punkt x von Objekt
          this.y + this.height - this.moreAccurateCollision.bottom > obj.y + obj.moreAccurateCollision.top &&  // Unterer Punkt der Y-Achse > Oberer Punkt y von Objekt
          this.x + this.moreAccurateCollision.left < obj.x + obj.width - obj.moreAccurateCollision.right &&  // Linker Punkt der X-Achse < rechter Punkt x von Objekt
          this.y - this.moreAccurateCollision.top < obj.y + obj.height - obj.moreAccurateCollision.bottom   // Oberer Punkt der Y-Achse < unterer Punkt Y von Objekt

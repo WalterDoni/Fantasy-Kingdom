@@ -11,6 +11,7 @@ class Coin extends MovableObjects {
         left: 15,
     }
     IMAGES = [
+
         'img/5.CollectableItems/coin1.png',
         'img/5.CollectableItems/coin2.png',
         'img/5.CollectableItems/coin3.png',
@@ -33,9 +34,13 @@ class Coin extends MovableObjects {
 
     animate() {
         this.moveLeft();
+
         setStoppableInterval(() => {
             this.playAnimation(this.IMAGES)
         }, 150)
+
     }
+
+
 }
 
